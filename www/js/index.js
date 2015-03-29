@@ -174,12 +174,6 @@ module.controller('MainController', function ($scope, $state, $ionicModal, $ioni
                 break;
         }
     };
-    $scope.$on('$locationChangeSuccess', function ()
-    {
-//                                 An text view native when back
-        if (txtStatus)
-            txtStatus = 0;
-    });
     $scope.opinion = function () {
         $state.go('admin_feedback');
     };
