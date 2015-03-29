@@ -1,0 +1,26 @@
+<ion-view>
+    <ion-nav-bar class="bar-calm">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>Ý KIẾN PHẢN HỒI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="popover.show($event)">
+                <i class="icon ion-document-text"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    
+    <ion-content  class="opinion_body">
+        <ion-refresher pulling-text="Tải danh sách ý kiến phản hồi" on-refresh="doRefreshOpinion()">
+        </ion-refresher>
+        <ion-list>
+            <ion-item  class="opinion_reply_item" ng-repeat="opinion in opinions" ng-click="opinionReply($index)">
+                    <span class="row opinion_reply_title">{{opinion.title}}</span>
+                    <span class="row opinion_reply-department">{{opinion.department}}</span>
+                    <span name="label_item" class="row opinion_reply-time">{{opinion.time}}</span>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreOpinionCanBeLoaded()" 
+                             on-infinite="loadMoreOpinion()"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

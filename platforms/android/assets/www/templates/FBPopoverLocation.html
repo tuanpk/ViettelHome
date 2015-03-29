@@ -1,0 +1,11 @@
+<!--Create by Loinv7 at 23/03/2015-->
+<ion-popover-view style="max-height: 100px;width: 90%;opacity: 0.3;margin-left: 6px;height: {{40 * filtered.length+'px'}};margin-right: 6px;margin-top: 5px;">
+    <ion-content>
+        <ion-scrool>
+            <a class="item FBPopoverItemBorder FBItemPadding" ng-repeat="item in filtered = (items | filter: fbDataFilter.query)" ng-click="selectLocation(item.department)">
+            <span class="FBFloatLeft">{{item.department}}</span>
+        </a>
+        </ion-scrool>
+        
+    </ion-content>
+</ion-popover-view>

@@ -1,0 +1,52 @@
+<ion-view>
+    <ion-nav-bar class="bar-calm">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>TRẢ LỜI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="forwardReply()">
+                <i class="ion-arrow-right-a bt_icon"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content class="admin_feedback_body">
+        <ion-list>
+            <ion-item  class="admin_feedback_item">
+                <header>
+                    <span class="row admin_feedback_title">{{detailAdminFeedback.title}}</span>
+                    <div class="row">
+                        <span class="col admin_feedback_department">{{detailAdminFeedback.department}}</span>    
+                        <span name="label_item" class="col col-33 admin_feedback_time">{{detailAdminFeedback.time}}</span>
+                    </div>
+                    <span class="row admin_feedback_location">{{detailAdminFeedback.location}}</span>
+                    <span name="label_item" class="admin_feedback_content2">NỘI DUNG</span>
+                    <span name="label_item" class="row item-text-wrap admin_feedback_content3">{{detailAdminFeedback.content}}</span>
+                    <div class="row">
+                        <img src="{{img.url}}" ng-repeat="img in imgs" width="50px" height="50px" class="admin_img" ng-click="zoomImg($event, img.url)" /> 
+                    </div>
+                </header>
+                <ul class="row admin_reply">
+                    <li class="ion-arrow-left-c admin_reply_icon"></li>
+                    <ul>
+                        <i name="label_item" class="admin_feedback_content2">Trả lời: <i name="label_item" class="admin_feedback_time1">{{detailAdminFeedback.time}}</i></i>
+                        <br/>
+                        <li class="item-text-wrap admin_feedback_location">{{detailAdminFeedback.location}}</li>
+                    </ul>
+                </ul>
+                <ul class="row reply" ng-repeat="comment in comments">
+                    <ul class="col col-right">
+                        <i name="label_item" class="admin_feedback_content2">Trả lời: <i name="label_item" class="admin_feedback_time1">{{comment.time}}</i></i>
+                        <br/>
+                        <li class="item-text-wrap admin_feedback_location">{{comment.content}}</li>
+                    </ul>
+                    <li class="col col-10 ion-arrow-right-c reply_icon"></li>
+                </ul>
+                <button class="button button-block button-positive"  ng-click="reply()">
+                    <i class="ion-reply bt_icon"></i>
+                    Trả lời
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

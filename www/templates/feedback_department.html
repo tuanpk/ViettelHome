@@ -1,0 +1,39 @@
+<ion-view>
+    <ion-nav-bar class="bar-balanced">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>LỰA CHỌN CẤP GỬI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="sumitDepartment()">
+                Xong
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content locking="false" direction="y" scroll="false" overflow-scroll="false" style="background-color: #eef2f7">
+        <div class="FBBody">
+            <span class="row feedback_heading">Cấp độ trực thuộc nơi công tác:</span>
+            <div class="FBDepartmentItemFrame">
+                <div class="FBText_boxDepartment">
+                    <input type="text" ng-model="department.value" disabled="true">
+                </div>
+                <label class="checkbox FBMarginLeft">
+                    <input type="radio" name="fbCheckDepartment">
+                </label>
+            </div>
+            <span class="feedback_des">
+                Lựa chọn cấp độ thuộc nơi công tác (PHòng tổng hợp hoặc cấp quản lý phòng ban)
+            </span>
+            <span >Đơn vị trung tâm khác</span>
+            <div class="FBDepartmentItemFrame">
+                <div class="item-input-wrapper FBText_boxSearchDepartment">
+                    <i class="icon ion-search placeholder-icon FBIconSize25" style="margin-top: 1.3px;margin-left: 0px;"></i>
+                    <input type="search" placeholder="Search..." ng-model="fbDataFilter.query" ng-click="popover.show($event)">
+                    <i class="icon ion-close-circled placeholder-icon FBIconSize20" style="margin-top: 1.3px;margin-right: 8px;" ng-click="clearSearch()"></i>
+                </div>
+                <label class="checkbox FBMarginLeft">
+                    <input class="FBMarginLeft" type="radio" id="fbCheckDepartment" name="fbCheckDepartment">
+                </label>
+            </div> 
+        </div>
+    </ion-content>
+</ion-view>

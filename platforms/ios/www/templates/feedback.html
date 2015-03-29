@@ -1,0 +1,76 @@
+<ion-view>
+    <ion-nav-bar class="bar-balanced">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>PHẢN ÁNH
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="postFeedback()">
+                <span class="fontFamily">Gửi</span>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">     
+        <div style="height: 55%;">
+            <div class="FBBody">
+                <h5>Lựa chọn tình trạng phản ánh:</h5>
+                <div class="row feedback_row">
+            
+                    <label class="item item-radio col col-50 feedback_radio">
+                        <input type="radio" name="group" value="1" ng-checked="">
+                        <div class="item-content">TÍCH CỰC</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio col col-50 feedback_radio">
+                        <input type="radio" name="group" value="0" ng-checked="">
+                        <div class="item-content">TIÊU CỰC</div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                </div>
+                <h5>Lĩnh vực: 
+                    <select class="feedback_field">
+                        <option value="HanhChinh">Hành chính</option>
+                        <option value="KyThuat">Kỹ thuật</option>
+                        <option value="KinhDoanh">Kinh doanh</option>
+                    </select>
+                </h5>
+                <span>Tiêu đề</span>
+                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>
+                <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
+                <span>Nội dung</span>
+                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>
+                <div class="FBMedia">
+                    <img class="FBimg" alt="">
+                    <button class="feedback_icon" ng-click="choosePicture()">
+                        <i class="icon ion-images"></i>
+                    </button> 
+                    <button class="feedback_icon" ng-click="takePicture()">
+                        <i class="icon ion-ios-camera-outline"></i>
+                    </button> 
+                    <button class="feedback_icon" ng-click="takeVideo()">
+                        <i class="icon ion-ios-videocam-outline"></i>
+                    </button>
+                </div>
+            </div>
+            <br/><br/>
+        <section>
+            <div class="FBOption">
+                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
+                    <span class="FBFloatLeft">Địa điểm: {{local}}</span>
+                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                </a>
+                <span class="FB_des_item">Địa điểm không chọn được mặc định tại nơi công tác hoặc tự động định vị theo vị trí  hiện tại (Vui lòng bật xác định vị trí trong mục cài đặt)</span>
+                <a class="item FBOptionItemBorder FBItemPadding" ng-click="">
+                    <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
+                    <!--<span><input class="feedback_time" type="text" id="demo_datetime"/></span>-->
+                </a>
+                <span class="FB_des_item">Thời gian không chọn thì được tự động để mặc định với thời gian hiện tại</span>
+                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
+                    <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
+                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                </a>
+                <span class="FB_des_item">Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác</span>
+            </div>
+        </section>
+        </div>
+    </ion-content>
+</ion-view>

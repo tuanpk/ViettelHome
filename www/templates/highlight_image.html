@@ -1,0 +1,17 @@
+<ion-view class="HLFullSizeAlignCenter">
+    <ion-nav-bar class="bar-energized HL-bar" style="background-color: #F68324;">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i> <span class="fontFamily"> {{title}}</span>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    
+    <ion-content locking="false" direction="" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">>
+        <ion-slide-box active-slide="indexOfImage" class="HLFullSizeAlignCenter">
+            <ion-slide ng-repeat="item in items">
+                <ion-scroll direction="z" zooming="true" style="width: {{width}}px;height: {{height}}px;">
+                    <img src="{{item.url}}" ng-i class="HLSlideImage"/>
+                </ion-scroll>
+            </ion-slide>
+        </ion-slide-box> 
+    </ion-content>
+</ion-view>

@@ -1,0 +1,39 @@
+<ion-view>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>BÌNH CHỌN SỰ KIỆN
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button bt_finish" ng-click="finish_event()">Xong</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item class="vote_event_item">
+                <div class="item-text-wrap vote_event_item_title">{{eventDetailFalse.title}}</div>
+                <span class="row vote_event_item_desc">{{eventDetailFalse.department}}</span>
+                <span class="vote_event_item_content">NỘI DUNG:</span>
+                <div class="item-text-wrap vote_event_content">{{eventDetailFalse.content}}</div>
+            </ion-item>
+        </ion-list>
+        <div class="vote_event_status_false">Bình chọn</div>
+
+        <div class="row">
+            <label class="item item-radio col col-50 radio_event">
+                <input type="radio" name="group" value="1" ng-checked="eventDetailFalse.status == 1">
+                <div class="item-content">Đồng ý</div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio col col-50 radio_event">
+                <input type="radio" name="group" value="0" ng-checked="eventDetailFalse.status == 0">
+                <div class="item-content">Không đồng ý</div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
+
+        <div>
+            <p class="vote_event_ideal">Đóng góp thêm ý kiến</p>
+            <textarea rows="5" class="vote_event_ideal_text" id="txtVote" ng-model="txtVote.value" ng-click="popOverText()"></textarea>
+        </div>
+    </ion-content>
+</ion-view>

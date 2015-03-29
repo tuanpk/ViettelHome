@@ -1,0 +1,38 @@
+<ion-view>
+    <ion-nav-bar class="bar-calm">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i> TRẢ LỜI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="finish_OpinionReply()">
+                <p class="main-toolbar-title">Xong</p>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content class="opinion_body">
+        <ion-list>
+            <ion-item  class="opinion_reply_item">
+                <header>
+                    <span class="row opinion_reply_title">{{item.title}}</span>
+                    <span class="row opinion_reply-department">{{item.department}}</span>    
+                    <span name="label_item" class="row opinion_reply-time">{{item.time}}</span>
+                    <span name="label_item" class="row opinion_reply-location">{{item.location}}</span>
+                    <span name="label_item" class="opinion_reply-content">NỘI DUNG</span>
+                    <span name="label_item" class="row item-text-wrap">{{item.content}}</span>
+                    <br/>
+                    <ion-list>
+                        <span name="label_item" class="opinion_reply-content"><i class="ion-ios-ionic-outline"></i> TRẢ LỜI</span>
+                        <ion-item  class="opinion_reply-forward" ng-repeat="comment in comments">
+                                <span class="row">{{comment.content}}</span>
+                                <span name="label_item" class="row opinion_reply-time">{{comment.time}}</span>
+                        </ion-item>
+                    </ion-list>
+
+                </header>
+            </ion-item>
+            <span name="label_item" class="row opinion_reply-content">Ý KIẾN KHÁC</span>
+                <textarea id="txtOpinionReply" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>
+        </ion-list>
+    </ion-content>
+</ion-view>

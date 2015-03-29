@@ -1,0 +1,156 @@
+.admin_feedback_body{
+    background-color: #eef2f7;
+    padding: 10px;
+}
+.admin_item{
+    padding: 0;
+}
+.admin_feedback_item{
+    margin-bottom: 10px;
+    line-height: 1;
+    box-shadow: 5px 5px 10px #c0c0c0;
+}
+.admin_feedback_item1{
+    margin-bottom: 10px;
+    line-height: 1;
+    background-color: #e4f2fe;
+    box-shadow: 5px 5px 10px #c0c0c0;
+}
+.admin_feedback_content{
+    width: 78%;
+    padding: 5px;
+}
+.admin_feedback_time{
+    color: #f5a44b;
+    font-size: 90%;
+    padding-bottom: 10px;
+}
+.admin_feedback_department{
+    color: #4d4d4d;
+    font-size: 80%;
+    padding-bottom: 10px;
+}
+.admin_feedback_title{
+    color: #098c94;
+    font-weight: bold;
+    font-size: 80%;
+    padding-bottom: 10px;
+}
+.ion_like{
+    color: #ff0000;
+    font-size: 150%;
+    padding-left: 5px;
+}
+.ion_unlike{
+    color: #28a54c;
+    font-size: 150%;
+    padding-left: 5px;
+}
+.admin_icon_left{
+    font-size: 200%;
+    padding-top: 20px;
+    text-align: center;
+    color: #285ea6;
+}
+.admin_feedback_content1{
+    width: 92%;
+    padding: 5px;
+}
+.admin_icon_right1{
+    font-size: 150%; 
+    color: #c00000;
+}
+.admin_icon_right2{
+    font-size: 200%; 
+    color: #00b0f0;
+}
+.admin_status1{
+    font-size: 80%;
+    padding-left: 35%;
+    color: #f28226;
+}
+.admin_status2{
+    font-size: 80%;
+    padding-left: 35%;
+    color: #28a54c;
+}
+.admin_feedback_department1{
+    color: black;
+    font-size: 80%;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-style: italic;
+}
+.admin_feedback_time1{
+    color: #747474;
+    font-size: 100%;
+    padding-bottom: 10px;
+}
+.admin_icon_right3{
+    padding-top: 10%;
+    font-size: 140%;
+    color: #c0c0c0;
+}
+/*reply*/
+.admin_feedback_location{
+    font-size: 80%;
+    font-weight: bold;
+    color: #285ea6;
+}
+.admin_feedback_content2{
+    font-size: 75%;
+    font-weight: bold;
+}
+.admin_feedback_content3{
+    font-size: 70%;
+}
+.admin_feedback_reply{
+    width: 95%;
+    margin-left: 2%;
+    border-radius: 5px;
+    border: 1px solid #0380ea;
+}
+.admin_list_reply{
+    line-height: 1;
+    width: 85%;
+    padding-left: 5px;
+    font-size: 80%;
+    height: 90%;
+    word-wrap: break-word;
+}
+.bt_icon{
+    font-size: 200%;
+}
+ /**************/
+.admin_reply{
+    background-color: #f2f2f2;
+    width: 90%;
+    margin: 10px;
+}
+.admin_reply_icon{
+    font-size: 150%;
+    color: #9d3d35;
+}
+.reply{
+    float: right;
+    text-align: right;
+    background-color: #e4f2fe;
+    width: 90%;
+    margin: 10px;
+}
+.reply_icon{
+    font-size: 150%;
+    color: #28a54c;
+}
+.reply_icon1{
+    float: right;
+    text-align: right;
+    font-size: 200%; 
+    color: #00b0f0;
+}
+button.bt_icon:hover{
+    font-size: 250%;
+}
+.admin_img{
+    margin: 2px;
+}

@@ -1,0 +1,18 @@
+<ion-view>
+    <ion-nav-bar class="bar-energized">
+            <ion-nav-back-button class="button-clear">
+                <i class="ion-chevron-left"></i> <span class="fontFamily"> {{title}}</span>
+            </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="HLFrameListImage">
+            <p class="HLTitleListImages">{{title}}</p>
+            <div class="row" ng-repeat="row in rows" style="">
+                <div class="col col-50" style="overflow: hidden"><img class="HLListViewItemImage" src="{{row.cells[0].url}}" ng-click="showDetail($index,0)"/></div>
+                <div class="col col-50"><img class="HLListViewItemImage" src="{{row.cells[1].url}}" ng-click="showDetail($index,1)"/></div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

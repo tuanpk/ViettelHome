@@ -1,0 +1,224 @@
+.HLToolBar
+{
+    background: #173660;
+}
+.HLtTitileNavi
+{
+    color: white;
+    font-size: 16px;
+    padding-bottom: 10px;
+
+}
+.HLMasterItems {
+    /*line-height: 1;*/
+    display: block;
+    padding: 5px;
+    background-color: green;
+}
+
+.HLFrameEventItems 
+{
+    margin: 5px 0 0 0;
+    line-height: 1;
+    overflow: hidden;
+
+    padding-top:10%;
+}
+
+
+.HLFrameListImage
+{
+    height: 100%;
+    width: 95%;
+    margin:0 auto;
+    padding-top: 20px;
+    background-color: #EEF2F7;
+    position: static;
+}
+.HLTitleListImages
+{
+    /*margin-top: 3%;*/
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    color: #17734F;
+    display: block;
+}
+/*.HLListViewItemImage
+{
+    width: 100% ;
+    height: auto;
+}*/
+.HLListViewItemImage {
+    width: 102%;
+    height: auto;
+    max-height: 347px;
+    overflow: hidden;
+    height: 96.7741935483871px;
+    position: inherit;
+    zoom: 1.5;
+    /* margin-left: 10%; */
+}
+.HLVideoEvent
+{
+    text-align: center;
+    margin-top: 1px;
+    width:100%;
+    height:100%;
+}
+.HLImageDetail
+{
+    width: 100%;
+    height: 100%;
+}
+.HLTruyenThongTextContent p
+{
+    text-indent:20px;
+}
+.HLIconSliderLeft
+{
+    float: left;
+    margin-left: 3px;
+    margin-top: 75%;
+    color: white;
+    z-index:1;
+}
+.HLIconSliderRight
+{
+
+    float: right;
+    margin-right: 3px;
+    margin-top: 75%;
+    color: white;
+    z-index: 0;
+}
+.HLFullSize
+{
+    width: 100%;
+    height: 100%;
+}
+.HLSizeHalf
+{
+    width: 50%;
+    height: 50%;
+
+}
+.HLFullSizeAlignCenter
+{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: black;
+}
+.HLAlignCenter
+{
+    text-align: center;
+    margin-top: 55%;
+    z-index: -1;
+}
+.slider {
+    width: 100%;
+    height: 100%;
+}
+.HLSlideImages
+{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: green;
+}
+.HLSlideImage
+{
+    width: 100%;
+    position: relative;
+    margin-top: 70%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+/*-------------------------quynt7---------------------------*/
+.HL_icon:before {
+    font-size: 42px;
+}
+.HL_crossbar {
+    margin: 0;
+    margin-bottom: 1.5%;
+    border-color: green;
+}
+.HL.col{
+    display: inline-block;
+    width: 100%;
+    height: 100px !important;
+}
+.testbk{
+    background-color: black;
+    font-weight: bold !important;
+}
+.HL_list {
+    margin: 0;
+    margin-bottom: 1.5%;
+    border-color: green;
+    box-shadow: 5px 5px 10px #c0c0c0;
+    width: 96%;
+    margin-left: 2%;
+}
+.HL_list:first-child{
+    margin-top: 1.5%;
+}
+.bar.bar-energized:first-child {
+    border-color: #F68324;
+    background-color: #F68324;
+}
+.bar-energized .button.button-clear:first-child{
+    font-weight: bold;
+}
+.HL_list_icon {
+    display: block;
+    width: 36px;
+    text-align: center;
+    font-size: 51px !important; 
+    color: olive;
+}
+.HLItemTitle
+{
+    /*margin: 5px 0 0 0;*/
+    line-height: 1;
+    font-size: 17px;
+    color: #17734F;
+    margin-left: 2% !important;
+}
+.HLEventItem-department {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.3;
+    margin: 5px 0 0 0;
+    max-height: 30px;
+    margin-left: 2% !important;
+}
+.HL_text_body {
+    box-shadow: 5px 5px 10px #c0c0c0;
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 3%;
+}
+.HL_TruyenThongTitle
+{
+    text-align:left;
+    color: #17734F;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size:15px;
+    text-indent: 1em;
+}
+.HL_TruyenThongTextContent
+{
+    font-size: 14px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: justify;
+    text-indent: 1em;
+    /*text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;*/
+}

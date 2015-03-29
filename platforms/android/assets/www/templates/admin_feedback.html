@@ -1,0 +1,49 @@
+<ion-view>
+    <ion-nav-bar class="bar-calm">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>Ý KIẾN PHẢN HỒI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="popover.show($event)">
+                <i class="icon ion-document-text"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content  class="admin_feedback_body">
+        <ion-refresher pulling-text="Tải danh sách ý kiến phản hồi" on-refresh="doRefreshAdminFeedBack()">
+        </ion-refresher>
+        <ion-list>
+            <ion-item class="admin_item" ng-repeat="dataAdmin in dataAdminFeedback">
+                <div class="row admin_feedback_item" ng-click="viewAdminFeedBack($index)" ng-hide="{{dataAdmin.username.localeCompare(fullname)}}">
+                    <i class="col col-10 icon {{icon_admin[dataAdmin.link_type]}} admin_icon_left"></i>
+                    <div class="admin_feedback_content">
+                        <span class="row admin_feedback_title">{{dataAdmin.title}}</span>
+                        <span class="row admin_feedback_department">{{dataAdmin.username}}-{{department[1].department}}</span>
+                        <span name="label_item" class="row admin_feedback_time">{{dataAdmin.time}} 
+                            <i class="ion-happy-outline ion_like" ng-hide="{{dataAdmin.status == 2}}"></i>
+                            <i class="ion-sad-outline ion_unlike" ng-hide="{{dataAdmin.status == 1}}"></i>
+                        </span>
+                    </div>
+                    <div class="col col-10">
+                        <i class="ion-arrow-left-c admin_icon_right1" ng-hide="{{2 - dataAdmin.status}}"></i><br/><br/>
+                        <i class="ion-reply admin_icon_right2"></i>
+                    </div>
+                </div>
+                <div  class="row admin_feedback_item1" ng-click="viewFeedBack($index)" ng-hide="{{!dataAdmin.username.localeCompare(fullname)}}">
+                    <div class="admin_feedback_content1"> 
+                        <span class="row admin_feedback_title">{{dataAdmin.title}}</span>
+                        <p class="row admin_feedback_department1">Gửi tới :{{department[1].department}}</p>
+                        <span name="label_item" class="row admin_feedback_time1">{{dataAdmin.time}} 
+                            <span class="admin_status1" ng-hide="{{dataAdmin.status == 1}}">Đã trả lời</span>
+                            <span class="admin_status2" ng-hide="{{dataAdmin.status == 2}}">Chưa trả lời</span>
+                        </span>
+                    </div>
+                    <i class="col ion-chevron-right admin_icon_right3"></i>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreAdminFeedBackCanBeLoaded()" 
+                             on-infinite="loadMoreAdminFeedBack()"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

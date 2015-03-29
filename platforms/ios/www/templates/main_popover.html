@@ -1,0 +1,14 @@
+<ion-popover-view style="height: {{(68 * filters.length) + 'px'}};">
+    <ion-header-bar> 
+        <h1 class="title">{{pop_title}}</h1> 
+    </ion-header-bar> 
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="filter in filters" ng-click="settings($index)">
+                <header>
+                    <span class="opinion-title">{{filter.title}}</span>
+                </header>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-popover-view>

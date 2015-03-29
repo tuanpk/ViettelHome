@@ -1,0 +1,44 @@
+<ion-view>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button class="button-clear" ng-click="back()">
+            <i class="ion-chevron-left"></i>BÌNH CHỌN SỰ KIỆN
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item class="vote_event_item">
+                <div class="item-text-wrap vote_event_item_title">{{eventDetail.title}}</div>
+                <span class="row vote_event_item_desc">{{eventDetail.department}}</span>
+                <span class="vote_event_item_content">NỘI DUNG:</span>
+                <div class="item-text-wrap vote_event_content">{{eventDetail.content}}</div>
+            </ion-item>
+        </ion-list>
+        <div class="vote_event_status">Bạn đã bình chọn</div>
+
+        <div class="row">
+            <label class="item item-radio col col-50 radio_event_true">
+                <input type="radio" name="group_true" disabled="true" ng-checked="eventDetail.status == 1">
+                <div class="item-content">Đồng ý</div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio col col-50 radio_event_true">
+                <input type="radio" name="group_true" disabled="true" ng-checked="eventDetail.status == 0">
+                <div class="item-content">Không đồng ý</div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
+        
+        <div class="row">
+            <div class="col col-center">
+                <canvas class="event_chart" id="chart-area"></canvas>
+            </div>
+        </div>
+
+        <div class="bt_chart">
+            <button class="bt_chart_style1"></button> Đồng ý : {{notePie[0]}} %
+        </div><p></p>
+        <div class="bt_chart">
+            <button class="bt_chart_style2"></button> Không đồng ý : {{notePie[1]}} %
+        </div>
+    </ion-content>
+</ion-view>

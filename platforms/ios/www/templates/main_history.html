@@ -1,0 +1,33 @@
+<ion-view>
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-chevron-left"></i>DANH SÁCH ĐÃ GỬI
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="popover.show($event)">
+                <i class="ion ion-document-text"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Tải danh sách đã gửi" on-refresh="refreshHistory()">
+        </ion-refresher>
+        <p ng-hide="historys.length" class="opinion_hide">Không có lịch sử nào! <i class="ion-sad-outline"></i></p>
+        <ion-list>
+            <ion-item class="row" ng-repeat="history in historys">
+                <i class="icon {{fileIcon[history.type]}} col col-10 history_icon_left"></i>
+                <header class="col col-66">
+                    <span class="row history_title_item">{{history.title}}</span>
+                    <span class="row history_time">{{history.date}}</span>
+                </header>
+                <div class="col history_notify{{history.status}}">
+                    <i class="row icon {{statusIcon[history.status]}}"></i>
+                    <span class="row">{{statusText[history.status]}}</span>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreHistoryCanBeLoaded()" 
+                             on-infinite="loadMoreHistory()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

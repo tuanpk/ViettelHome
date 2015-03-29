@@ -1,0 +1,46 @@
+<ion-view>
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="left">
+            <button class="button" ng-click="opinion()">
+                <i class="icon ion-email" data-notifications="10"></i>
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="history()">
+                <i class="icon ion-share"data-notifications="18"></i>
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="secondary">
+            <button class="button" ng-click="popover.show($event)">
+                <i class="icon ion-android-settings"></i>
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content>
+        
+        <section class="main-sologan" ng-click="onLoadSologan()">
+            <p class="main-sologan-contents">"Chuyển hoá lặng lẽ có thể giết chết Viettel...
+        </section>
+        <section class="main-box">
+        <div class="main-feedback" ng-click="showScreen(1)">
+            <i class="ion-chatbox-working main-title-icon"></i>
+            Phản ánh
+            <span class="badge badge-assertive" style="float: right; margin-right: 10%; margin-top: 5%;">2</span>
+
+        </div>
+
+        <div class="main-event" ng-click="showScreen(2)">
+            <i class="ion-thumbsup main-title-icon"></i>
+            Bình chọn
+            <span class="badge badge-assertive" style="float: right; margin-right: 10%; margin-top: 5%;">3</span>
+        </div>
+
+        <div class="main-highlight" ng-click="showScreen(3)">
+            <i class="ion-alert main-title-icon" ></i>
+            Sự Kiện   
+            <span class="badge badge-assertive" style="float: right; margin-right: 10%; margin-top: 5%;">5</span>
+        </div>
+    </section>
+    </ion-content>
+</ion-view>

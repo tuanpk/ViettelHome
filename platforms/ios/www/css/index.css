@@ -1,0 +1,339 @@
+// ****************** LOGIN screen begin
+.login-form {
+}
+
+.login-logo {
+    text-align: center;   
+    width: 57.33%;
+    height:  23.33%;
+    padding-top: 25%;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.login-title {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 25%;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20%;
+}
+
+input[type=email], input[type=password] {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    outline: none;
+    background-color : #f4f8fc;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    border-radius: 10px;
+    padding-left: 2%;
+}
+
+.login-button {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    outline: none;
+    background-color : #f4f8fc;
+    color: #8dc8ff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 10px;
+    border-radius: 10px;
+}
+
+.forgot-password {
+    display: block;
+    margin: 8px auto 0 auto;
+    font-size: 14px;
+}
+// ################## LOGIN screen end
+
+// ****************** MAIN screen begin
+
+.main-toolbar {
+    background-color: #AFDAE6;
+    color: #AFDAE6;
+}
+
+.main-toolbar-title{
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 0.2em;
+}
+
+.main-toolbar-icon {
+    color: #275B9D;
+}
+.main-toolbar-icon-email {
+    color: #275B9D;
+    margin-left: 15%;
+}
+.main-title-icon {
+    padding-right: 5%;
+    font-size: 180%;
+    color: #FFFFFF;
+}
+.main-sologan {
+    background-color: #FFFFFF;
+    color: #CB6009;
+    /*    border-radius: 10px;*/
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    outline: none;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    font-size: 115%;
+    height: 50%;
+
+
+        /*    background-color: #ffffff;
+            color: #E7DDFF;
+            text-align: center;
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+            outline: none;*/
+}
+.main-sologan-contents {
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 155%;
+    line-height: 110%;
+
+}
+
+.main-feedback {
+    background-color: #349C42;
+    color: #FFFFFF;
+    border-radius: 0.5em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    outline: none;
+    padding-top: 3%;
+    padding-bottom: 4%;
+    font-size: 155%;
+    margin-bottom: 5px;
+    
+
+}
+
+.main-event {
+    background-color: #417BAD;
+    color: #FFFFFF;
+    border-radius: 0.5em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    outline: none;
+    padding-top: 3%;
+    padding-bottom: 4%;
+    font-size: 155%;
+    margin-bottom: 5px;
+}
+
+.main-highlight {
+    background-color: #F68324;
+    color: #FFFFFF;
+    border-radius: 0.5em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    /*    outline: none;*/
+    padding-top: 3%;
+    padding-bottom: 4%;
+    font-size: 155%;
+    margin-bottom: 5px;
+
+}
+// ################## MAIN screen end
+
+
+
+// ****************** OPINION screen begin
+
+.opinion-toolbar {
+    background-color: #00B0F0;
+    color: #00B0F0;
+}
+
+.opinion-toolbar-icon {
+    color: #00B0F0;
+}
+// ################## OPINION screen end
+
+// ****************** OPINION REPLY screen begin
+
+.opinion_reply-toolbar {
+    background-color: #E6C942;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.opinion_reply-toolbar-icon {
+    color: #00B0F0;
+}
+.opinion_reply_item{
+    margin : 10px;
+    margin-top: 0;
+    line-height: 1;
+}
+.opinion_body{
+    background-color: #dbeff6;
+}
+.opinion_reply_title {
+    color: #098c94;
+    font-weight: bold;
+    font-size: 110%;
+    padding-bottom: 10px;
+}
+
+.opinion_reply-department {
+    color: #f5a44b;
+    font-size: 90%;
+    padding-bottom: 10px;
+}
+
+.opinion_reply-time {
+    color: #4d4d4d;
+    font-weight: bold;
+    font-size: 90%;
+    padding-bottom: 10px;
+}
+
+.opinion_reply-location {
+    color: #285EA6;
+    padding-bottom: 20px;
+}
+.opinion_reply-content {
+    color: #009093;
+    font-weight: bold;
+    font-size: 90%;
+}
+
+.opinion_reply-forward {
+    background-color: #dbeff6;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.opinion_reply-comment {
+    width: 95%;
+    margin-left: 2%;
+    border-radius: 5px;
+    border: 1px solid #0380ea;
+}
+.opinion_hide{
+    text-align: center;
+    margin-top: 10%;
+    color: #8699A4;
+    font-style: italic;
+}
+
+///history===============
+.history_toolbar_icon{
+    color: white;
+}
+.history_title{
+    color: #fff;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 0.2em;
+}
+.history_bar_back i {
+    display: block;
+    color: white;
+}
+.history_bar{
+    background-color: #8dae47;
+}
+.history_item{
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.history_icon_left{
+    font-size: 200%;
+    padding-top: 20px;
+    text-align: center;
+    color: #285ea6;
+}
+.history_title_item{
+    font-size: 80%;
+    color: #275b9d;
+}
+.history_time{
+    color: #f68324;
+    font-size: 60%;
+}
+.history_img{
+}
+.history_notify0{
+    text-align: center;
+    color: red;
+    font-size: 60%;
+}
+.history_notify1{
+    text-align: center;
+    color: #48c157;
+    font-size: 60%;
+}
+.history_notify2{
+    text-align: center;
+    color: #275b9d;
+    font-size: 60%;
+}
+////
+
+// ################## OPINION REPLY screen end
+
+//--------------quynt7
+
+[data-notifications] {
+    position: relative;
+}
+
+[data-notifications]:after {
+    content: attr(data-notifications);
+    position: absolute;
+    background: red;
+    border-radius: 100%;
+    display: inline-block;
+    padding: 15%;
+    padding-bottom: 0;
+    padding-top:4;
+    color: #f2f2f2;
+    right: -13%;
+    height: 60%;
+    text-align: center;
+    line-height: 98%;
+}
+.main-icon{
+    font-size: 100%;
+    
+}
+.main-box {
+}

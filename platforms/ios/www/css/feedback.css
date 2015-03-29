@@ -1,0 +1,410 @@
+/**********Quy nt7***********/
+.FBItemPadding input {
+  font-size: 100%;
+  margin-top: -10%;
+  margin-bottom: -4%;
+  margin-left: 79px;
+}
+.bar-balanced .button.button-clear {
+    font-weight: bold;
+}
+.bar.bar-balanced {
+    border-color: #349C42;
+    background-color: #349C42;
+}
+.bar-balanced .button {
+    border-color: #349C42;
+    background-color: #349C42;
+    font-weight: bold
+}
+.feedback_toolbar 
+{
+    background-color: #1f9c6a;
+    color: white;
+    font-weight: bold;
+}
+.feedback_bar_left i {
+    display: block;
+    color: white;
+}
+.feedback_title{
+    color: #fff;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 0.2em;
+}
+.feedback_bar_right{
+    color: #fff;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+}
+.FBMedia 
+{
+    margin-right: 2%;
+    margin-top: 3px;
+}
+.feedback_heading_small{
+    font-size: 85%;
+    float: left;
+
+    width: 50%;
+    color:#595959;
+}
+.feedback_radio_button{
+    float: left;
+    width: 24%;
+    text-align: center;
+    color: #4281d0;
+}
+.feedback_icon_radio1{
+    float: right;
+    margin-right: 2%;
+    color: #00b0f0;
+    size: 300%;
+    fixed-width: true;
+}
+.feedback_icon_radio2{
+    float: right;
+    color: #ff0000;
+    size: 200%;
+    fixed-width: true;
+}
+.feedback_heading_title{
+    margin-bottom: 4px;
+    width: 100%;
+    font-size: 80%;
+    margin-top: 4px;
+    float: left;
+}
+.feedback_item_label{
+    width: 100%;
+}
+.feedback_icon{
+    float: right;
+    font-size: 198%;
+    margin-left: 3%;
+    background-color: #C6E746
+}
+.feedback_true{
+    float: left;
+    width: 35%;
+    margin:0 auto; 
+    margin-left: 9%;
+}
+.feedback_false{
+    float: right;
+    width: 45%;
+    margin:0 auto; 
+}
+
+.feedback_value {
+    /*    margin-left: 2%;*/
+    font-size:96%;
+    color: black;
+    background-color: white;
+    size: 25px;
+    float: left;
+    margin-top: 1%
+
+}
+.feedback_even_item {
+    padding: 10px;
+    line-height: 1;
+    width: 100%;
+}
+.feedback_item-title {
+    font-size: 70%;
+    font-weight: bold;
+    color: #17734f;
+}
+.feedback_item-desc {
+    font-size: 60%;
+    color: #000;
+    line-height: 1.3;
+    margin: 4px 0 0 0;
+    padding: 0 30px 0 0;
+    font-weight: bold;
+}
+.feedback_item-label {
+    font-size: 60%;
+    font-style: italic;
+    color: #f28226;
+    float: right;
+}
+.feedback_icon_XXX {
+    text-align: right;
+    margin-right: 2%;
+}
+.feedback_icon_YYY {
+    text-align: left;
+    margin-right: 2%;
+    float: right;
+    size: 200px;
+}
+.feedback_radio{
+    text-align: center;
+    color: #4281d0;
+    font-weight: bold;
+    font-size: 80%;
+    border: 1px solid black;
+}
+.feedback_field 
+{
+    color: #4281d0;
+    border-radius: 8%; 
+    size: 160px; 
+    margin-left:2%;
+    text-align: center;
+}
+
+.feedback_row{
+    margin-top: -2%;
+}
+#map 
+{
+    width: 100%;
+    height: 100%;
+}
+.scroll {
+    height: 80%;
+}
+.feedback_time {
+    background-color: white;
+    width: 250%;
+    height: 25px;
+    margin-left: -1%;
+    font-size: 108%;
+}
+/*loinv7 at 21/03/2015*/
+.FBContent
+{
+    background-color: oldlace;
+}
+.FBBody
+{
+    margin-left: 6px;
+    margin-right: 6px;
+}
+.FBText_box
+{
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+    padding: 1px;
+}
+.FBText_box input
+{
+    width: 100%;
+    /*height: 100%;*/
+}
+.FBLocaText_box
+{
+    border: 1px solid black;
+    border-radius: 3px;
+    text-align: left;
+    padding: 1px;
+    background-color: graytext;
+}
+.FBLocaText_box input
+{
+    width: 92%;
+    height: 100%;
+    float: right;
+    /*margin-top: 1px;*/
+    /*line-height: 1.5;*/
+    /*background-color: blue;*/
+}
+.FBOptionItemBorder
+{
+    border: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+    /*border-top: 1px solid black;*/
+    padding: 10px;
+}
+.FBOptionItemBorder span
+{
+    /*float: left;*/
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+.FBPopoverItemBorder
+{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    padding: 6px;
+}
+.FBPopoverItemBorder span
+{
+    font-size: 11px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.FBTextarea{
+    /*    margin-left: 2%;*/
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid black;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-top: 1px;
+}
+.FBimg
+{
+    width: 40%;
+    float: left;
+}
+.FBOption
+{
+    margin-top: 3%;
+    /*    background-color: green;*/
+}
+.FB_des_item
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color:#595959;
+    line-height: 1.4;
+}
+.FBIconSize25
+{
+    /*float: left;*/
+    font-size: 25px;
+}
+.FBIconSize20
+{
+    /*float: left;*/
+    font-size: 20px;
+}
+.FBIconSize15
+{
+    /*float: left;*/
+    font-size: 15px;
+}
+.FBIconYellow
+{
+    color: #f5a44b;
+}
+.FBIconFloatRight
+{
+    float: right;
+    margin-right: 8px;
+    margin-top: 1.2%;
+}
+.FBFloatLeft
+{
+    float: left;
+    margin-left: 5px;
+}
+.FBItemPadding
+{
+    padding: 1px;
+}
+.FBItemPadding icon
+{
+    padding: 1px;
+}
+/*.FBItemPadding input*/
+/*{*/
+    /*margin-left: 10%;*/
+/*}*/
+/*Loinv7 at 23/03/2015*/
+.FBModalFrame
+{
+    padding: 10px;
+}
+
+.FBModalFrame textarea
+{
+    height: 100%;
+    padding-right: 5px;
+}
+.FBText_boxDepartment
+{
+    float: left;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+    /*background-color: graytext;*/
+    background-color: white;
+    width: 82%;
+}
+.FBText_boxDepartment input
+{
+    width: 98%;
+    height: 20%;
+    line-height: 1.6;
+    margin-left: 2px;
+}
+.FBFloatRight
+{
+    float: right;
+    margin-right: 3%;
+
+}
+
+.feedback_des
+{
+    width: 100%;
+    font-size: 70%;
+    color:#595959;
+    display: block;
+}
+
+.FBDepartmentItemFrame
+{
+    width: 100%;
+    /*background-color: #17734f;*/
+}
+.FBDepartmentItemFrame label
+{
+    padding: 1px;
+    margin-left: 2%;
+}
+.FBMapFrame
+{
+    width: 100%;
+    height: 45%;
+}
+.FBMarginLeft
+{
+    margin-left: 8px;
+}
+/*Loinv7 at 25/03/15*/
+.FBText_boxLocation
+{
+    float: left;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+    /*background-color: graytext;*/
+    background-color: white;
+    width: 100%;
+}
+.FBText_boxLocation input
+{
+    width: 85%;
+    height: 30%;
+    line-height: 1.6;
+    /*background-color: green;*/
+}
+.FBText_boxSearchDepartment
+{
+    float: left;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+    /*background-color: graytext;*/
+    background-color: white;
+    width: 82%;
+}
+.FBText_boxSearchDepartment input
+{
+    width: 82%;
+    height: 30%;
+    line-height: 1.6;
+    /*background-color: green;*/
+}
