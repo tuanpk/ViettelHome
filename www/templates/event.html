@@ -13,7 +13,7 @@
                     <p><span class="vote_event_item_title">{{event.title}}</span></p>
                     <span class="vote_event_item_desc">{{event.department}}</span>
                 </header>
-                <span name="label_item" class="vote_event_item-label{{event.status}}" id="vote_event_item{{$index}}">{{des[event.status]}}</span>
+                <span name="label_item" class="vote_event_item-label{{event.state}}" id="vote_event_item{{$index}}">{{des[event.state]}}</span>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="moreEventCanBeLoaded()" 

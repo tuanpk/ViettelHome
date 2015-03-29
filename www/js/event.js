@@ -23,27 +23,6 @@ function getListEvent($scope) {
     else
         $scope.listEvent = voteEvent.listEvent;
 }
-//        $.ajax({
-//            url: PARSE + "onLoadVoteEvent",
-//            method: "POST",
-//            headers: {
-//                "X-Parse-Application-Id": "WsJgVbuQIuDIIU5jddWimWU7Qvgki0cRlASgBQ1Z",
-//                "X-Parse-REST-API-Key": "QEHmL7MTKtYvD81DBokbrvxde4mydTApl8SRJNRw",
-//                "Content-Type": "application/json"
-//            },
-//            timeout: TIMEOUT_HTTP,
-//            data: "{}",
-//            success: function (data) {
-//                $scope.$apply(function ()
-//                {
-//                    voteEvent.listEvent = data.result;
-//                    $scope.listEvent = voteEvent.listEvent;
-//                });
-//            },
-//            error: function () {
-//                alert("Vui lòng kết nối mạng và thử lại!");
-//            }
-//        });
 
 module.controller('chooseEventController', function ($scope, $state) {
     getListEvent($scope);
@@ -71,7 +50,7 @@ module.controller('chooseEventController', function ($scope, $state) {
     $scope.showDetail_even = function (index) {
         var selectedVoteItem = voteEvent.listEvent[index];
         voteEvent.selectedItem = selectedVoteItem;
-        if (selectedVoteItem.status == 2) {
+        if (selectedVoteItem.state == 0) {
             $state.go('event_detail_false', {title: selectedVoteItem.title});
         } else
             $state.go('event_detail_true', {title: selectedVoteItem.title});
@@ -149,7 +128,8 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
     {
         var valOfRadio = $('input[name=group]:checked').val();
         var textOfTextarea = $scope.txtVote.value;
-        if (valOfRadio !== voteEvent.selectedItem.status || textOfTextarea) {
+        alert("$scope.txtVote.value : " + $scope.txtVote.value);
+        if (valOfRadio !== voteEvent.selectedItem.state || textOfTextarea) {
             var alertEvent = $ionicPopup.show({
                 title: 'Thông Báo',
                 template: 'Bạn có muốn lưu bình chọn của mình hay không?',
@@ -161,23 +141,23 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
                         type: 'button-positive',
                         onTap: function () {
                             alertEvent.close();
-                            $.post(PARSE + "voteEvent", {userId: userId, session: session, status: valOfRadio, eventId: voteEvent.selectedItem.eventId, content: textOfTextarea}).done(function (json) {
+                            $.post(PARSE + "voteEvent", {userId: userId, session: session, state: valOfRadio, eventId: $scope.eventDetailFalse.eventId, content: textOfTextarea}).done(function (json) {
                                 alert(JSON.stringify(json));
                                 $scope.$apply(function ()
                                 {
-                                    if (voteEvent.selectedItem.status == 2) {
+                                    if ($scope.eventDetailFalse.eventId == 0) {
                                         if (valOfRadio == 1)
                                             voteEvent.selectedItem.like++;
                                         else
                                             voteEvent.selectedItem.unlike++;
-                                    } else if ((voteEvent.selectedItem.status == 1) && (valOfRadio == 0)) {
+                                    } else if (($scope.eventDetailFalse.eventId == 1) && (valOfRadio == 2)) {
                                         voteEvent.selectedItem.like--;
                                         voteEvent.selectedItem.unlike++;
-                                    } else if ((voteEvent.selectedItem.status == 0) && (valOfRadio == 1)) {
+                                    } else if (($scope.eventDetailFalse.eventId == 2) && (valOfRadio == 1)) {
                                         voteEvent.selectedItem.like++;
                                         voteEvent.selectedItem.unlike--;
                                     }
-                                    voteEvent.selectedItem.status = valOfRadio;
+                                    voteEvent.selectedItem.state = valOfRadio;
                                     $state.go('event_detail_true');
                                 });
                             }).fail(function () {

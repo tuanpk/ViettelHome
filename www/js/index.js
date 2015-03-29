@@ -1,6 +1,7 @@
 var userId = '';
 var session = '';
 var fullname = '';
+var maxPage = 20;
 
 // var PARSE = "https://api.parse.com/1/functions/";
 var PARSE = "http://125.235.4.243:8080/ViettelHomeBackend/";
@@ -102,7 +103,6 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 $ionicLoading.hide();
                 userId = json.result[0].userId;
                 session = json.result[0].session;
-//                alert(JSON.stringify(json));
                 fullname = json.result[0].fullname;
                 alert('Login Success userId: ' + userId + ' session:' + session);
                 $state.go('main');
@@ -174,6 +174,12 @@ module.controller('MainController', function ($scope, $state, $ionicModal, $ioni
                 break;
         }
     };
+    $scope.$on('$locationChangeSuccess', function ()
+    {
+//                                 An text view native when back
+        if (txtStatus)
+            txtStatus = 0;
+    });
     $scope.opinion = function () {
         $state.go('admin_feedback');
     };
@@ -304,6 +310,8 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
 
     $scope.finish_OpinionReply = function () {
         var txtOpinionReply = $('textarea#txtOpinionReply').val();
+        var time = new Date();
+        var timeparse = parseInt(time.getTime() / 1000);
         if (txtOpinionReply) {
             var alertOpinionReply = $ionicPopup.show({
                 title: 'Thông Báo',
@@ -318,18 +326,20 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
                                     {userId: userId,
                                         session: session,
                                         feedbackId: dataOpinion.selectedItem.feedbackId,
-                                        department: '',
+                                        department: dataOpinion.selectedItem.department,
                                         content: txtOpinionReply,
-                                        time: '214343545'}).done(function (json) {
+                                        time: timeparse,
+                                        patternId: 0
+                                    }).done(function (json) {
                                 $scope.$apply(function ()
                                 {
                                     var comment_new = {
-                                        commentId: '435345',
+                                        commentId: json.commentId,
                                         content: txtOpinionReply,
-                                        time: '214343545'};
+                                        time: timeparse};
                                     $scope.$apply(function () {
                                         dataOpinion.selectedItem.comment.push(comment_new);
-                                        $state.go('admin_feedback_myReply', {}, {reload: true});
+                                        $state.go('main_opinion_reply', {}, {reload: true});
                                     });
                                 });
                             }).fail(function () {

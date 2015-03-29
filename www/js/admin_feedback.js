@@ -1,25 +1,26 @@
 var dataAdminFeedback;
 var department;
 var isMoreAdminFeedback = true;
-function getdataAdmin($scope) {
+function getdataAdmin($scope,page) {
     if (!dataAdminFeedback)
     {
         dataAdminFeedback = {};
-        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: 100}).done(function (json) {
+        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: page*maxPage, end: (page+1)*maxPage}).done(function (json) {
             $scope.$apply(function () {
                 dataAdminFeedback = json.result;
                 $scope.dataAdminFeedback = dataAdminFeedback;
 //                alert(JSON.stringify(dataAdminFeedback));
                 $scope.$broadcast('scroll.refreshComplete');
                 isMoreAdminFeedback = false;
+                page = page + 1;
             });
-        }).fail(function () {
-            alert("Vui lòng kết nối mạng và thử lại!");
+        }).fail(function (er) {
+            alert("Vui lòng kết nối mạng và thử lại!" + JSON.stringify(er));
         });
     } else {
         $scope.dataAdminFeedback = dataAdminFeedback;
     }
-    
+
     if (!department)
     {
         department = {};
@@ -38,7 +39,8 @@ function getdataAdmin($scope) {
 }
 
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
-    getdataAdmin($scope);
+    var pageAdmin = 0;
+    getdataAdmin($scope,pageAdmin);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
     $scope.doRefreshAdminFeedBack = function ()
     {
@@ -47,7 +49,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
     };
 
     $scope.loadAdminFeedBack = function () {
-        loadOpinion($scope);
+        getdataAdmin($scope);
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 
@@ -94,7 +96,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
                 break;
         }
     };
-    $scope.fullname = fullname;
+    $scope.username = fullname;
     /// chuyển trang admin
     $scope.viewAdminFeedBack = function (index) {
         var selectedItem = dataAdminFeedback[index];
@@ -123,13 +125,7 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
         $scope.popover = popover;
     });
     $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
-    $scope.imgs = []; //dataAdminFeedback.selectedItemAdmin.link;
-    var testLink = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    var testLink2 = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    var testLink3 = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    $scope.imgs.push(testLink);
-    $scope.imgs.push(testLink2);
-    $scope.imgs.push(testLink3);
+    $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
     $scope.zoomImg = function ($event, src) {
         $scope.imgPopover = src;
         $scope.popover.show($event);
@@ -161,18 +157,21 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
         $state.go('feedback_department', {});
     };
     $scope.sentReply = function () {
-        alert("111 : " + $scope.detailAdminFeedback.department + " Ccccccc: " + $scope.detailAdminFeedback.feedbackId);
+        var time = new Date();
+        var timeparse = parseInt(time.getTime() / 1000);
+//        alert("111 : " + $scope.adFBTXTReply.value + " Ccccccc: " + $scope.detailAdminFeedback.feedbackId);
         $.post(PARSE + "replyFeedback",
                 {
                     userId: userId,
                     session: session,
                     feedbackId: $scope.detailAdminFeedback.feedbackId,
-                    department: $scope.detailAdminFeedback.departmentId,
+                    department: $scope.detailAdminFeedback.department,
                     content: $scope.adFBTXTReply.value,
-                    time: '1425375269'
+                    time: timeparse,
+                    patternId: 0
                 }
         ).done(function (json) {
-            alert(JSON.stringify(json));
+//            alert(JSON.stringify(json));
             goBackViewWithName('admin_feedback');
         }).fail(function (err) {
             alert("postFeedback Error " + JSON.stringify(err));
@@ -189,13 +188,7 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $scope.popover = popover;
     });
     $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
-    $scope.imgs = []; //dataAdminFeedback.selectedItemAdmin.link;
-    var testLink = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    var testLink2 = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    var testLink3 = {url: "http://anhdep.pro/wp-content/uploads/2015/01/banh-sinh-nhat-dep-.jpg"};
-    $scope.imgs.push(testLink);
-    $scope.imgs.push(testLink2);
-    $scope.imgs.push(testLink3);
+    $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
     $scope.zoomImg = function ($event, src) {
         $scope.imgPopover = src;
         $scope.popover.show($event);
@@ -205,7 +198,7 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $state.go('admin_feedback_reply', {});
     };
 });
-module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicModal,$ionicPopup) {
+module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicModal, $ionicPopup) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
     alert(JSON.stringify($scope.comments));
@@ -236,9 +229,10 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicMod
         document.getElementById("txtOpinionReply").value = document.getElementById("modalTxtArea").value;
         $scope.modal.hide();
     };
-
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
+        var time = new Date();
+        var timeparse = parseInt(time.getTime() / 1000);
         if (txtOpinionReply) {
             var alertOpinionReply = $ionicPopup.show({
                 title: 'Thông Báo',
@@ -254,16 +248,18 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicMod
                                         userId: userId,
                                         session: session,
                                         feedbackId: dataAdminFeedback.selectedItem.feedbackId,
-                                        department: '',
+                                        department: dataAdminFeedback.selectedItem.department,
                                         content: txtOpinionReply,
-                                        time: '214343545'}).done(function (json) {
+                                        time: timeparse,
+                                        patternId: 0
+                                    }).done(function (json) {
                                 $scope.$apply(function ()
                                 {
-//                                    alert(JSON.stringify(json));
+                                    alert(JSON.stringify(json));
                                     var comment_new = {
                                         commentId: json.result.commentId,
                                         content: txtOpinionReply,
-                                        time: '214343545'};
+                                        time: timeparse};
                                     $scope.$apply(function () {
                                         dataAdminFeedback.selectedItem.comment.push(comment_new);
                                         $state.go('admin_feedback_myReply', {}, {reload: true});

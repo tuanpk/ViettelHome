@@ -31,18 +31,19 @@
     padding-bottom: 10px;
 }
 .admin_feedback_title{
+    text-transform: uppercase;
     color: #098c94;
     font-weight: bold;
     font-size: 80%;
     padding-bottom: 10px;
 }
 .ion_like{
-    color: #ff0000;
+    color: #28a54c;
     font-size: 150%;
     padding-left: 5px;
 }
 .ion_unlike{
-    color: #28a54c;
+    color: #ff0000;
     font-size: 150%;
     padding-left: 5px;
 }
