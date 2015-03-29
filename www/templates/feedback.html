@@ -33,11 +33,14 @@
                         <option value="KinhDoanh">Kinh doanh</option>
                     </select>
                 </h5>
-                <span>Tiêu đề</span>
-                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>
+                <span>Tiêu đề</span> <span>{{50 - title.length}}</span>
+                <textarea rows="2" class="FBTextarea" id="txtTitle" ng-keypress="updateEditor('txtTitle')" ng-model="title" ng-trim="false" maxlength="50" ></textarea>
+                <!--<div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle"></div>-->
+<!--                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>-->
                 <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
-                <span>Nội dung</span>
-                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>
+                <span>Nội dung</span> <span>{{200 - content.length}}</span>
+                <textarea rows="3" class="FBTextarea" id="txtContent" ng-keypress="updateEditor('txtContent')" ng-model="content" ng-trim="false" maxlength="200" ></textarea>
+<!--                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>-->
                 <div class="FBMedia">
                     <img class="FBimg" alt="">
                     <button class="feedback_icon" ng-click="choosePicture()">

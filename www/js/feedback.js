@@ -97,60 +97,65 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 break;
         }
     };
+    
+    $scope.updateEditor = function (elementId) {
+        var element = document.getElementById(elementId);
+        element.style.height = element.scrollHeight + "px";
+    };
 
     $scope.postFeedback = function ()
     {
-            if (validText("txtTitle", "Tiêu đề"))
-                if (validText("txtContent", "Nôi dung phản ánh")) {
-                    //                alert('postFeedback');
-                    $.post(PARSE + "postFeedBack",
-                            {
-                                userId: userId,
-                                session: session,
-                                state: '1',
-                                domain: '1',
-                                title: document.getElementById('txtTitle').value,
-                                content: document.getElementById('txtContent').value,
-                                attach_type: '0',
-                                location: 'Noi trai tim co nang',
-                                time: new Date().getTime(),
-                                department: '1',
-                                attach_count: '0'
-                            }
-                    ).done(function (json) {
-                        var feedbackId = json.result[0].feedbackId;
-                        alert('postFeedback Success feedbackId: ' + feedbackId + ' ' + JSON.stringify(json));
-
-                        if ($scope.mediaUrl.length > 0) {
-                            for (var i = 0; i < $scope.mediaUrl.length; i++) {
-                                $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
-                                $scope.mediaUrl[i].status = i % 3;
-                            }
-                            store.batch($scope.mediaUrl, function (json)
-                            {
-                                alert('insert ' + JSON.stringify(json));
-                                //                            alert('success');
-                            });
+        if (validText("txtTitle", "Tiêu đề"))
+            if (validText("txtContent", "Nôi dung phản ánh")) {
+                //                alert('postFeedback');
+                $.post(PARSE + "postFeedBack",
+                        {
+                            userId: userId,
+                            session: session,
+                            state: '1',
+                            domain: '1',
+                            title: document.getElementById('txtTitle').value,
+                            content: document.getElementById('txtContent').value,
+                            attach_type: '0',
+                            location: 'Noi trai tim co nang',
+                            time: new Date().getTime(),
+                            department: '1',
+                            attach_count: '0'
                         }
-                        Parse.Push.send({
-                            where: query, // Set our Installation query
-                            data: {
-                                alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
-                            }
-                        }, {
-                            success: function () {
-                                alert('Parse.Push.send Success');
-                            },
-                            error: function (error) {
-                                alert('Parse.Push.send Error' + JSON.stringify(error));
-                            }
+                ).done(function (json) {
+                    var feedbackId = json.result[0].feedbackId;
+                    alert('postFeedback Success feedbackId: ' + feedbackId + ' ' + JSON.stringify(json));
+
+                    if ($scope.mediaUrl.length > 0) {
+                        for (var i = 0; i < $scope.mediaUrl.length; i++) {
+                            $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
+                            $scope.mediaUrl[i].status = i % 3;
+                        }
+                        store.batch($scope.mediaUrl, function (json)
+                        {
+                            alert('insert ' + JSON.stringify(json));
+                            //                            alert('success');
                         });
-                        goBackViewWithName('main');
-                    }).fail(function (err) {
-                        alert("postFeedback Error " + JSON.stringify(err));
+                    }
+                    Parse.Push.send({
+                        where: query, // Set our Installation query
+                        data: {
+                            alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
+                        }
+                    }, {
+                        success: function () {
+                            alert('Parse.Push.send Success');
+                        },
+                        error: function (error) {
+                            alert('Parse.Push.send Error' + JSON.stringify(error));
+                        }
                     });
-                    alert('postFeedback DONE');
-                }
+                    goBackViewWithName('main');
+                }).fail(function (err) {
+                    alert("postFeedback Error " + JSON.stringify(err));
+                });
+                alert('postFeedback DONE');
+            }
     };
 
     function gotFile(fileEntry) {
