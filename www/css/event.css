@@ -35,13 +35,13 @@
     font-weight: bold;
     white-space: nowrap;
 }
-.vote_event_item-label1,.vote_event_item-label0 {
+.vote_event_item-label1,.vote_event_item-label2 {
     font-size: 60%;
     font-style: italic;
     color: #ff2e2e;
     float: right;
 }
-.vote_event_item-label2 {
+.vote_event_item-label0 {
     font-size: 60%;
     font-style: italic;
     color: #7c9152;
