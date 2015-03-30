@@ -125,9 +125,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
         if (validText("txtTitle", "Tiêu đề"))
             if (validText("txtContent", "Nôi dung phản ánh"))
-
             {
-                //                alert('postFeedback');
                 $.post(PARSE + "postFeedback",
                         {
                             userId: userId,
@@ -150,62 +148,56 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
 //                            $scope.mediaUrl[i].status = i % 3;
-
-                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, gotFile, onError);
+                            $scope.mediaUrl[i].feedbackId = feedbackId;
+                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
                         }
-                        store.batch($scope.mediaUrl, function (json)
-                        {
+                        store.batch($scope.mediaUrl, function (json) {
 //                            alert('insert ' + JSON.stringify(json));
-                            //                            alert('success');
                         });
                     }
-
 //                    goBackViewWithName('main');
                 }).fail(function (err) {
                     alert("postFeedback Error " + JSON.stringify(err));
                 });
-//                alert('postFeedback DONE');
             }
     };
 
-    function gotFile(fileEntry) {
-//        alert('fileEntry: ' + JSON.stringify(fileEntry));
+    function readFile(fileEntry) {
         fileEntry.file(function (file) {
-//            alert('fileEntry.file: ' + JSON.stringify(file));
-
             var reader = new FileReader();
             reader.onloadend = function (evt) {
                 alert('onloadend ' + sizeof(evt) + ' ' + sizeof(evt.target.result));
-//              onimageSuccess(evt.target.result);
 
-                var file = new Parse.File("feedback_image.jpg", evt.target.result);
-                file.save().then(function () {
-
-                    var obj = new Parse.Object("FeedbackImage");
-                    obj.set("file", file);
-
-                    alert('file.url: ' + JSON.stringify(file));
-
-                    obj.save().then(function () {
-                        var query = new Parse.Query(Parse.Installation);
-                        Parse.Push.send({
-                            where: query, // Set our Installation query
-                            data: {
-                                alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
-                            }
-                        }, {
-                            success: function () {
-                                alert('Parse.Push.send Success');
-                            },
-                            error: function (error) {
-                                alert('Parse.Push.send Error' + JSON.stringify(error));
-                            }
-                        });
+                $.post(PARSE + "uploadFileFeedback",
+                        {
+                            userId: userId,
+                            session: session,
+                            attach_type: '1',
+                            feedbackId: '83',
+                            file_index: '1',
+                            filename: 'icon.png',
+                            stringData: evt.target.result
+                        }
+                ).done(function (json) {
+                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
+                    Parse.Push.send({
+                        where: query, // Set our Installation query
+                        data: {
+                            alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
+                        }
+                    }, {
+                        success: function () {
+                            alert('Parse.Push.send Success');
+                        },
+                        error: function (error) {
+                            alert('Parse.Push.send Error' + JSON.stringify(error));
+                        }
                     });
-                }, onError);
-
+                }).fail(function (err) {
+                    alert("uploadFileFeedback Error " + JSON.stringify(err));
+                });
             }
-            reader.readAsDataURL(file);
+            reader.readAsBinaryString(file);
         });
     }
 
