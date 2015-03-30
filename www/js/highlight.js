@@ -57,10 +57,26 @@ module.controller('HLTruyenThongController', function ($scope)
     $scope.title = currentHighlightEvent.title;
 });
 var indexOfUrl;
+
 module.controller('HLListViewController', function ($scope, $state)
 {
+    $scope.statusLoadmore=true;
+    var loadIndex = 5;
     $scope.title = currentHighlightEvent.title;
     getListImageItem($scope);
+    
+    $scope.loadMoreImages = function ()
+    {
+//        alert('begin load more');
+        if (listImages.rows[loadIndex + 1])
+        {
+            $scope.rows.push(listImages.rows[++loadIndex]);
+            $scope.statusLoadmore=true;
+        }
+        else $scope.statusLoadmore=false;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$broadcast('scroll.resize');
+    }
     $scope.doRefresh = function ()
     {
         getListImageItem($scope);
@@ -96,93 +112,95 @@ module.controller('HLVideoController', function ($scope, $location, $state)
 //Get list image item by curent index highlight
 function getListImageItem($scope)
 {
-    if (!listImages)
-    {
+//    if (!listImages)
+//    {
+        $scope.rows = [];
         listImages = {};
         listImages.rows = [];
-        listImages.link =[
-                {
-                    "name": "tfss-0a1099cc-2a23-4fd2-a0da-d489c22189ca-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-0a1099cc-2a23-4fd2-a0da-d489c22189ca-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-e23e9388-646f-492f-b98d-7c75f08f8973-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-e23e9388-646f-492f-b98d-7c75f08f8973-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-8570d638-1870-419e-898a-275d0dbdb3a8-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-8570d638-1870-419e-898a-275d0dbdb3a8-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-95535d66-155d-408e-b15e-16ec155fc899-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-95535d66-155d-408e-b15e-16ec155fc899-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-f6ca316f-0f09-421e-9366-533728da7b75-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-f6ca316f-0f09-421e-9366-533728da7b75-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-0166cb10-7faf-4b47-b4a3-1b0bd9995443-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-0166cb10-7faf-4b47-b4a3-1b0bd9995443-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-b657051b-89e2-44c6-8642-d3e33253ce49-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-b657051b-89e2-44c6-8642-d3e33253ce49-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-d9544353-4235-468a-9cfd-10dc5e6e8431-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-d9544353-4235-468a-9cfd-10dc5e6e8431-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-87bc46f6-90d1-417a-afc8-1cf80d0250d0-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-87bc46f6-90d1-417a-afc8-1cf80d0250d0-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-b81ade70-4ccf-4529-be15-d6975e88d279-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-b81ade70-4ccf-4529-be15-d6975e88d279-feedback_image.jpg"
-                },
-                {
-                    "__type": "File",
-                    "name": "tfss-4c149795-8335-4d50-9b0f-679b17f3f2bc-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-4c149795-8335-4d50-9b0f-679b17f3f2bc-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-3bf3386a-812c-4941-a0c3-840c11fa7bb0-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-3bf3386a-812c-4941-a0c3-840c11fa7bb0-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-41c6fd94-0f2b-482c-8152-8d0a6c5a19df-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-41c6fd94-0f2b-482c-8152-8d0a6c5a19df-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-62b8aef5-4f8d-4586-864b-2d20346e81c8-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-62b8aef5-4f8d-4586-864b-2d20346e81c8-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-bb225523-802c-4508-97ec-5329993ed222-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-bb225523-802c-4508-97ec-5329993ed222-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-2375eefd-fde4-4b3f-95be-3014407ff3da-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-2375eefd-fde4-4b3f-95be-3014407ff3da-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-bef18e63-4a5b-4333-8027-a4f320ff6ddb-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-bef18e63-4a5b-4333-8027-a4f320ff6ddb-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-3173c0dd-6d24-4e47-9afe-c652ea8639a5-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-3173c0dd-6d24-4e47-9afe-c652ea8639a5-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-a0ededf7-9f56-48b3-97a1-3a3d837f9572-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-a0ededf7-9f56-48b3-97a1-3a3d837f9572-feedback_image.jpg"
-                },
-                {
-                    "name": "tfss-1aba0b0b-9ae8-4e4d-af45-de4554091d68-feedback_image.jpg",
-                    "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-1aba0b0b-9ae8-4e4d-af45-de4554091d68-feedback_image.jpg"
-                }
-            ];
+        listImages.link = [
+            {
+                "name": "tfss-0a1099cc-2a23-4fd2-a0da-d489c22189ca-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-0a1099cc-2a23-4fd2-a0da-d489c22189ca-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-e23e9388-646f-492f-b98d-7c75f08f8973-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-e23e9388-646f-492f-b98d-7c75f08f8973-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-8570d638-1870-419e-898a-275d0dbdb3a8-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-8570d638-1870-419e-898a-275d0dbdb3a8-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-95535d66-155d-408e-b15e-16ec155fc899-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-95535d66-155d-408e-b15e-16ec155fc899-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-f6ca316f-0f09-421e-9366-533728da7b75-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-f6ca316f-0f09-421e-9366-533728da7b75-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-0166cb10-7faf-4b47-b4a3-1b0bd9995443-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-0166cb10-7faf-4b47-b4a3-1b0bd9995443-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-b657051b-89e2-44c6-8642-d3e33253ce49-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-b657051b-89e2-44c6-8642-d3e33253ce49-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-d9544353-4235-468a-9cfd-10dc5e6e8431-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-d9544353-4235-468a-9cfd-10dc5e6e8431-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-87bc46f6-90d1-417a-afc8-1cf80d0250d0-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-87bc46f6-90d1-417a-afc8-1cf80d0250d0-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-b81ade70-4ccf-4529-be15-d6975e88d279-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-b81ade70-4ccf-4529-be15-d6975e88d279-feedback_image.jpg"
+            },
+            {
+                "__type": "File",
+                "name": "tfss-4c149795-8335-4d50-9b0f-679b17f3f2bc-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-4c149795-8335-4d50-9b0f-679b17f3f2bc-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-3bf3386a-812c-4941-a0c3-840c11fa7bb0-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-3bf3386a-812c-4941-a0c3-840c11fa7bb0-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-41c6fd94-0f2b-482c-8152-8d0a6c5a19df-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-41c6fd94-0f2b-482c-8152-8d0a6c5a19df-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-62b8aef5-4f8d-4586-864b-2d20346e81c8-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-62b8aef5-4f8d-4586-864b-2d20346e81c8-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-bb225523-802c-4508-97ec-5329993ed222-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-bb225523-802c-4508-97ec-5329993ed222-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-2375eefd-fde4-4b3f-95be-3014407ff3da-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-2375eefd-fde4-4b3f-95be-3014407ff3da-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-bef18e63-4a5b-4333-8027-a4f320ff6ddb-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-bef18e63-4a5b-4333-8027-a4f320ff6ddb-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-3173c0dd-6d24-4e47-9afe-c652ea8639a5-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-3173c0dd-6d24-4e47-9afe-c652ea8639a5-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-a0ededf7-9f56-48b3-97a1-3a3d837f9572-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-a0ededf7-9f56-48b3-97a1-3a3d837f9572-feedback_image.jpg"
+            },
+            {
+                "name": "tfss-1aba0b0b-9ae8-4e4d-af45-de4554091d68-feedback_image.jpg",
+                "url": "http://files.parsetfss.com/15723333-8130-4869-8e9e-c359c9a3a944/tfss-1aba0b0b-9ae8-4e4d-af45-de4554091d68-feedback_image.jpg"
+            }
+        ];
+        var j=0;
         for (var i = 0; i < listImages.link.length; i++)
         {
             listImages.rows = listImages.rows.concat(
@@ -197,9 +215,15 @@ function getListImageItem($scope)
                                         }
                                     ]
                         }]);
+            if (j < 6)
+            {
+//                alert(JSON.stringify($scope.rows));
+                $scope.rows.push(listImages.rows[j++]);
+//                alert(JSON.stringify($scope.rows));
+            }
+                
         }
-    }
-    $scope.rows = listImages.rows;
+//    }
 }
 
 function getHighlightEvents($scope)
