@@ -80,6 +80,7 @@ module.controller('HLListViewController', function ($scope, $state)
     {
         getListImageItem($scope);
         $scope.statusLoadmore=true;
+        loadIndex=5;
     };
     $scope.showDetail = function (index, colIndex)
     {
