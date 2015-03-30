@@ -188,9 +188,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         alert('onError ' + JSON.stringify(error));
     }
 
-    function onSuccess(response) {
-        alert('onSuccess ' + JSON.stringify(response));
-    }
+//    function onSuccess(response) {
+//        alert('onSuccess ' + JSON.stringify(response));
+//    }
 
 
 //    function fileUpload(fileURI, fileKey, mimeType) {
