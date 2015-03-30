@@ -192,7 +192,7 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
     };
     $scope.sentReply = function () {
         var time = new Date();
-        var timeparse = parseInt(time.getTime() / 1000);
+        var timeparse = Date.parse(time);
         $.post(PARSE + "replyFeedback",
                 {
                     userId: userId,
@@ -251,9 +251,8 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
         var time = new Date();
-        var timeparse = parseInt(time.getTime());
+        var timeparse = Date.parse(time);
         if (txtOpinionReply) {
-//            alert("time.toLocaleDateString() " + time.toLocaleDateString());
             var alertOpinionReply = $ionicPopup.show({
                 title: 'Thông Báo',
                 template: 'Bạn có chắc chắn muốn gửi ý kiến?',
