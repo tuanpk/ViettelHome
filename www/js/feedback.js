@@ -12,7 +12,7 @@ var fbDepartment =
 var listDepartment = {};
 var listLocation = {};
 //save status show/hidden of text area native --Loinv7 at 27/03
-module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName,$ResizeTextArea)
+module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName)
 {
     $scope.items = [
         {
@@ -99,9 +99,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }
     };
 
-    $scope.updateEditor = function (elementId, heightPer)
+    $scope.updateEditor = function (elementId)
     {
-        $ResizeTextArea.resize(elementId,heightPer);
+        resizeTextArea(elementId);
     };
 
     $scope.postFeedback = function ()
@@ -314,7 +314,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 //    }
 });
 
-module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName, $ResizeTextArea)
+module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName)
 {
     $scope.fbDataFilter = {};
     $scope.fbTxtOtherLocal = {};
@@ -354,9 +354,9 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
         $scope.popover.hide();
         $scope.fbDataFilter.query = '';
     };
-    $scope.updateEditor = function (elementId, heightPer)
+    $scope.updateEditor = function (elementId)
     {
-        $ResizeTextArea.resize(elementId,heightPer);
+        resizeTextArea.resize(elementId);
     };
     $scope.showScreen = function (i)
     {
@@ -594,17 +594,13 @@ function getListLocation($scope)
     });
 }
 //Loinv7 At 30/03/15
-module.factory('$ResizeTextArea', function ()
+function resizeTextArea(elementId)
 {
-    var resizeTextArea = {};
-    resizeTextArea.resize = function (elementId,heightPer)
-    {
-        var element = document.getElementById(elementId);
-        if (element.scrollHeight > element.clientHeight)
-        {
-            if (element.scrollHeight < (window.innerHeight * heightPer / 100))
-                element.style.height = element.scrollHeight + "px";
-        }
-    }
-    return resizeTextArea;
-});
+    var element = document.getElementById(elementId);
+//    if (element.scrollHeight > element.clientHeight)
+//    {
+//        if (element.scrollHeight < (window.innerHeight * heightPer / 100))
+    element.style.height = element.scrollHeight + "px";
+//    }
+}
+;
