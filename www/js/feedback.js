@@ -93,7 +93,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             location: 'Noi trai tim co nang',
                             time: new Date().getTime(),
                             department: '1',
-                            attach_count: $scope.feedbackId.length
+                            attach_count: $scope.mediaUrl.length
                         }
                 ).done(function (json) {
 
@@ -102,12 +102,18 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
+                            $scope.mediaUrl[i].key = $scope.feedbackId + "_" + i;
+                            $scope.mediaUrl[i].index = i;
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
-//                            $scope.mediaUrl[i].status = i % 3;
+                            $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
-                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
+//                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
                         }
                         store.batch($scope.mediaUrl, function (json) {
+//                            alert('insert ' + JSON.stringify(json));
+                            for (var i = 0; i < json.length; i++) {
+                                window.resolveLocalFileSystemURI(json[i].url, readFile, onError);
+                            }
                         });
                     }
 //                    goBackViewWithName('main');
@@ -119,11 +125,17 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     function readFile(fileEntry) {
+//        alert('fileEntry ' + JSON.stringify(fileEntry));
         fileEntry.file(function (file) {
             var reader = new FileReader();
-            alert('fileEntry.file ' + JSON.stringify(file));
+//            alert('fileEntry.file ' + JSON.stringify(file));
+            reader.onprogress = function (evt) {
+                alert('onprogress ' + JSON.stringify(evt));
+            };
             reader.onloadend = function (evt) {
-                alert('onloadend ' + sizeof(evt.target.result));
+//                alert('onloadend ' + sizeof(evt.target.result));
+//                alert('fileEntry.file 2 ' + JSON.stringify(file));
+//                alert('fileEntry.file 2 ' + JSON.stringify(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
                         {
                             userId: userId,
@@ -131,11 +143,16 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             attach_type: '1',
                             feedbackId: $scope.feedbackId,
                             file_index: '1',
-                            filename: file.localURL.substr(file.localURL.lastIndexOf('/') + 1),
+                            filename: file.name,
                             stringData: evt.target.result
                         }
                 ).done(function (json) {
                     alert('uploadFileFeedback Success ' + JSON.stringify(json));
+                    store.get($scope.feedbackId + '_0', function (json) {
+                        json.status = 1;
+                        store.save(json);
+                    });
+
                     Parse.Push.send({
                         where: query, // Set our Installation query
                         data: {
@@ -151,6 +168,10 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     });
                 }).fail(function (err) {
                     alert("uploadFileFeedback Error " + JSON.stringify(err));
+                    store.get($scope.feedbackId + '_0', function (json) {
+                        json.status = 1;
+                        store.save(json);
+                    });
                 });
             }
             reader.readAsDataURL(file);
