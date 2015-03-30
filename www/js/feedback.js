@@ -180,7 +180,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     alert("uploadFileFeedback Error " + JSON.stringify(err));
                 });
             }
-            reader.readAsBinaryString(file);
+            reader.readAsDataURL(file);
         });
     }
 
