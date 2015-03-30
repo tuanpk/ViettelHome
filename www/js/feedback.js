@@ -55,25 +55,26 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
         $scope.modal = modal;
     });
-    var txtActiveIndex = 0;
-    $scope.showModalText = function (index)
-    {
-        txtActiveIndex = index;
-        $scope.modal.show();
-        if (txtActiveIndex === 0)
-            document.getElementById("modalTxtArea").value = document.getElementById("txtTitle").value;
-        else
-            document.getElementById("modalTxtArea").value = document.getElementById("txtContent").value;
-    };
-    $scope.submit = function (value)
-    {
-        if (txtActiveIndex === 0)
-            document.getElementById("txtTitle").value = document.getElementById("modalTxtArea").value;
-        else
-            document.getElementById("txtContent").value = document.getElementById("modalTxtArea").value;
-        $scope.modal.hide();
-//        $scope.modal=nill;
-    };
+//    var txtActiveIndex = 0;
+//    $scope.showModalText = function (index)
+//    {
+//        txtActiveIndex = index;
+//        $scope.modal.show();
+//        if (txtActiveIndex === 0)
+//            document.getElementById("modalTxtArea").value = document.getElementById("txtTitle").value;
+//        else
+//            document.getElementById("modalTxtArea").value = document.getElementById("txtContent").value;
+//  
+//    $scope.submit = function (value)
+//    {
+//        if (txtActiveIndex === 0)
+//            document.getElementById("txtTitle").value = document.getElementById("modalTxtArea").value;
+//        else
+//            document.getElementById("txtContent").value = document.getElementById("modalTxtArea").value;
+//      
+//        $scope.modal.hide();
+////        $scope.modal=nill;
+//    };
     $scope.$on('$destroy', function ()
     {
         $scope.modal.remove();
@@ -369,6 +370,10 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
     {
         $scope.popover.hide();
         $scope.fbDataFilter.query = '';
+    };
+    $scope.updateEditor = function (elementId) {
+        var element = document.getElementById(elementId);
+        element.style.height = element.scrollHeight + "px";
     };
     $scope.showScreen = function (i)
     {
