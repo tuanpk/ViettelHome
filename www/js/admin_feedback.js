@@ -1,7 +1,7 @@
 var dataAdminFeedback = [];
 var department;
 
-function getDepartment($scope,$ionicPopup) {
+function getDepartment($scope, $ionicPopup) {
     if (!department)
     {
         department = {};
@@ -25,8 +25,8 @@ function getDepartment($scope,$ionicPopup) {
 
 var pageAdminFeedback = 0;
 var isLoadMore = false;
-module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover,$ionicPopup, $state) {
-    getDepartment($scope,$ionicPopup);
+module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) {
+    getDepartment($scope, $ionicPopup);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
 
     $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
@@ -38,10 +38,10 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover,$ionicPopu
         });
     }).fail(function (er) {
         $ionicPopup.show({
-                title: 'Thông Báo',
-                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
-                buttons: [{text: 'Ok'}]
-            });
+            title: 'Thông Báo',
+            template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+            buttons: [{text: 'Ok'}]
+        });
     })
 
     $scope.refresh = function () {
@@ -76,8 +76,8 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover,$ionicPopu
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     pageAdminFeedback += maxPage;
                 } else {
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
                     isLoadMore = false;
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
                 }
             });
         }).fail(function (er) {
@@ -272,14 +272,16 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
                                         commentId: json.result.commentId,
                                         content: txtOpinionReply,
                                         time: timeparse};
-                                    $scope.$apply(function () {
                                         dataAdminFeedback.selectedItem.comment.push(comment_new);
                                         dataAdminFeedback.selectedItem.status = 2;
-                                        $state.go('admin_feedback', {}, {reload: true});
-                                    });
+                                        $state.go('admin_feedback_myReply', {}, {reload: true});
                                 });
-                            }).fail(function () {
-                                alert("Vui lòng kết nối mạng và thử lại!");
+                            }).fail(function (err) {
+                                $ionicPopup.show({
+                                    title: 'Thông Báo',
+                                    template: "postFeedback Error " + JSON.stringify(err),
+                                    buttons: [{text: 'Ok'}]
+                                });
                             });
                         }
                     }
