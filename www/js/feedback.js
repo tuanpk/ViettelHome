@@ -356,7 +356,7 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
     };
     $scope.updateEditor = function (elementId)
     {
-        resizeTextArea.resize(elementId);
+        resizeTextArea(elementId);
     };
     $scope.showScreen = function (i)
     {
