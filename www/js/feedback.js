@@ -597,10 +597,9 @@ function getListLocation($scope)
 function resizeTextArea(elementId)
 {
     var element = document.getElementById(elementId);
-//    if (element.scrollHeight > element.clientHeight)
+    if (element.scrollHeight > element.clientHeight) element.style.height = element.scrollHeight + "px";
 //    {
 //        if (element.scrollHeight < (window.innerHeight * heightPer / 100))
-    element.style.height = element.scrollHeight + "px";
+    
 //    }
-}
-;
+};
