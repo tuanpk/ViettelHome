@@ -8,21 +8,21 @@ var pageVoteEvent = 0;
 module.controller('chooseEventController', function ($scope, $state, $ionicPopup) {
     $scope.des = ["Chưa bình chọn", "Đã bình chọn", "Đã bình chọn"];
     $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
-            $scope.$apply(function ()
-            {
-                voteEvent.listEvent = json.result;
-                alert(JSON.stringify(json.result));
-                $scope.listEvent = voteEvent.listEvent;
-                pageVoteEvent = maxPage;
-                isMoreEvent = true;
-            });
-        }).fail(function (er) {
-            $ionicPopup.show({
-                title: 'Thông Báo',
-                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
-                buttons: [{text: 'Ok'}]
-            });
+        $scope.$apply(function ()
+        {
+            voteEvent.listEvent = json.result;
+            $scope.listEvent = voteEvent.listEvent;
+            pageVoteEvent = maxPage;
+            isMoreEvent = true;
         });
+    }).fail(function (er) {
+        $ionicPopup.show({
+            title: 'Thông Báo',
+            template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+            buttons: [{text: 'Ok'}]
+        });
+    });
+
     $scope.doRefreshListEvent = function ()
     {
         $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
@@ -47,15 +47,15 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
         $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: pageVoteEvent, end: pageVoteEvent + maxPage}).done(function (json) {
             $scope.$apply(function ()
             {
-                if(json.result.length > 0) {
-                voteEvent.listEvent = voteEvent.listEvent.concat(json.result);
-                $scope.listEvent = voteEvent.listEvent;
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-                pageVoteEvent += maxPage;
-            }else{
-                isMoreEvent = false;
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-            }
+                if (json.result.length > 0) {
+                    voteEvent.listEvent = voteEvent.listEvent.concat(json.result);
+                    $scope.listEvent = voteEvent.listEvent;
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    pageVoteEvent += maxPage;
+                } else {
+                    isMoreEvent = false;
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                }
             });
         }).fail(function (er) {
             $ionicPopup.show({
@@ -64,13 +64,11 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
                 buttons: [{text: 'Ok'}]
             });
         });
-       
     };
 
     $scope.moreEventCanBeLoaded = function () {
         return isMoreEvent;
     };
-
 
     $scope.showDetail_even = function (index) {
         var selectedVoteItem = voteEvent.listEvent[index];
