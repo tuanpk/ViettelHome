@@ -15,7 +15,7 @@ var TIMEOUT_HTTP = 30000;
 var DEBUG = true;
 
 //var module = angular.module('starter.controllers', []);
-var dataOpinion;
+var dataOpinion = [];
 
 //function alert(message) {
 //    if(DEBUG)
@@ -55,7 +55,11 @@ function validText(idText, name)
 {
     var inputText = document.getElementById(idText);
     if (inputText == null || inputText.value == "") {
-        alert(name + " chưa được nhập!");
+        $ionicPopup.show({
+                    title: 'Thông Báo',
+                    template: name + " chưa được nhập!",
+                    buttons: [{text: 'Ok'}]
+                });
         return false;
     }
     else
@@ -75,7 +79,7 @@ module.controller('BlankController', function ($scope, $location, $state) {
     }
 });
 
-module.controller('LoginController', function ($scope, $location, $state, $ionicLoading)
+module.controller('LoginController', function ($scope, $location, $state, $ionicLoading,$ionicPopup)
 {
     $scope.login = function () {
         if (!validText("username", "Email")) {
@@ -103,43 +107,21 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 $ionicLoading.hide();
                 userId = json.result[0].userId;
                 session = json.result[0].session;
-//                fullname = json.result[0].fullname;
-//                alert('Login Success userId: ' + userId + ' session:' + session);
                 $state.go('main');
             }).fail(function (err) {
                 $ionicLoading.hide();
-                alert("Login Error " + JSON.stringify(err));
+                $ionicPopup.show({
+                    title: 'Thông Báo',
+                    template: "Login Error " + JSON.stringify(err),
+                    buttons: [{text: 'Ok'}]
+                });
                 $state.go('main');
             });
-
-//            $.ajax({
-//                url: PARSE + "login",
-//                method: "POST",
-//                headers: {
-//                    "X-Parse-Application-Id": "WsJgVbuQIuDIIU5jddWimWU7Qvgki0cRlASgBQ1Z",
-//                    "X-Parse-REST-API-Key": "QEHmL7MTKtYvD81DBokbrvxde4mydTApl8SRJNRw",
-//                    "Content-Type": "application/json"
-//                },
-//                timeout: TIMEOUT_HTTP,
-//                data: "{}",
-//                success: function (response) {
-//                    $ionicLoading.hide();
-//                    alert(JSON.stringify(response));
-//                    userId = response.result[0].userId;
-//                    session = response.result[0].session;
-//                    $state.go('main');
-//                },
-//                error: function (request, status, error) {
-//                    $ionicLoading.hide();
-//                    alert("error request.responseText:" + request.responseText + "\nrequest.status:" + request.status + "\nstatus:" + status + "\nerror:" + error);
-//                    $state.go('main');
-//                }
-//            });
         }
     };
 });
 
-module.controller('MainController', function ($scope, $state, $ionicModal, $ionicPopover)
+module.controller('MainController', function ($scope, $state,$ionicPopup, $ionicModal, $ionicPopover)
 {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         animation: 'slide-in-up',
@@ -168,7 +150,11 @@ module.controller('MainController', function ($scope, $state, $ionicModal, $ioni
                 $state.go('main_login');
                 break;
             case 0:
-                alert("Nhan thong bao?");
+                $ionicPopup.show({
+                    title: 'Thông Báo',
+                    template: "Nhận thông báo?",
+                    buttons: [{text: 'Ok'}]
+                });
                 break;
             default:
                 break;
@@ -203,31 +189,40 @@ module.controller('MainController', function ($scope, $state, $ionicModal, $ioni
     };
 });
 
-function loadOpinion($scope) {
-    if (!dataOpinion)
-    {
-        dataOpinion = {};
-        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: 100}).done(function (json) {
-            $scope.$apply(function () {
-                dataOpinion = json.result;
-                $scope.opinions = dataOpinion;
-                $scope.$broadcast('scroll.refreshComplete');
-                isMoreOpinion = false;
-            });
-        }).fail(function () {
-            alert("Vui lòng kết nối mạng và thử lại!");
+var isLoadMoreOpinion = false;
+var pageOpinion = 0;
+module.controller('OpinionController', function ($scope, $state, $ionicModal, $ionicPopup, $ionicPopover) {
+    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        $scope.$apply(function () {
+            dataOpinion = json.result;
+            $scope.dataOpinion = dataOpinion;
+            pageOpinion = maxPage;
+            isLoadMoreOpinion = true;
         });
-    }
-    else
-        $scope.opinions = dataOpinion;
-}
-
-module.controller('OpinionController', function ($scope, $state, $ionicModal, $ionicPopover) {
-    loadOpinion($scope);
+    }).fail(function (er) {
+        $ionicPopup.show({
+            title: 'Thông Báo',
+            template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+            buttons: [{text: 'Ok'}]
+        });
+    })
     $scope.doRefreshOpinion = function ()
     {
-        dataOpinion = null;
-        loadOpinion($scope);
+        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+            $scope.$apply(function () {
+                dataOpinion = json.result;
+                $scope.dataOpinion = dataOpinion;
+                $scope.$broadcast('scroll.refreshComplete');
+                pageOpinion = maxPage;
+                isLoadMoreOpinion = true;
+            });
+        }).fail(function (er) {
+            $ionicPopup.show({
+                title: 'Thông Báo',
+                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                buttons: [{text: 'Ok'}]
+            });
+        })
     };
 
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
@@ -336,8 +331,12 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
                                         $state.go('main_opinion_reply', {}, {reload: true});
                                     });
                                 });
-                            }).fail(function () {
-                                alert("Vui lòng kết nối mạng và thử lại!");
+                            }).fail(function (er) {
+                                $ionicPopup.show({
+                                    title: 'Thông Báo',
+                                    template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                                    buttons: [{text: 'Ok'}]
+                                });
                             });
                         }
                     }
@@ -368,7 +367,6 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
                     type: 'button-positive',
                     onTap: function (e) {
                         if (!$scope.data.wifi) {
-                            //don't allow the user to close unless he enters wifi password
                             e.preventDefault();
                         } else {
                             return $scope.data.wifi;
