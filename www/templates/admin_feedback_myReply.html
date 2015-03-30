@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-bar class="bar-calm">
         <ion-nav-back-button class="button-clear">
-            <i class="ion-chevron-left"></i>TRẢ LỜI
+            <i class="ion-chevron-left"></i> TRẢ LỜI
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
             <button class="button" ng-click="finish_AdminReply()">
@@ -13,23 +13,22 @@
     <ion-content class="opinion_body">
         <ion-list>
             <ion-item  class="opinion_reply_item">
-                <header>
-                    <span class="row opinion_reply_title">{{item.title}}</span>
-                    <span class="row opinion_reply-department">{{item.department}}</span>    
-                    <span name="label_item" class="row opinion_reply-time">{{item.time}}</span>
-                    <span name="label_item" class="row opinion_reply-location">Địa điểm : {{item.location}}</span>
-                    <span name="label_item" class="opinion_reply-content">NỘI DUNG</span>
-                    <span name="label_item" class="row item-text-wrap">{{item.content}}</span>
-                    <br/>
-                    <ion-list>
-                        <span name="label_item" class="opinion_reply-content"><i class="ion-ios-ionic-outline"></i> TRẢ LỜI</span>
-                        <ion-item  class="opinion_reply-forward" ng-repeat="comment in comments">
-                                <span name="label_item" class="row opinion_reply-time">{{comment.fullname}} : {{comment.time}}</span>
-                                <span class="row item-text-wrap">{{comment.content}}</span>
-                        </ion-item>
-                    </ion-list>
-
-                </header>
+                <span class="row opinion_reply_title">{{item.title}}</span>
+                <span class="row opinion_reply-department">{{item.department}}</span>    
+                <span name="label_item" class="row opinion_reply-time">{{item.time}}</span>
+                <span name="label_item" class="row opinion_reply-location">Địa điểm : {{item.location}}</span>
+                <span name="label_item" class="opinion_reply-content">NỘI DUNG</span>
+                <span name="label_item" class="row item-text-wrap">{{item.content}}</span>
+                <div class="row">
+                    <img src="{{img.url}}" ng-repeat="img in imgs" width="50px" height="50px" class="admin_img" ng-click="zoommyImg($event, img.url)" /> 
+                </div>
+                <ion-list>
+                    <span name="label_item" class="opinion_reply-content"><i class="ion-ios-ionic-outline"></i> TRẢ LỜI</span>
+                    <ion-item  class="opinion_reply-forward" ng-repeat="comment in comments">
+                        <span name="label_item" class="row opinion_reply-time">{{comment.fullname}} : {{comment.time}}</span>
+                        <span class="row item-text-wrap">{{comment.content}}</span>
+                    </ion-item>
+                </ion-list>
             </ion-item>
             <span name="label_item" class="row opinion_reply-content">Ý KIẾN KHÁC</span>
             <textarea id="txtOpinionReply" ng-keypress="resizeText('txtOpinionReply')" ng-trim="false" maxlength="150" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>

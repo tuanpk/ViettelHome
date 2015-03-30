@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-bar class="bar-calm">
         <ion-nav-back-button class="button-clear">
-            <i class="ion-chevron-left"></i>TRẢ LỜI
+            <i class="ion-chevron-left"></i> TRẢ LỜI
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
             <button class="button" ng-click="forwardReply()">
@@ -22,7 +22,6 @@
                     <span class="row admin_feedback_location">{{detailAdminFeedback.location}}</span>
                     <span name="label_item" class="admin_feedback_content2">NỘI DUNG</span>
                     <span name="label_item" class="row item-text-wrap admin_feedback_content3">{{detailAdminFeedback.content}}</span>
-                    <br/>
                     <div class="row">
                         <img src="{{img.url}}" ng-repeat="img in imgs" height="50px" width="50px" class="admin_img" ng-click="zoomImg($event, img.url)" /> 
                     </div>

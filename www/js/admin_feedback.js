@@ -243,6 +243,11 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
 module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
+    $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
+    $scope.zoommyImg = function ($event, src) {
+        $scope.imgPopover = src;
+        $scope.popover.show($event);
+    };
 
     $scope.resizeText = function (elementId) {
         resizeTextArea(elementId);
