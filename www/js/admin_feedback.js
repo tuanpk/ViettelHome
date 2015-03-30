@@ -28,13 +28,16 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
     $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         $scope.$apply(function () {
             dataAdminFeedback = json.result;
-//            alert("json.result  " + JSON.stringify(json.result));
             $scope.dataAdminFeedback = dataAdminFeedback;
             pageAdminFeedback = maxPage;
             isLoadMore = true;
         });
     }).fail(function (er) {
-        alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+        $ionicPopup.show({
+                title: 'Thông Báo',
+                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                buttons: [{text: 'Ok'}]
+            });
     })
 
     $scope.refresh = function () {
@@ -47,7 +50,11 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
                 isLoadMore = true;
             });
         }).fail(function (er) {
-            alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+            $ionicPopup.show({
+                title: 'Thông Báo',
+                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                buttons: [{text: 'Ok'}]
+            });
         });
     }
 
@@ -65,12 +72,16 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     pageAdminFeedback += maxPage;
                 } else {
-                    alert('Het Load More ' + json.result.length);
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
                     isLoadMore = false;
                 }
             });
         }).fail(function (er) {
-            alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+            $ionicPopup.show({
+                title: 'Thông Báo',
+                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                buttons: [{text: 'Ok'}]
+            });
         });
     }
 
@@ -222,7 +233,7 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $state.go('admin_feedback_reply', {});
     };
 });
-module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, goBackViewWithName, $ionicPopup) {
+module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
 
@@ -259,8 +270,8 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, goBackVie
                                         time: timeparse};
                                     $scope.$apply(function () {
                                         dataAdminFeedback.selectedItem.comment.push(comment_new);
-                                        goBackViewWithName('admin_feedback');
-//                                        $state.go('admin_feedback_myReply', {}, {reload: true});
+                                        dataAdminFeedback.selectedItem.status = 2;
+                                        $state.go('admin_feedback', {}, {reload: true});
                                     });
                                 });
                             }).fail(function () {
