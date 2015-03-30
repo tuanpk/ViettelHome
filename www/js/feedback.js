@@ -124,6 +124,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             attach_count: '0'
                         }
                 ).done(function (json) {
+
                     var feedbackId = json.result[0].feedbackId;
                     alert('postFeedback Success feedbackId: ' + feedbackId + ' ' + JSON.stringify(json));
 
@@ -149,8 +150,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         fileEntry.file(function (file) {
             var reader = new FileReader();
             reader.onloadend = function (evt) {
-//                alert('onloadend ' + sizeof(evt.target.result) + ' ' + JSON.stringify(fileEntry.file));
-
+                alert('onloadend ' + sizeof(evt.target.result) + ' ' + JSON.stringify(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
                         {
                             userId: userId,
@@ -405,47 +405,18 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
 
 module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
 {
+    $scope.isLoadedMap = false;
+    loadMap($scope);
     getListLocation($scope);
-    function initialize()
+    $scope.loadMap = function ()
     {
-        navigator.geolocation.getCurrentPosition(function (pos)
+        if ($scope.isLoadedMap)
         {
-            var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-
-            var mapOptions = {
-                center: myLatlng,
-                zoom: 16,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("map"),
-                    mapOptions);
-
-            //Marker + infowindow + angularjs compiled ng-click
-            var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-            var compiled = $compile()($scope);
-
-            var infowindow = new google.maps.InfoWindow({
-                content: compiled[0]
-            });
-
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: 'My Position'
-            });
-
-            google.maps.event.addListener(marker, 'click', function ()
-            {
-                infowindow.open(map, marker);
-            });
-            $scope.$apply(function () {
-                $scope.map = map;
-            });
-        }, function (error) {
-            alert('Unable to get location: ' + error.message);
-        });
+            var element = document.getElementById("infiniteLoadMap");
+            element.parentNode.removeChild(element);
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        }
     }
-    initialize();
     $scope.local = {
         loc: ''
     };
@@ -457,7 +428,38 @@ module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
         goBackViewWithName('feedback');
     };
 });
+function loadMap($scope)
+{
+    navigator.geolocation.getCurrentPosition(function (pos)
+    {
+        var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"),
+                mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'My Position'
+        });
+        google.maps.event.addListener(marker, 'click', function ()
+        {
+            infowindow.open(map, marker);
+        });
+        $scope.$apply(function ()
+        {
+            $scope.map = map;
+            $scope.isLoadedMap = true;
+        });
+    },function(err)
+    {
+        alert(err);
+    });
+}
 module.factory('$Camera', ['$q', function ($q) {
 
         return {
@@ -597,9 +599,11 @@ function getListLocation($scope)
 function resizeTextArea(elementId)
 {
     var element = document.getElementById(elementId);
-    if (element.scrollHeight > element.clientHeight) element.style.height = element.scrollHeight + "px";
+    if (element.scrollHeight > element.clientHeight)
+        element.style.height = element.scrollHeight + "px";
 //    {
 //        if (element.scrollHeight < (window.innerHeight * heightPer / 100))
-    
+
 //    }
-};
+}
+;
