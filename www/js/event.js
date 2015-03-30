@@ -100,6 +100,10 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
 //    $scope.txtVote = {
 //        value: ''
 //    };
+$scope.updateEditor = function (elementId, heightPer)
+    {
+        $ResizeTextArea.resize(elementId,heightPer);
+    };
     $scope.eventDetailFalse = voteEvent.selectedItem;
 //    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
 //        scope: $scope,
