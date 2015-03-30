@@ -1,20 +1,45 @@
 /**********Quy nt7***********/
+.FB_gps
+{
+    /*    padding: 1px;*/
+    margin-top: -24px;
+}
+.FBText_boxLocation
+{
+    float: left;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+    /* background-color: graytext; */
+    background-color: white;
+    width: 100%;
+    margin-top: -2px;
+    margin-bottom: 13px;
+}
+.FBText_boxLocation input
+{
+    width: 85%;
+    height: 30%;
+    line-height: 1.6;
+    margin-left: 0px;
+    /*background-color: green;*/
+}
 .FBimg
 {
-/*    width: 40%;*/
+    /*    width: 40%;*/
     float: left;
     font-size: 35px;
-    margin-left: 3%;
+    margin-left: 0%;
     max-width: 30%;
     max-height: 30%;
     height: 45px;
     width: 45px;
 }
 .FBItemPadding input {
-  font-size: 100%;
-  margin-top: -10%;
-  margin-bottom: -4%;
-  margin-left: 79px;
+    font-size: 100%;
+    margin-top: -10%;
+    margin-bottom: -4%;
+    margin-left: 79px;
 }
 .bar-balanced .button.button-clear {
     font-weight: bold;
@@ -306,10 +331,11 @@
 {
     float: left;
     margin-left: 5px;
+    color: blue;
 }
 .FBItemPadding
 {
-    padding: 1px;
+    padding: 0px;
 }
 .FBItemPadding icon
 {
@@ -317,7 +343,7 @@
 }
 /*.FBItemPadding input*/
 /*{*/
-    /*margin-left: 10%;*/
+/*margin-left: 10%;*/
 /*}*/
 /*Loinv7 at 23/03/2015*/
 .FBModalFrame
@@ -382,23 +408,6 @@
     margin-left: 8px;
 }
 /*Loinv7 at 25/03/15*/
-.FBText_boxLocation
-{
-    float: left;
-    border: 1px solid black;
-    border-radius: 4px;
-    text-align: left;
-    /*background-color: graytext;*/
-    background-color: white;
-    width: 100%;
-}
-.FBText_boxLocation input
-{
-    width: 85%;
-    height: 30%;
-    line-height: 1.6;
-    /*background-color: green;*/
-}
 .FBText_boxSearchDepartment
 {
     float: left;

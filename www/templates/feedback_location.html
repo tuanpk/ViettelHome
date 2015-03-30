@@ -11,22 +11,22 @@
     </ion-nav-bar>
     <ion-content locking="false" direction="y" scroll="false" overflow-scroll="false" style="background-color: #eef2f7">
         <div class="FBBody">
-            <span class="">Lựa chọn địa điểm</span>
+            <h5>Lựa chọn địa điểm: </h5>
             <div class="item-input-wrapper FBText_boxLocation">
                 <i class="icon ion-search placeholder-icon FBIconSize25" style="margin-top: 1.3px;margin-left: 0px;"></i>
                 <input type="search" placeholder="Search..." ng-model="fbDataFilter.query" ng-click="popover.show($event)">
                 <i class="icon ion-close-circled placeholder-icon FBIconSize20" style="padding-left: 20%;margin-top: 1.3px" ng-click="clearSearch()"></i>
             </div>
-            <br>
-            <span class="">Nhập địa điểm khác</span>
+            <h5>Nhập địa điểm khác: <h5>
             <!--<textarea rows="3" class="FBTextarea" ng-model="fbTxtOtherLocal.value"></textarea>-->
             <textarea rows="3" class="FBTextarea" id="txtLocation" ng-keypress="updateEditor('txtLocation')" ng-model="txtLocation" ng-trim="false" maxlength="150" ></textarea>
-            <p class="feedback_des">Nhập vị trí như tên đường phố, miêu tả dễ hiểu!</p>
+            <p class="FB_des_item">Nhập vị trí như tên đường phố, miêu tả dễ hiểu!</p>
+             </div>
             <br/><br/>
-            <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen()">
-                <span class="FBFloatLeft">Định theo vị trí</span>
-                <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+            <a class="item FBOptionItemBorder FBItemPadding FB_gps" ng-click="showScreen()">
+                <span class="FBFloatLeft" >Định theo vị trí</span>
+                <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>               
             </a>
-        </div>
+            <p class="FB_des_item">Gợi ý theo khu vực, vui lòng bật GPS để tăng độ chính xác cho vị trí của bạn!</p>  
     </ion-content>
 </ion-view>
