@@ -1,26 +1,5 @@
-var dataAdminFeedback;
+var dataAdminFeedback = [];
 var department;
-var isMoreAdminFeedback = true;
-function getdataAdmin($scope, page) {
-    if (!dataAdminFeedback)
-    {
-        dataAdminFeedback = {};
-        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: page * maxPage, end: (page + 1) * maxPage}).done(function (json) {
-            $scope.$apply(function () {
-                dataAdminFeedback = json.result;
-                $scope.dataAdminFeedback = dataAdminFeedback;
-//                alert(JSON.stringify(dataAdminFeedback));
-                $scope.$broadcast('scroll.refreshComplete');
-                isMoreAdminFeedback = false;
-                page = page + 1;
-            });
-        }).fail(function (er) {
-            alert("Vui lòng kết nối mạng và thử lại!" + JSON.stringify(er));
-        });
-    } else {
-        $scope.dataAdminFeedback = dataAdminFeedback;
-    }
-}
 
 function getDepartment($scope) {
     if (!department)
@@ -30,7 +9,6 @@ function getDepartment($scope) {
             $scope.$apply(function () {
                 department = json.result;
                 $scope.department = department;
-//                alert(JSON.stringify(department));
             });
         }).fail(function () {
             alert("Vui lòng kết nối mạng và thử lại!");
@@ -41,26 +19,59 @@ function getDepartment($scope) {
 }
 ;
 
+var pageAdminFeedback = 0;
+var isLoadMore = false;
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
-    var pageAdmin = 0;
-    getdataAdmin($scope, pageAdmin);
     getDepartment($scope);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
-    $scope.doRefreshAdminFeedBack = function ()
-    {
-        dataAdminFeedback = null;
-        loadOpinion($scope);
+
+    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        $scope.$apply(function () {
+            dataAdminFeedback = json.result;
+            $scope.dataAdminFeedback = dataAdminFeedback;
+            pageAdminFeedback = maxPage;
+            isLoadMore = true;
+        });
+    }).fail(function (er) {
+        alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    });
+
+    $scope.refresh = function () {
+        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+            $scope.$apply(function () {
+                dataAdminFeedback = json.result;
+                $scope.dataAdminFeedback = dataAdminFeedback;
+                $scope.$broadcast('scroll.refreshComplete');
+                pageAdminFeedback = maxPage;
+                isLoadMore = true;
+            });
+        }).fail(function (er) {
+            alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+        });
     };
 
-    $scope.loadAdminFeedBack = function () {
-        getdataAdmin($scope);
-        $scope.$broadcast('scroll.infiniteScrollComplete');
+    $scope.isLoadMore = function () {
+        return isLoadMore;
     };
 
-    $scope.moreAdminFeedBackCanBeLoaded = function () {
-        return isMoreAdminFeedback;
+    $scope.loadMore = function () {
+        $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: pageAdminFeedback, end: pageAdminFeedback + maxPage}).done(function (json) {
+            $scope.$apply(function () {
+                if (json.result.length > 0) {
+//                    alert('Load More ' + json.result.length);
+                    dataAdminFeedback = dataAdminFeedback.concat(json.result);
+                    $scope.dataAdminFeedback = dataAdminFeedback;
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    pageAdminFeedback += maxPage;
+                } else {
+                    alert('Het Load More ' + json.result.length);
+                    isLoadMore = false;
+                }
+            });
+        }).fail(function (er) {
+            alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+        });
     };
-
 
     /// lọc dữ liệu #####################
     $ionicPopover.fromTemplateUrl('templates/main_popover.html', {
@@ -119,7 +130,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
     };
 }
 );
-module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopover,$ionicPopup, goBackViewWithName)
+module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopover, $ionicPopup, goBackViewWithName)
 {
     $scope.adFBTXTReply = {};
     $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
@@ -179,12 +190,11 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
                 template: 'Bạn gửi ý kiến thành công!',
                 buttons: [{text: 'Ok'}]
             });
-//            alert(JSON.stringify(json));
             goBackViewWithName('admin_feedback');
         }).fail(function (err) {
             $ionicPopup.show({
                 title: 'Thông Báo',
-                template:"postFeedback Error " + JSON.stringify(err),
+                template: "postFeedback Error " + JSON.stringify(err),
                 buttons: [{text: 'Ok'}]
             });
         });
@@ -210,37 +220,10 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $state.go('admin_feedback_reply', {});
     };
 });
-module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicModal, $ionicPopup) {
+module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, goBackViewWithName, $ionicPopup) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
-    alert(JSON.stringify($scope.comments));
 
-    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
-        scope: $scope,
-        focusFirstInput: true,
-        animation: 'slide-in-up'
-    }).then(function (modal)
-    {
-        $scope.modal = modal;
-    });
-    $scope.popText = function () {
-        $scope.modal.show();
-    };
-    $scope.$on('$destroy', function ()
-    {
-        $scope.modal.remove();
-    });
-    $scope.submit = function ()
-    {
-        if (txtActiveIndex === 0)
-            document.getElementById("txtTitle").value = document.getElementById("modalTxtArea").value;
-        else
-            document.getElementById("txtContent").value = document.getElementById("modalTxtArea").value;
-        $scope.modal.hide();
-
-        document.getElementById("txtOpinionReply").value = document.getElementById("modalTxtArea").value;
-        $scope.modal.hide();
-    };
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
         var time = new Date();
@@ -267,14 +250,15 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicMod
                                     }).done(function (json) {
                                 $scope.$apply(function ()
                                 {
-                                    alert(JSON.stringify(json));
+                                    alert(JSON.stringify(json) + " json ");
                                     var comment_new = {
                                         commentId: json.result.commentId,
                                         content: txtOpinionReply,
                                         time: timeparse};
                                     $scope.$apply(function () {
                                         dataAdminFeedback.selectedItem.comment.push(comment_new);
-                                        $state.go('admin_feedback_myReply', {}, {reload: true});
+                                        goBackViewWithName('admin_feedback');
+//                                        $state.go('admin_feedback_myReply', {}, {reload: true});
                                     });
                                 });
                             }).fail(function () {
