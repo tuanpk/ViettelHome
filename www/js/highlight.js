@@ -29,7 +29,6 @@ module.controller('HLController', function ($scope, $state)
     {
         listHighlightEvent = null;
         getHighlightEvents($scope);
-
     };
     $scope.pushPage = function (id)
     {
@@ -80,6 +79,7 @@ module.controller('HLListViewController', function ($scope, $state)
     $scope.doRefresh = function ()
     {
         getListImageItem($scope);
+        $scope.statusLoadmore=true;
     };
     $scope.showDetail = function (index, colIndex)
     {
@@ -112,8 +112,6 @@ module.controller('HLVideoController', function ($scope, $location, $state)
 //Get list image item by curent index highlight
 function getListImageItem($scope)
 {
-//    if (!listImages)
-//    {
         $scope.rows = [];
         listImages = {};
         listImages.rows = [];
@@ -217,13 +215,11 @@ function getListImageItem($scope)
                         }]);
             if (j < 6)
             {
-//                alert(JSON.stringify($scope.rows));
                 $scope.rows.push(listImages.rows[j++]);
-//                alert(JSON.stringify($scope.rows));
             }
                 
         }
-//    }
+        $scope.$broadcast('scroll.refreshComplete');
 }
 
 function getHighlightEvents($scope)
