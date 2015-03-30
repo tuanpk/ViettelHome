@@ -210,6 +210,7 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
     }).then(function (popover) {
         $scope.popover = popover;
     });
+    $scope.username = userName;
     $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
     $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
     $scope.zoomImg = function ($event, src) {

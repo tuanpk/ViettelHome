@@ -32,7 +32,7 @@
                 </div>
                 <div  class="row admin_feedback_item1" ng-click="viewFeedBack($index)" ng-hide="{{dataAdmin.username.localeCompare(username)}}">
                     <div class="admin_feedback_content1"> 
-                        <span class="row admin_feedback_title">{{dataAdmin.title}}</span>
+                        <p class="row admin_feedback_title">{{dataAdmin.title}}</p>
                         <p class="row admin_feedback_department1">Gửi tới :{{department[1].department}}</p>
                         <span name="label_item" class="row admin_feedback_time1">{{dataAdmin.time}}
                             <span class="admin_status1" ng-hide="{{dataAdmin.status == 1}}">Đã trả lời</span>
