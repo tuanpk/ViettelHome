@@ -19,7 +19,8 @@
             </div>
             <br>
             <span class="">Nhập địa điểm khác</span>
-            <textarea rows="3" class="FBTextarea" ng-model="fbTxtOtherLocal.value"></textarea>
+            <!--<textarea rows="3" class="FBTextarea" ng-model="fbTxtOtherLocal.value"></textarea>-->
+            <textarea rows="3" class="FBTextarea" id="txtContent" ng-keypress="updateEditor('txtContent')" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
             <p class="feedback_des">Nhập vị trí như tên đường phố, miêu tả dễ hiểu!</p>
             <br/><br/>
             <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen()">
