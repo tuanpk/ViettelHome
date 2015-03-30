@@ -1,6 +1,3 @@
-// ****************** QUYNT7   //23/03/15 LoiNV7
-
-// Bien luu tru thong tin vi tri tra ve dua vao vi tri hien tai (lay tu FBMapCtrl)
 var mapLocal =
         {
             local: ''
@@ -11,37 +8,30 @@ var fbDepartment =
         };
 var listDepartment = {};
 var listLocation = {};
-//save status show/hidden of text area native --Loinv7 at 27/03
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName)
 {
     $scope.items = [
         {
             title: 'ĐỊA ĐIỂM',
-//              label: 'Đã bình chọn',
             desc: 'Địa điểm không chọn được mặc định tại nơi công tác hoặc tự động định vị theo vị trí  hiện tại (Vui lòng bật xác định vị trí trong mục cài đặt)',
-//              vote: 1,
             content: 'Anh chỉ mong sao Em có thể nói lên hết những tâm tư bao lâu nay của hai đứa.Nhưng sau hôm nay Em nói xóa mau đi bao nhiêu kí ức Em vội ra đi riêng mình Em. Em có biết rất khó mới tìm thấy nhau, như lúc này Anh xin Em hãy quay trở lại.'
         },
         {
             title: 'THỜI GIAN',
-//              label: 'Đã bình chọn',
             desc: 'Thời gian không chọn thì được tự động để mặc định với thời gian hiện tại',
-//              vote: 1,
             content: 'Anh chỉ mong sao Em có thể nói lên hết những tâm tư bao lâu nay của hai đứa.Nhưng sau hôm nay Em nói xóa mau đi bao nhiêu kí ức Em vội ra đi riêng mình Em. Em có biết rất khó mới tìm thấy nhau, như lúc này Anh xin Em hãy quay trở lại.'
         }, {
             title: 'LỰA CHỌN CẤP GỬI',
-//              label: 'Đã bình chọn',
             desc: 'Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác',
-//              vote: 0
         }
     ];
     $scope.mediaUrl = [];
 
     $('#demo_datetime').mobiscroll().datetime({
-        theme: 'mobiscroll-dark', // Specify theme like: theme: 'ios' or omit setting to use default 
-        mode: 'mode', // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
-        display: 'bottom', // Specify display mode like: display: 'bottom' or omit setting to use default 
-        lang: 'en-UK', // Specify language like: lang: 'pl' or omit setting to use default
+        theme: 'mobiscroll-dark',
+        mode: 'mode',
+        display: 'bottom',
+        lang: 'en-UK',
         minDate: new Date(2010, 01, 01, 00, 00), // More info about minDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-minDate
         maxDate: new Date(2020, 01, 01, 00, 00), // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
         stepMinute: 1  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
@@ -55,26 +45,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
         $scope.modal = modal;
     });
-//    var txtActiveIndex = 0;
-//    $scope.showModalText = function (index)
-//    {
-//        txtActiveIndex = index;
-//        $scope.modal.show();
-//        if (txtActiveIndex === 0)
-//            document.getElementById("modalTxtArea").value = document.getElementById("txtTitle").value;
-//        else
-//            document.getElementById("modalTxtArea").value = document.getElementById("txtContent").value;
-//  
-//    $scope.submit = function (value)
-//    {
-//        if (txtActiveIndex === 0)
-//            document.getElementById("txtTitle").value = document.getElementById("modalTxtArea").value;
-//        else
-//            document.getElementById("txtContent").value = document.getElementById("modalTxtArea").value;
-//      
-//        $scope.modal.hide();
-////        $scope.modal=nill;
-//    };
+
     $scope.$on('$destroy', function ()
     {
         $scope.modal.remove();
@@ -137,7 +108,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
                         }
                         store.batch($scope.mediaUrl, function (json) {
-//                            alert('insert ' + JSON.stringify(json));
                         });
                     }
 //                    goBackViewWithName('main');
@@ -149,15 +119,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     function readFile(fileEntry) {
-        //        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-//        alert('fileEntry ' + JSON.stringify(fileEntry));
         fileEntry.file(function (file) {
             var reader = new FileReader();
             alert('fileEntry.file ' + JSON.stringify(file));
             reader.onloadend = function (evt) {
                 alert('onloadend ' + sizeof(evt.target.result));
-//                alert('fileEntry.file 2 ' + JSON.stringify(file));
-//                alert('fileEntry.file 2 ' + JSON.stringify(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
                         {
                             userId: userId,
@@ -194,35 +160,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     function onError(error) {
         alert('onError ' + JSON.stringify(error));
     }
-
-//    function onSuccess(response) {
-//        alert('onSuccess ' + JSON.stringify(response));
-//    }
-
-
-//    function fileUpload(fileURI, fileKey, mimeType) {
-//        var options = new FileUploadOptions();
-//        options.fileKey = fileKey;
-//        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-//        options.mimeType = mimeType;
-//
-//        var params = {};
-//        params.userId = userId;
-//        params.session = session;
-//        params.attach_type = 1;
-//        params.feedbackId = 154;
-//        params.file_index = 1;
-//        params.filename = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-//        params.byteData = 'data:image/gif;base64,R0lGODlhDwAPAKECAAAAzMzM/////wAAACwAAAAADwAPAAACIISPeQHsrZ5ModrLlN48CXF8m2iQ3YmmKqVlRtW4MLwWACH+H09wdGltaXplZCBieSBVbGVhZCBTbWFydFNhdmVyIQAAOw==';
-//
-//        options.params = params;
-//
-//        var ft = new FileTransfer();
-//        alert('FileTransfer ' + fileURI);
-//        ft.upload(fileURI, encodeURI("http://125.235.4.243:8080/ViettelHomeBackend/uploadFileFeedback"), onSuccess, onError, options);
-//        //window.resolveLocalFileSystemURL
-//    }
-
     $scope.choosePicture = function ()
     {
         $Camera.getPicture({
@@ -234,8 +171,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             $scope.mediaUrl.push(json);
             var image = document.getElementById('feedback_image');
             image.src = file_uri;
-//            alert('choosePicture Success: ' + file_uri);
-//            fileUpload(file_uri, 'data', 'image/jpeg');
         }, onError);
     };
 
@@ -251,8 +186,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             $scope.mediaUrl.push(json);
             var image = document.getElementById('feedback_image');
             image.src = file_uri;
-//            alert('takePicture Success: ' + file_uri);
-//            fileUpload(file_uri, 'data', 'image/jpeg');
         }, onError);
     };
 
@@ -261,7 +194,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: files_uri[0], title: "", content: "", type: 2, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
-//            alert('captureVideo Success ' + files_uri[0].fullPath);
         }, onError);
     };
 
@@ -326,7 +258,6 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
     $scope.fbDataFilter = {};
     $scope.fbTxtOtherLocal = {};
     getDepartments($scope);
-//    $scope.items = listDepartment;
     $ionicPopover.fromTemplateUrl('templates/FBPopoverLocation.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -343,8 +274,6 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
     };
     $scope.sumitLocal = function ()
     {
-//        alert($scope.fbTxtOtherLocal);
-//        alert($scope.fbDataFilter.query);
         if ($scope.fbTxtOtherLocal.value)
             mapLocal = {
                 local: $scope.fbTxtOtherLocal.value
@@ -353,7 +282,6 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
             mapLocal = {
                 local: $scope.fbDataFilter.query
             };
-//        alert(mapLocal.local);
         goBackViewWithName('feedback');
     };
     $scope.clearSearch = function ()
@@ -400,7 +328,6 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
             fbDepartment = {
                 value: $scope.department.value
             };
-//        alert(fbDepartment.value);
         goBackViewWithName('feedback');
     };
     $scope.clearSearch = function ()
@@ -474,7 +401,6 @@ module.factory('$Camera', ['$q', function ($q) {
                 var q = $q.defer();
 
                 navigator.camera.getPicture(function (result) {
-                    // Do any magic you need
                     q.resolve(result);
                 }, function (err) {
                     q.reject(err);
@@ -484,21 +410,17 @@ module.factory('$Camera', ['$q', function ($q) {
             }
         }
     }]);
-//Loi nv 7 at 24/03/15
-//Service go multi view
+
 module.service('goBackManyView', function ($ionicHistory) {
     return function (depth) {
-        // get the right history stack based on the current view
         var historyId = $ionicHistory.currentHistoryId();
         var history = $ionicHistory.viewHistory().histories[historyId];
-        // set the view 'depth' back in the stack as the back view
         var targetViewIndex = history.stack.length - 1 - depth;
         $ionicHistory.backView(history.stack[targetViewIndex]);
-        // navigate to it
         $ionicHistory.goBack();
     };
 });
-//Service go to view with name
+
 module.service('goBackViewWithName', function ($ionicHistory) {
     return function (stateName) {
         var historyId = $ionicHistory.currentHistoryId();
@@ -520,7 +442,6 @@ module.factory('$Capture', ['$q', function ($q) {
                 var q = $q.defer();
 
                 navigator.device.capture.captureVideo(function (result) {
-                    // Do any magic you need
                     q.resolve(result);
                 }, function (err) {
                     q.reject(err);
@@ -568,7 +489,6 @@ function sizeof(_1) {
     return _3;
 }
 
-//Loinv7 at 25/03/15
 function getDepartments($scope)
 {
     $.post(PARSE + "onLoadDepartment", {userId: userId, session: session, begin: 0, end: 50})
@@ -585,7 +505,6 @@ function getDepartments($scope)
         alert('Xin hãy kiểm tra lại kết nối');
     });
 }
-//LoiNV7 At 26/03/15
 function getListLocation($scope)
 {
     $.post(PARSE + "onSuggestDepartment", {userId: userId, session: session, begin: 0, end: 50})
@@ -602,15 +521,9 @@ function getListLocation($scope)
         alert('Xin hãy kiểm tra lại kết nối');
     });
 }
-//Loinv7 At 30/03/15
 function resizeTextArea(elementId)
 {
     var element = document.getElementById(elementId);
     if (element.scrollHeight > element.clientHeight)
         element.style.height = element.scrollHeight + "px";
-//    {
-//        if (element.scrollHeight < (window.innerHeight * heightPer / 100))
-
-//    }
-}
-;
+};
