@@ -1,8 +1,25 @@
 /**********Quy nt7***********/
+.FBText_boxDepartment input
+{
+    width: 98%;
+    height: 30px;
+    /*line-height: 2;*/
+    margin-left: 2px;
+}
+.FBText_boxSearchDepartment input
+{
+    width: 82%;
+    height: 30px;
+    /*line-height: 1.6;*/
+    /*background-color: green;*/
+}
 .FB_gps
 {
     /*    padding: 1px;*/
     margin-top: -24px;
+}
+.FB_des_item_department{
+    width: 80%
 }
 .FBText_boxLocation
 {
@@ -366,13 +383,6 @@
     background-color: white;
     width: 82%;
 }
-.FBText_boxDepartment input
-{
-    width: 98%;
-    height: 20%;
-    line-height: 1.6;
-    margin-left: 2px;
-}
 .FBFloatRight
 {
     float: right;
@@ -417,11 +427,4 @@
     /*background-color: graytext;*/
     background-color: white;
     width: 82%;
-}
-.FBText_boxSearchDepartment input
-{
-    width: 82%;
-    height: 30%;
-    line-height: 1.6;
-    /*background-color: green;*/
 }
