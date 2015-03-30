@@ -1,7 +1,7 @@
 var userId = '';
 var session = '';
 var userName = '';
-var maxPage = 20;
+var maxPage = 10;
 
 // var PARSE = "https://api.parse.com/1/functions/";
 var PARSE = "http://125.235.4.243:8080/ViettelHomeBackend/";

@@ -32,7 +32,7 @@
                 </header>
             </ion-item>
             <span name="label_item" class="row opinion_reply-content">Ý KIẾN KHÁC</span>
-            <textarea id="txtOpinionReply" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>
+            <textarea id="txtOpinionReply" ng-keypress="resizeText('txtOpinionReply')" ng-trim="false" maxlength="150" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>
         </ion-list>
     </ion-content>
 </ion-view>

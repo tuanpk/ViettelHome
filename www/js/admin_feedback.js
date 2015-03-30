@@ -69,8 +69,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     $scope.loadMore = function () {
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: pageAdminFeedback, end: pageAdminFeedback + maxPage}).done(function (json) {
             $scope.$apply(function () {
-                if (json.result.length > 0) {
-//                    alert('Load More ' + json.result.length);
+                if (json.length > 0 && json.result.length) {
                     dataAdminFeedback = dataAdminFeedback.concat(json.result);
                     $scope.dataAdminFeedback = dataAdminFeedback;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -148,7 +147,6 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
 );
 module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopover, $ionicPopup, goBackViewWithName)
 {
-    $scope.adFBTXTReply = {};
     $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
     $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
         scope: $scope
@@ -184,6 +182,11 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
     {
         $scope.adFBTXTReply.value = $scope.fbReply.value;
     };
+
+    $scope.resizeText = function (elementId) {
+        resizeTextArea(elementId);
+    };
+
     $scope.forwardReply = function () {
         $state.go('feedback_department', {});
     };
@@ -241,6 +244,10 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
 
+    $scope.resizeText = function (elementId) {
+        resizeTextArea(elementId);
+    };
+
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
         var time = new Date();
@@ -272,9 +279,9 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
                                         commentId: json.result.commentId,
                                         content: txtOpinionReply,
                                         time: timeparse};
-                                        dataAdminFeedback.selectedItem.comment.push(comment_new);
-                                        dataAdminFeedback.selectedItem.status = 2;
-                                        $state.go('admin_feedback_myReply', {}, {reload: true});
+                                    dataAdminFeedback.selectedItem.comment.push(comment_new);
+                                    dataAdminFeedback.selectedItem.status = 2;
+                                    $state.go('admin_feedback_myReply', {}, {reload: true});
                                 });
                             }).fail(function (err) {
                                 $ionicPopup.show({
