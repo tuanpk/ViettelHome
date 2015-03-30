@@ -17,15 +17,15 @@
                     <span class="row opinion_reply_title">{{item.title}}</span>
                     <span class="row opinion_reply-department">{{item.department}}</span>    
                     <span name="label_item" class="row opinion_reply-time">{{item.time}}</span>
-                    <span name="label_item" class="row opinion_reply-location">{{item.location}}</span>
+                    <span name="label_item" class="row opinion_reply-location">Địa điểm : {{item.location}}</span>
                     <span name="label_item" class="opinion_reply-content">NỘI DUNG</span>
                     <span name="label_item" class="row item-text-wrap">{{item.content}}</span>
                     <br/>
                     <ion-list>
                         <span name="label_item" class="opinion_reply-content"><i class="ion-ios-ionic-outline"></i> TRẢ LỜI</span>
                         <ion-item  class="opinion_reply-forward" ng-repeat="comment in comments">
+                                <span name="label_item" class="row opinion_reply-time">{{comment.fullname}} : {{comment.time}}</span>
                                 <span class="row item-text-wrap">{{comment.content}}</span>
-                                <span name="label_item" class="row opinion_reply-time">{{comment.time}}</span>
                         </ion-item>
                     </ion-list>
 
