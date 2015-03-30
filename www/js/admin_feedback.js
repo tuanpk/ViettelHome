@@ -28,13 +28,14 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
     $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         $scope.$apply(function () {
             dataAdminFeedback = json.result;
+//            alert("json.result  " + JSON.stringify(json.result));
             $scope.dataAdminFeedback = dataAdminFeedback;
             pageAdminFeedback = maxPage;
             isLoadMore = true;
         });
     }).fail(function (er) {
         alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
-    });
+    })
 
     $scope.refresh = function () {
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
@@ -48,11 +49,11 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
         }).fail(function (er) {
             alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
         });
-    };
+    }
 
     $scope.isLoadMore = function () {
         return isLoadMore;
-    };
+    }
 
     $scope.loadMore = function () {
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: pageAdminFeedback, end: pageAdminFeedback + maxPage}).done(function (json) {
@@ -71,7 +72,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
         }).fail(function (er) {
             alert("Không thể kết nối đến máy chủ" + JSON.stringify(er));
         });
-    };
+    }
 
     /// lọc dữ liệu #####################
     $ionicPopover.fromTemplateUrl('templates/main_popover.html', {
@@ -111,7 +112,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $state) {
                 break;
         }
     };
-    $scope.username = fullname;
+    $scope.username = userName;
     /// chuyển trang admin
     $scope.viewAdminFeedBack = function (index) {
         var selectedItem = dataAdminFeedback[index];

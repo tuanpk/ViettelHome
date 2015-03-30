@@ -1,6 +1,6 @@
 var userId = '';
 var session = '';
-var fullname = '';
+var userName = '';
 var maxPage = 20;
 
 // var PARSE = "https://api.parse.com/1/functions/";
@@ -97,13 +97,13 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
 //            }
 
             console.log($location.path());
-            var username = document.getElementById("username").value;
+            userName = document.getElementById("username").value;
             var password = document.getElementById("password").value;
-            $.post(PARSE + "login", {username: username, password: password}).done(function (json) {
+            $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {
                 $ionicLoading.hide();
                 userId = json.result[0].userId;
                 session = json.result[0].session;
-                fullname = json.result[0].fullname;
+//                fullname = json.result[0].fullname;
 //                alert('Login Success userId: ' + userId + ' session:' + session);
                 $state.go('main');
             }).fail(function (err) {
