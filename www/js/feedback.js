@@ -97,15 +97,28 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 break;
         }
     };
-    
-    $scope.updateEditor = function (elementId) 
+
+    $scope.updateEditor = function (elementId)
     {
-        
-        var element = document.getElementById(elementId);
-        if(element.scrollHeight>element.clientHeight)
+        if (elementId == 'txtTitle')
         {
-            if(element.scrollHeight<(window.innerHeight*20/100)) element.style.height = element.scrollHeight + "px";
+            var element = document.getElementById(elementId);
+            if (element.scrollHeight > element.clientHeight)
+            {
+                if (element.scrollHeight < (window.innerHeight * 8 / 100))
+                    element.style.height = element.scrollHeight + "px";
+            }
         }
+        else
+        {
+            var element = document.getElementById(elementId);
+            if (element.scrollHeight > element.clientHeight)
+            {
+                if (element.scrollHeight < (window.innerHeight * 18 / 100))
+                    element.style.height = element.scrollHeight + "px";
+            }
+        }
+
     };
 
     $scope.postFeedback = function ()
