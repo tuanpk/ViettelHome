@@ -240,10 +240,15 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $state.go('admin_feedback_reply', {});
     };
 });
-module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup) {
+module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup,$ionicPopover) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
     $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
+    $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
+        scope: $scope
+    }).then(function (popover) {
+        $scope.popover = popover;
+    });
     $scope.zoommyImg = function ($event, src) {
         $scope.imgPopover = src;
         $scope.popover.show($event);
