@@ -149,7 +149,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         fileEntry.file(function (file) {
             var reader = new FileReader();
             reader.onloadend = function (evt) {
-                alert('onloadend ' + sizeof(evt.target.result) + ' ' + JSON.stringify(fileEntry.file));
+//                alert('onloadend ' + sizeof(evt.target.result) + ' ' + JSON.stringify(fileEntry.file));
 
                 $.post(PARSE + "uploadFileFeedback",
                         {
