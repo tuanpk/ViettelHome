@@ -167,7 +167,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     obj.set("file", file);
 
                     alert('file.url: ' + JSON.stringify(file));
-                    
+
                     obj.save().then(function () {
                         var query = new Parse.Query(Parse.Installation);
                         Parse.Push.send({
