@@ -116,7 +116,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             }
                         });
                     }
-//                    goBackViewWithName('main');
+                    goBackViewWithName('main');
                 }).fail(function (err) {
                     $scope.feedbackId = -1;
                     alert("postFeedback Error " + JSON.stringify(err));
@@ -161,7 +161,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         }
                     }, {
                         success: function () {
-                            alert('Parse.Push.send Success');
+//                            alert('Parse.Push.send Success');
                         },
                         error: function (error) {
                             alert('Parse.Push.send Error' + JSON.stringify(error));
