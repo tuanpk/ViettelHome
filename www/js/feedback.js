@@ -169,7 +169,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 }).fail(function (err) {
                     alert("uploadFileFeedback Error " + JSON.stringify(err));
                     store.get($scope.feedbackId + '_0', function (json) {
-                        json.status = 1;
+                        json.status = 0;
                         store.save(json);
                     });
                 });
