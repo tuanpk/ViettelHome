@@ -35,7 +35,7 @@ module.controller('chooseEventController', function ($scope, $state) {
     $scope.reloadRoute = function () {
         $route.reload();
     };
-    $scope.des = ["Đã bình chọn", "Đã bình chọn", "Chưa bình chọn"];
+    $scope.des = ["Chưa bình chọn", "Đã bình chọn", "Đã bình chọn"];
 
     $scope.loadMoreEvent = function () {
         getListEvent($scope);
@@ -97,38 +97,38 @@ module.controller('eventDetailTrueController', function ($scope, goBackViewWithN
 
 //***********eventDetailFalseController*****************
 module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $ionicModal, $state) {
-    $scope.txtVote = {
-        value: ''
-    };
+//    $scope.txtVote = {
+//        value: ''
+//    };
     $scope.eventDetailFalse = voteEvent.selectedItem;
-    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
-        scope: $scope,
-        focusFirstInput: true,
-        animation: 'slide-in-up'
-    }).then(function (modal)
-    {
-        $scope.modal = modal;
-    });
-    $scope.$on('$destroy', function ()
-    {
-        $scope.modal.remove();
-    });
-    $scope.popOverText = function ()
-    {
-        $scope.modal.show();
-        document.getElementById("modalTxtArea").value = $scope.txtVote.value;
-    };
-    $scope.submit = function ()
-    {
-        $scope.txtVote.value = document.getElementById("modalTxtArea").value;
-        $scope.modal.hide();
-    };
+//    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
+//        scope: $scope,
+//        focusFirstInput: true,
+//        animation: 'slide-in-up'
+//    }).then(function (modal)
+//    {
+//        $scope.modal = modal;
+//    });
+//    $scope.$on('$destroy', function ()
+//    {
+//        $scope.modal.remove();
+//    });
+//    $scope.popOverText = function ()
+//    {
+//        $scope.modal.show();
+//        document.getElementById("modalTxtArea").value = $scope.txtVote.value;
+//    };
+//    $scope.submit = function ()
+//    {
+//        $scope.txtVote.value = document.getElementById("modalTxtArea").value;
+//        $scope.modal.hide();
+//    };
 
     $scope.finish_event = function ()
     {
         var valOfRadio = $('input[name=group]:checked').val();
-        var textOfTextarea = $scope.txtVote.value;
-        alert("$scope.txtVote.value : " + $scope.txtVote.value);
+        var textOfTextarea = document.getElementById("txtVote").value;
+        alert("$scope.txtVote.value : " + textOfTextarea);
         if (valOfRadio !== voteEvent.selectedItem.state || textOfTextarea) {
             var alertEvent = $ionicPopup.show({
                 title: 'Thông Báo',
