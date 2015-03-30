@@ -97,10 +97,15 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 break;
         }
     };
-
-    $scope.updateEditor = function (elementId) {
+    
+    $scope.updateEditor = function (elementId) 
+    {
+        
         var element = document.getElementById(elementId);
-        element.style.height = element.scrollHeight + "px";
+        if(element.scrollHeight>element.clientHeight)
+        {
+            if(element.scrollHeight<(window.innerHeight*20/100)) element.style.height = element.scrollHeight + "px";
+        }
     };
 
     $scope.postFeedback = function ()
