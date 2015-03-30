@@ -14,7 +14,7 @@
             <div class="FBBody">
                 <h5>Lựa chọn tình trạng phản ánh:</h5>
                 <div class="row feedback_row">
-            
+
                     <label class="item item-radio col col-50 feedback_radio">
                         <input type="radio" name="group" value="1" ng-checked="">
                         <div class="item-content">TÍCH CỰC</div>
@@ -36,11 +36,11 @@
                 <span>Tiêu đề</span> <span>{{50 - txtTitle.length}}</span>
                 <textarea rows="2" class="FBTextarea" id="txtTitle" ng-keypress="updateEditor('txtTitle')" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea>
                 <!--<div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle"></div>-->
-<!--                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>-->
+                <!--                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>-->
                 <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
                 <span>Nội dung</span> <span>{{200 - txtContent.length}}</span>
                 <textarea rows="3" class="FBTextarea" id="txtContent" ng-keypress="updateEditor('txtContent')" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
-<!--                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>-->
+                <!--                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>-->
                 <div class="FBMedia">
                     <img class="FBimg" alt="" id="feedback_image">
                     <button class="feedback_icon" ng-click="choosePicture()">
@@ -53,27 +53,27 @@
                         <i class="icon ion-ios-videocam-outline"></i>
                     </button>
                 </div>
+                <div class="clear" style="clear: both;"></div>
             </div>
-            <br/><br/>
-        <section>
-            <div class="FBOption">
-                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
-                    <span class="FBFloatLeft">Địa điểm: {{local}}</span>
-                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
-                </a>
-                <span class="FB_des_item">Địa điểm không chọn được mặc định tại nơi công tác hoặc tự động định vị theo vị trí  hiện tại (Vui lòng bật xác định vị trí trong mục cài đặt)</span>
-                <a class="item FBOptionItemBorder FBItemPadding" ng-click="">
-                    <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
-                    <!--<span><input class="feedback_time" type="text" id="demo_datetime"/></span>-->
-                </a>
-                <span class="FB_des_item">Thời gian không chọn thì được tự động để mặc định với thời gian hiện tại</span>
-                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
-                    <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
-                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
-                </a>
-                <span class="FB_des_item">Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác</span>
-            </div>
-        </section>
+            <section>
+                <div class="FBOption">
+                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
+                        <span class="FBFloatLeft">Địa điểm: {{local}}</span>
+                        <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                    </a>
+                    <span class="FB_des_item">Địa điểm không chọn được mặc định tại nơi công tác hoặc tự động định vị theo vị trí  hiện tại (Vui lòng bật xác định vị trí trong mục cài đặt)</span>
+                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="">
+                        <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
+                        <!--<span><input class="feedback_time" type="text" id="demo_datetime"/></span>-->
+                    </a>
+                    <span class="FB_des_item">Thời gian không chọn thì được tự động để mặc định với thời gian hiện tại</span>
+                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
+                        <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
+                        <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                    </a>
+                    <span class="FB_des_item">Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác</span>
+                </div>
+            </section>
         </div>
     </ion-content>
 </ion-view>
