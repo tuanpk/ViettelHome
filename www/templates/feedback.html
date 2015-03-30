@@ -41,7 +41,7 @@
                 <textarea rows="3" class="FBTextarea" id="txtContent" ng-keypress="updateEditor('txtContent',30)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
                 <!--                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>-->
                 <div class="FBMedia">
-                    <img class="FBimg" alt="" id="feedback_image">
+                    <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event, img.url)">
                     <button class="feedback_icon" ng-click="choosePicture()">
                         <i class="icon ion-images"></i>
                     </button> 

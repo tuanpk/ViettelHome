@@ -8,7 +8,7 @@ var fbDepartment =
         };
 var listDepartment = {};
 var listLocation = {};
-module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName)
+module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName)
 {
     $scope.items = [
         {
@@ -68,6 +68,16 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 alert("NOT FOUND showScreen " + i);
                 break;
         }
+    };
+    
+    $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
+        scope: $scope
+    }).then(function (popover) {
+        $scope.popover = popover;
+    });
+    $scope.zoomImg = function ($event, src) {
+        $scope.imgPopover = src;
+        $scope.popover.show($event);
     };
 
     $scope.updateEditor = function (elementId)
