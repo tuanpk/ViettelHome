@@ -251,8 +251,9 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
         var time = new Date();
-        var timeparse = parseInt(time.getTime() / 1000);
+        var timeparse = parseInt(time.getTime());
         if (txtOpinionReply) {
+//            alert("time.toLocaleDateString() " + time.toLocaleDateString());
             var alertOpinionReply = $ionicPopup.show({
                 title: 'Thông Báo',
                 template: 'Bạn có chắc chắn muốn gửi ý kiến?',
@@ -278,7 +279,8 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
                                     var comment_new = {
                                         commentId: json.result.commentId,
                                         content: txtOpinionReply,
-                                        time: timeparse};
+                                        fullname : fullName,
+                                        time: time.toLocaleDateString()};
                                     dataAdminFeedback.selectedItem.comment.push(comment_new);
                                     dataAdminFeedback.selectedItem.status = 2;
                                     $state.go('admin_feedback_myReply', {}, {reload: true});

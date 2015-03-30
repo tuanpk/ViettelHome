@@ -1,6 +1,7 @@
 var userId = '';
 var session = '';
 var userName = '';
+var fullName = '';
 var maxPage = 10;
 
 // var PARSE = "https://api.parse.com/1/functions/";
@@ -107,6 +108,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 $ionicLoading.hide();
                 userId = json.result[0].userId;
                 session = json.result[0].session;
+                fullName = json.result[0].fullname;
                 $state.go('main');
             }).fail(function (err) {
                 $ionicLoading.hide();
