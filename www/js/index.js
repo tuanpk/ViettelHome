@@ -182,7 +182,7 @@ module.controller('MainController', function ($scope, $state, $ionicModal, $ioni
     };
 
     $scope.onLoadSologan = function () {
-        alert("onLoadSologan");
+//        alert("onLoadSologan");
     };
 
     $scope.showScreen = function (i) {
