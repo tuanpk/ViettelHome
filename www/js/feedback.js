@@ -97,7 +97,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 break;
         }
     };
-    
+
     $scope.updateEditor = function (elementId) {
         var element = document.getElementById(elementId);
         element.style.height = element.scrollHeight + "px";
@@ -106,9 +106,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.postFeedback = function ()
     {
         if (validText("txtTitle", "Tiêu đề"))
-            if (validText("txtContent", "Nôi dung phản ánh")) {
+            if (validText("txtContent", "Nôi dung phản ánh"))
+
+            {
                 //                alert('postFeedback');
-                $.post(PARSE + "postFeedBack",
+                $.post(PARSE + "postFeedback",
                         {
                             userId: userId,
                             session: session,
@@ -129,44 +131,61 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
-                            $scope.mediaUrl[i].status = i % 3;
+//                            $scope.mediaUrl[i].status = i % 3;
+
+                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, gotFile, onError);
                         }
                         store.batch($scope.mediaUrl, function (json)
                         {
-                            alert('insert ' + JSON.stringify(json));
+//                            alert('insert ' + JSON.stringify(json));
                             //                            alert('success');
                         });
                     }
-                    Parse.Push.send({
-                        where: query, // Set our Installation query
-                        data: {
-                            alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
-                        }
-                    }, {
-                        success: function () {
-                            alert('Parse.Push.send Success');
-                        },
-                        error: function (error) {
-                            alert('Parse.Push.send Error' + JSON.stringify(error));
-                        }
-                    });
-                    goBackViewWithName('main');
+
+//                    goBackViewWithName('main');
                 }).fail(function (err) {
                     alert("postFeedback Error " + JSON.stringify(err));
                 });
-                alert('postFeedback DONE');
+//                alert('postFeedback DONE');
             }
     };
 
     function gotFile(fileEntry) {
-        alert('fileEntry: ' + JSON.stringify(fileEntry));
+//        alert('fileEntry: ' + JSON.stringify(fileEntry));
         fileEntry.file(function (file) {
-            alert('fileEntry.file: ' + JSON.stringify(file));
+//            alert('fileEntry.file: ' + JSON.stringify(file));
 
             var reader = new FileReader();
             reader.onloadend = function (evt) {
-                alert('onloadend ' + sizeof(evt) + ' ' + sizeof(evt.target.result) + ' ' + evt.target.result);
+                alert('onloadend ' + sizeof(evt) + ' ' + sizeof(evt.target.result));
 //              onimageSuccess(evt.target.result);
+
+                var file = new Parse.File("feedback_image.jpg", evt.target.result);
+                file.save().then(function () {
+
+                    var obj = new Parse.Object("FeedbackImage");
+                    obj.set("file", file);
+
+                    alert('file.url: ' + JSON.stringify(file));
+                    
+                    obj.save().then(function () {
+                        var query = new Parse.Query(Parse.Installation);
+                        Parse.Push.send({
+                            where: query, // Set our Installation query
+                            data: {
+                                alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
+                            }
+                        }, {
+                            success: function () {
+                                alert('Parse.Push.send Success');
+                            },
+                            error: function (error) {
+                                alert('Parse.Push.send Error' + JSON.stringify(error));
+                            }
+                        });
+                    });
+                }, onError);
+
             }
             reader.readAsDataURL(file);
         });
@@ -180,28 +199,28 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         alert('onSuccess ' + JSON.stringify(response));
     }
 
-    function fileUpload(fileURI, fileKey, mimeType) {
-        var options = new FileUploadOptions();
-        options.fileKey = fileKey;
-        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-        options.mimeType = mimeType;
-
-        var params = {};
-        params.userId = userId;
-        params.session = session;
-        params.attach_type = 1;
-        params.feedbackId = 154;
-        params.file_index = 1;
-        params.filename = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-        params.byteData = 'data:image/gif;base64,R0lGODlhDwAPAKECAAAAzMzM/////wAAACwAAAAADwAPAAACIISPeQHsrZ5ModrLlN48CXF8m2iQ3YmmKqVlRtW4MLwWACH+H09wdGltaXplZCBieSBVbGVhZCBTbWFydFNhdmVyIQAAOw==';
-
-        options.params = params;
-
-        var ft = new FileTransfer();
-        alert('FileTransfer ' + fileURI);
-        ft.upload(fileURI, encodeURI("http://125.235.4.243:8080/ViettelHomeBackend/uploadFileFeedback"), onSuccess, onError, options);
-        //window.resolveLocalFileSystemURL
-    }
+//    function fileUpload(fileURI, fileKey, mimeType) {
+//        var options = new FileUploadOptions();
+//        options.fileKey = fileKey;
+//        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+//        options.mimeType = mimeType;
+//
+//        var params = {};
+//        params.userId = userId;
+//        params.session = session;
+//        params.attach_type = 1;
+//        params.feedbackId = 154;
+//        params.file_index = 1;
+//        params.filename = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+//        params.byteData = 'data:image/gif;base64,R0lGODlhDwAPAKECAAAAzMzM/////wAAACwAAAAADwAPAAACIISPeQHsrZ5ModrLlN48CXF8m2iQ3YmmKqVlRtW4MLwWACH+H09wdGltaXplZCBieSBVbGVhZCBTbWFydFNhdmVyIQAAOw==';
+//
+//        options.params = params;
+//
+//        var ft = new FileTransfer();
+//        alert('FileTransfer ' + fileURI);
+//        ft.upload(fileURI, encodeURI("http://125.235.4.243:8080/ViettelHomeBackend/uploadFileFeedback"), onSuccess, onError, options);
+//        //window.resolveLocalFileSystemURL
+//    }
 
     $scope.choosePicture = function ()
     {
@@ -209,11 +228,13 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         }).then(function (file_uri) {
-            var date = new Date().getTime() / 1000;
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 0, progess: 0};
+            var date = new Date();
+            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
+            var image = document.getElementById('feedback_image');
+            image.src = file_uri;
 //            alert('choosePicture Success: ' + file_uri);
-            fileUpload(file_uri, 'data', 'image/jpeg');
+//            fileUpload(file_uri, 'data', 'image/jpeg');
         }, onError);
     };
 
@@ -224,9 +245,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             targetHeight: 320,
             saveToPhotoAlbum: false
         }).then(function (file_uri) {
-            var date = new Date().getTime() / 1000;
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 0, progess: 0};
+            var date = new Date();
+            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
+            var image = document.getElementById('feedback_image');
+            image.src = file_uri;
 //            alert('takePicture Success: ' + file_uri);
 //            fileUpload(file_uri, 'data', 'image/jpeg');
         }, onError);
@@ -235,66 +258,66 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.takeVideo = function () {
         $Capture.captureVideo({limit: 1, duration: 1}).then(function (files_uri) {
             var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: files_uri[0], title: "", content: "", type: 2, date: date, status: 0, progess: 0};
+            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: files_uri[0], title: "", content: "", type: 2, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
 //            alert('captureVideo Success ' + files_uri[0].fullPath);
         }, onError);
     };
 
-    function videoSuccess(videoData) {
-        alert('upLoadVideo ' + sizeof(videoData));
-        var file = new Parse.File("feedback_video.mp4", {base64: videoData});
-        file.save().then(function () {
-            alert('videoSuccess  ' + file.url());
-            var obj = new Parse.Object("FeedbackVideo");
-            obj.set("file", file);
-            obj.save().then(function () {
-                var query = new Parse.Query(Parse.Installation);
-                Parse.Push.send({
-                    where: query, // Set our Installation query
-                    data: {
-                        alert: "Dong chi co phan anh video moi!"
-                    }
-                }, {
-                    success: function () {
-                        alert('Parse.Push.send Success');
-                    },
-                    error: function (error) {
-                        alert('Parse.Push.send Error' + JSON.stringify(error));
-                    }
-                });
-            });
-        }, onError);
-    }
+//    function videoSuccess(videoData) {
+//        alert('upLoadVideo ' + sizeof(videoData));
+//        var file = new Parse.File("feedback_video.mp4", {base64: videoData});
+//        file.save().then(function () {
+//            alert('videoSuccess  ' + file.url());
+//            var obj = new Parse.Object("FeedbackVideo");
+//            obj.set("file", file);
+//            obj.save().then(function () {
+//                var query = new Parse.Query(Parse.Installation);
+//                Parse.Push.send({
+//                    where: query, // Set our Installation query
+//                    data: {
+//                        alert: "Dong chi co phan anh video moi!"
+//                    }
+//                }, {
+//                    success: function () {
+//                        alert('Parse.Push.send Success');
+//                    },
+//                    error: function (error) {
+//                        alert('Parse.Push.send Error' + JSON.stringify(error));
+//                    }
+//                });
+//            });
+//        }, onError);
+//    }
 
-    function imageSuccess(imageData) {
-        var image = document.getElementById('feedback_image');
-        image.src = "data:image/jpeg;base64," + imageData;
-
-        var file = new Parse.File("feedback_image.jpg", {base64: imageData});
-        file.save().then(function () {
-//            alert('imageSuccess  ' + file.url());
-            var obj = new Parse.Object("FeedbackImage");
-            obj.set("file", file);
-
-            obj.save().then(function () {
-                var query = new Parse.Query(Parse.Installation);
-                Parse.Push.send({
-                    where: query, // Set our Installation query
-                    data: {
-                        alert: "Dong chi co phan anh hinh anh moi!"
-                    }
-                }, {
-                    success: function () {
-                        alert('Parse.Push.send Success');
-                    },
-                    error: function (error) {
-                        alert('Parse.Push.send Error ' + JSON.stringify(error));
-                    }
-                });
-            });
-        }, onError);
-    }
+//    function imageSuccess(imageData) {
+//        var image = document.getElementById('feedback_image');
+//        image.src = "data:image/jpeg;base64," + imageData;
+//
+//        var file = new Parse.File("feedback_image.jpg", {base64: imageData});
+//        file.save().then(function () {
+////            alert('imageSuccess  ' + file.url());
+//            var obj = new Parse.Object("FeedbackImage");
+//            obj.set("file", file);
+//
+//            obj.save().then(function () {
+//                var query = new Parse.Query(Parse.Installation);
+//                Parse.Push.send({
+//                    where: query, // Set our Installation query
+//                    data: {
+//                        alert: "Dong chi co phan anh hinh anh moi!"
+//                    }
+//                }, {
+//                    success: function () {
+//                        alert('Parse.Push.send Success');
+//                    },
+//                    error: function (error) {
+//                        alert('Parse.Push.send Error ' + JSON.stringify(error));
+//                    }
+//                });
+//            });
+//        }, onError);
+//    }
 });
 
 module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName)

@@ -104,7 +104,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 userId = json.result[0].userId;
                 session = json.result[0].session;
                 fullname = json.result[0].fullname;
-                alert('Login Success userId: ' + userId + ' session:' + session);
+//                alert('Login Success userId: ' + userId + ' session:' + session);
                 $state.go('main');
             }).fail(function (err) {
                 $ionicLoading.hide();
@@ -485,7 +485,7 @@ module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover) {
                     isMoreHistory = false;
                 } else if ($scope.historys.length === 0) {
                     isMoreHistory = false;
-                    alert('Bạn chưa gửi phản ánh nào');
+//                    alert('Bạn chưa gửi phản ánh nào');
                 }
             });
         }
