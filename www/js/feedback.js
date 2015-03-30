@@ -153,10 +153,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         store.save(json);
                     });
 
+                    var query = new Parse.Query(Parse.Installation);
                     Parse.Push.send({
                         where: query, // Set our Installation query
                         data: {
-                            alert: "Dong chi co phan anh moi : " + document.getElementById('txtTitle').value
+                            alert: "Đồng chí " + fullName + ' vừa gửi phản ánh : ' + document.getElementById('txtTitle').value
                         }
                     }, {
                         success: function () {
@@ -547,4 +548,5 @@ function resizeTextArea(elementId)
     var element = document.getElementById(elementId);
     if (element.scrollHeight > element.clientHeight)
         element.style.height = element.scrollHeight + "px";
-};
+}
+;
