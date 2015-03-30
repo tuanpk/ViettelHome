@@ -12,7 +12,7 @@ var fbDepartment =
 var listDepartment = {};
 var listLocation = {};
 //save status show/hidden of text area native --Loinv7 at 27/03
-module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName)
+module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicModal, goBackViewWithName,$ResizeTextArea)
 {
     $scope.items = [
         {
@@ -99,27 +99,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }
     };
 
-    $scope.updateEditor = function (elementId)
+    $scope.updateEditor = function (elementId, heightPer)
     {
-        if (elementId == 'txtTitle')
-        {
-            var element = document.getElementById(elementId);
-            if (element.scrollHeight > element.clientHeight)
-            {
-                if (element.scrollHeight < (window.innerHeight * 8 / 100))
-                    element.style.height = element.scrollHeight + "px";
-            }
-        }
-        else
-        {
-            var element = document.getElementById(elementId);
-            if (element.scrollHeight > element.clientHeight)
-            {
-                if (element.scrollHeight < (window.innerHeight * 18 / 100))
-                    element.style.height = element.scrollHeight + "px";
-            }
-        }
-
+        $ResizeTextArea.resize(elementId,heightPer);
     };
 
     $scope.postFeedback = function ()
@@ -331,7 +313,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 //    }
 });
 
-module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName)
+module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName, $ResizeTextArea)
 {
     $scope.fbDataFilter = {};
     $scope.fbTxtOtherLocal = {};
@@ -371,9 +353,9 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
         $scope.popover.hide();
         $scope.fbDataFilter.query = '';
     };
-    $scope.updateEditor = function (elementId) {
-        var element = document.getElementById(elementId);
-        element.style.height = element.scrollHeight + "px";
+    $scope.updateEditor = function (elementId, heightPer)
+    {
+        $ResizeTextArea.resize(elementId,heightPer);
     };
     $scope.showScreen = function (i)
     {
@@ -610,3 +592,18 @@ function getListLocation($scope)
         alert('Xin hãy kiểm tra lại kết nối');
     });
 }
+//Loinv7 At 30/03/15
+module.factory('$ResizeTextArea', function ()
+{
+    var resizeTextArea = {};
+    resizeTextArea.resize = function (elementId,heightPer)
+    {
+        var element = document.getElementById(elementId);
+        if (element.scrollHeight > element.clientHeight)
+        {
+            if (element.scrollHeight < (window.innerHeight * heightPer / 100))
+                element.style.height = element.scrollHeight + "px";
+        }
+    }
+    return resizeTextArea;
+});
