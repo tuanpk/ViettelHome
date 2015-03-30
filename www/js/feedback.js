@@ -104,6 +104,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         resizeTextArea(elementId);
     };
 
+    $scope.feedbackId = -1;
     $scope.postFeedback = function ()
     {
         if (validText("txtTitle", "Tiêu đề"))
@@ -121,18 +122,18 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             location: 'Noi trai tim co nang',
                             time: new Date().getTime(),
                             department: '1',
-                            attach_count: '0'
+                            attach_count: $scope.feedbackId.length
                         }
                 ).done(function (json) {
 
-                    var feedbackId = json.result[0].feedbackId;
-                    alert('postFeedback Success feedbackId: ' + feedbackId + ' ' + JSON.stringify(json));
+                    $scope.feedbackId = json.result[0].feedbackId;
+                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
 
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
 //                            $scope.mediaUrl[i].status = i % 3;
-                            $scope.mediaUrl[i].feedbackId = feedbackId;
+                            $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
                             window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
                         }
                         store.batch($scope.mediaUrl, function (json) {
@@ -141,24 +142,30 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     }
 //                    goBackViewWithName('main');
                 }).fail(function (err) {
+                    $scope.feedbackId = -1;
                     alert("postFeedback Error " + JSON.stringify(err));
                 });
             }
     };
 
     function readFile(fileEntry) {
+        //        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+//        alert('fileEntry ' + JSON.stringify(fileEntry));
         fileEntry.file(function (file) {
             var reader = new FileReader();
+            alert('fileEntry.file ' + JSON.stringify(file));
             reader.onloadend = function (evt) {
-                alert('onloadend ' + sizeof(evt.target.result) + ' ' + JSON.stringify(evt.target.result));
+                alert('onloadend ' + sizeof(evt.target.result));
+//                alert('fileEntry.file 2 ' + JSON.stringify(file));
+//                alert('fileEntry.file 2 ' + JSON.stringify(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
                         {
                             userId: userId,
                             session: session,
                             attach_type: '1',
-                            feedbackId: '83',
+                            feedbackId: $scope.feedbackId,
                             file_index: '1',
-                            filename: 'icon.png',
+                            filename: file.localURL.substr(file.localURL.lastIndexOf('/') + 1),
                             stringData: evt.target.result
                         }
                 ).done(function (json) {
@@ -455,7 +462,7 @@ function loadMap($scope)
             $scope.map = map;
             $scope.isLoadedMap = true;
         });
-    },function(err)
+    }, function (err)
     {
         alert(err);
     });
