@@ -91,7 +91,7 @@ module.controller('HLListViewController', function ($scope, $state)
             getListImageItem($scope);
             loadedImage = true;
         }
-        if (currentHighlightEvent.rows[curIndexLoaded])
+        else if (currentHighlightEvent.rows[curIndexLoaded])
         {
             $scope.rows.push(currentHighlightEvent.rows[curIndexLoaded++]);
             $scope.statusLoadmore = true;
@@ -149,7 +149,7 @@ function getListImageItem($scope)
                                     url: currentHighlightEvent.link[i].url
                                 },
                                 {
-                                    url: currentHighlightEvent.link[++i].url
+                                    url: currentHighlightEvent.link[++i].url?currentHighlightEvent.link[i].url:''
                                 }
                             ]
                 });
