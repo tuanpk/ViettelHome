@@ -104,6 +104,8 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
 
             console.log($location.path());
             userName = document.getElementById("username").value;
+            if(userName.indexOf("@viettel.com.vn")<0) userName=userName.concat("@viettel.com.vn");
+            
             
             var password = document.getElementById("password").value;
             $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {

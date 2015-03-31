@@ -1,7 +1,8 @@
 var dataAdminFeedback;
 var department;
 
-function getDepartment($scope, $ionicPopup) {
+function getDepartment($scope, $ionicPopup) 
+{
     if (!department)
     {
         department = {};
@@ -25,7 +26,9 @@ function getDepartment($scope, $ionicPopup) {
 
 var pageAdminFeedback = 0;
 var isLoadMore = false;
-module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) {
+module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) 
+{
+    $scope.statusFilter=1;
     dataAdminFeedback = {};
     getDepartment($scope, $ionicPopup);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
@@ -43,7 +46,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
             template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
             buttons: [{text: 'Ok'}]
         });
-    })
+    });
 
     $scope.refresh = function () {
         dataAdminFeedback = {};
@@ -64,11 +67,12 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
         });
     }
 
-    $scope.isLoadMore = function () {
+    $scope.isLoadMore = function () 
+    {
         return isLoadMore;
     }
-
-    $scope.loadMore = function () {
+    $scope.loadMore = function () 
+    {
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: pageAdminFeedback, end: pageAdminFeedback + maxPage}).done(function (json) {
             $scope.$apply(function () {
                 if (json.length > 0 && json.result.length) {
@@ -91,6 +95,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     }
 
     /// lọc dữ liệu #####################
+    
     $ionicPopover.fromTemplateUrl('templates/main_popover.html', {
         scope: $scope
     }).then(function (popover) {
@@ -116,13 +121,13 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
         var id = $scope.filters[i].id;
         switch (id) {
             case 1:
-                alert(id);
+                $scope.statusFilter=1;
                 break;
             case 2:
-                alert(id);
+                $scope.statusFilter=2;
                 break;
             case 3:
-                alert(id);
+                $scope.statusFilter=3;
                 break;
             default:
                 break;

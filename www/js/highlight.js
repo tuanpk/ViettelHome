@@ -97,7 +97,10 @@ module.controller('HLListViewController', function ($scope, $state)
             $scope.statusLoadmore = true;
         }
         else
+        {
             $scope.statusLoadmore = false;
+        }
+            
         $scope.$broadcast('scroll.infiniteScrollComplete');
         $scope.$broadcast('scroll.resize');
     };
@@ -146,16 +149,17 @@ function getListImageItem($scope)
                     cells:
                             [
                                 {
-                                    url: currentHighlightEvent.link[i].url
+                                    url: currentHighlightEvent.link[i]?currentHighlightEvent.link[i].url:''
                                 },
                                 {
-                                    url: currentHighlightEvent.link[++i].url?currentHighlightEvent.link[i].url:''
+                                    url: currentHighlightEvent.link[++i]?currentHighlightEvent.link[i].url:''
                                 }
                             ]
                 });
         if (j < 2 && currentHighlightEvent.rows[j])
         {
             $scope.rows.push(currentHighlightEvent.rows[j++]);
+            
         }
     }
 }
