@@ -127,7 +127,6 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
     {
         var valOfRadio = $('input[name=group]:checked').val();
         var textOfTextarea = document.getElementById("txtVote").value;
-        alert("$scope.txtVote.value : " + textOfTextarea);
         if (valOfRadio !== voteEvent.selectedItem.state || textOfTextarea) {
             var alertEvent = $ionicPopup.show({
                 title: 'Thông Báo',
