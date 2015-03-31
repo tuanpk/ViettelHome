@@ -196,7 +196,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         alert('onError ' + JSON.stringify(error));
     }
 
-    function gotFile(fileEntry) {
+    function gotFile(fileEntry) 
+    {
+        alert(fileEntry.nativeURL);
         $scope.imgPopover = fileEntry.nativeURL;
     }
 
