@@ -69,7 +69,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 break;
         }
     };
-    
+
     $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
         scope: $scope
     }).then(function (popover) {
@@ -80,9 +80,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         $scope.popover.show($event);
     };
 
-    $scope.updateEditor = function (elementId)
+    $scope.updateEditor = function (elementId, minHeight)
     {
-        resizeTextArea(elementId);
+        resizeTextArea(elementId, minHeight);
     };
 
     $scope.feedbackId = -1;
@@ -321,7 +321,7 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
         $scope.popover.hide();
         $scope.fbDataFilter.query = '';
     };
-    $scope.updateEditor = function (elementId)
+    $scope.updateEditor = function (elementId, minHeight)
     {
         resizeTextArea(elementId);
     };
@@ -374,15 +374,6 @@ module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
     $scope.isLoadedMap = false;
     loadMap($scope);
     getListLocation($scope);
-    $scope.loadMap = function ()
-    {
-        if ($scope.isLoadedMap)
-        {
-            var element = document.getElementById("infiniteLoadMap");
-            element.parentNode.removeChild(element);
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-        }
-    }
     $scope.local = {
         loc: ''
     };
@@ -553,13 +544,14 @@ function getListLocation($scope)
         alert('Xin hãy kiểm tra lại kết nối');
     });
 }
-function resizeTextArea(elementId)
+function resizeTextArea(elementId, minHeight)
 {
     var element = document.getElementById(elementId);
-//    if (element.scrollHeight > element.clientHeight)
+    if (element.scrollHeight < minHeight)
+        element.style.height = minHeight + "px";
+    else
         element.style.height = element.scrollHeight + "px";
-}
-;
+};
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string

@@ -38,7 +38,7 @@
                 <!--                <div class="FBText_box"><input class="FBInputDepart" type="text" id="txtTitle" ng-click="showModalText(0)"></div>-->
                 <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
                 <span>Nội dung:</span> (<span>{{200 - txtContent.length}}</span>)
-                <textarea rows="3" class="FBTextarea" id="txtContent" ng-keypress="updateEditor('txtContent',30)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
+                <textarea rows="3" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
                 <!--                <textarea rows="3" class="FBTextarea" id="txtContent" ng-click="showModalText(1)"></textarea>-->
                 <div class="FBMedia">
                     <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event, img.url)">

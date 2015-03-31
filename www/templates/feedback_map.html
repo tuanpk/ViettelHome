@@ -9,12 +9,12 @@
             </button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false">
+    <ion-content locking="false" scroll="false" direction="y" overflow-scroll="false">
         <div class="FBMapFrame" ng-model="isLoadedMap">
             <div id="map" data-tap-disabled="false"></div>
         </div>
-        <ion-scroll direction="y">
-            <div class="list" ng-show="isLoadedMap" style="width: 100%;height: 54%;">
+            <ion-scroll direction="y" style="height: 100%; background-color: #eef2f7;">
+            <div class="item" style="width: 100%; padding: 0px;">
                 <ion-radio  ng-repeat="item in items"
                            ng-value="item.department"
                            ng-model="local.loc">
