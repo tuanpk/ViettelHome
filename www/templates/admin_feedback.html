@@ -26,7 +26,7 @@
                         </span>
                     </div>
                     <div class="col col-10">
-                        <i class="ion-arrow-left-c admin_icon_right1" ng-hide="{{dataAdmin.status == 1 }}"></i><br/><br/>
+                        <i class="ion-arrow-left-c admin_icon_right1" ng-hide="{{dataAdmin.status == 2 }}"></i><br/><br/>
                         <i class="ion-reply admin_icon_right2"></i>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         <p class="row admin_feedback_title">{{dataAdmin.title}}</p>
                         <p class="row admin_feedback_department1">Gửi tới :{{department[1].department}}</p>
                         <span name="label_item" class="row admin_feedback_time1">{{dataAdmin.time}}
-                            <span class="admin_status1" ng-hide="{{dataAdmin.status == 1}}">Đã trả lời</span>
-                            <span class="admin_status2" ng-hide="{{dataAdmin.status == 2}}">Chưa trả lời</span>
+                            <span class="admin_status1" ng-hide="{{dataAdmin.status == 2}}">Đã trả lời</span>
+                            <span class="admin_status2" ng-hide="{{dataAdmin.status == 1}}">Chưa trả lời</span>
                         </span>
                     </div>
                     <i class="col ion-chevron-right admin_icon_right3"></i>
