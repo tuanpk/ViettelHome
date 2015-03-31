@@ -209,8 +209,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
             $scope.imgPopover = file_uri;
-//            var image = document.getElementById('feedback_image');
-//            image.src = file_uri;
+            var image = document.getElementById('feedback_image');
+            image.src = file_uri;
             window.resolveLocalFileSystemURI(file_uri, gotFile, onError);
         }, onError);
     };
