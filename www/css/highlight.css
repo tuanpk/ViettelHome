@@ -15,7 +15,6 @@
     padding: 5px;
     background-color: green;
 }
-
 .HLFrameEventItems 
 {
     margin: 5px 0 0 0;
@@ -24,8 +23,6 @@
 
     padding-top:10%;
 }
-
-
 .HLFrameListImage
 {
     height: 100%;
@@ -37,18 +34,12 @@
 }
 .HLTitleListImages
 {
-    /*margin-top: 3%;*/
     text-align: center;
     color: black;
     font-size: 15px;
     color: #17734F;
     display: block;
 }
-/*.HLListViewItemImage
-{
-    width: 100% ;
-    height: auto;
-}*/
 .HLListViewItemImage {
     width: 102%;
     height: auto;
@@ -57,7 +48,6 @@
     height: 96.7741935483871px;
     position: inherit;
     zoom: 1.5;
-    /* margin-left: 10%; */
 }
 .HLVideoEvent
 {
@@ -174,13 +164,6 @@
 .bar-energized .button.button-clear:first-child{
     font-weight: bold;
 }
-.HL_list_icon {
-    display: block;
-    width: 36px;
-    text-align: center;
-    font-size: 51px !important; 
-    color: olive;
-}
 .HLItemTitle
 {
     /*margin: 5px 0 0 0;*/
@@ -221,4 +204,12 @@
     text-align: justify;
     text-indent: 1em;
     /*text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;*/
+}
+.HLLeftIcon
+{
+    color: #387ef5;
+}
+.HLRightIcon
+{
+    color: #387ef5;
 }
