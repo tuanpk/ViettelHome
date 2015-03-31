@@ -16,6 +16,11 @@ var TIMEOUT_HTTP = 30000;
 
 var DEBUG = true;
 
+var notify_feedback = 0;
+var notify_event = 0;
+var notify_highlight = 0;
+var notify_history = 0;
+
 //var module = angular.module('starter.controllers', []);
 var dataOpinion = [];
 
@@ -137,7 +142,6 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
     }).then(function (modal) {
         $scope.modal = modal;
     });
-
     // .fromTemplateUrl() method
     $ionicPopover.fromTemplateUrl('templates/setting_popover.html', {
         scope: $scope
@@ -146,54 +150,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
     });
 
     $scope.pop_title = "Cài đặt";
-
-    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
-        var notify_feedback = 0;
-        dataAdminFeedback = json.result;
-        for (var i = 0; i < dataAdminFeedback.length; i++) {
-            if (dataAdminFeedback[i].status == 2) {
-                notify_feedback++;
-            }
-        }
-        $scope.notify_feedback = notify_feedback;
-    }).fail(function (er) {
-        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
-    })
-
-    $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
-        voteEvent.listEvent = json.result;
-        var notify_event = 0;
-        for (var i = 0; i < voteEvent.listEvent.length; i++) {
-            if (voteEvent.listEvent[i].state == 0) {
-                notify_event++;
-            }
-        }
-        $scope.notify_event = notify_event;
-    }).fail(function (er) {
-        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
-    });
-
-    $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: 0, end: maxPage})
-            .done(function (data) {
-                if (data.result) {
-                    if (!listHighlightEvent)
-                    {
-                        listHighlightEvent = {};
-                        listHighlightEvent.items = [];
-                    }
-                    listHighlightEvent.items = data.result;
-                    $scope.notify_highlight = data.result.length;
-                }
-            }).fail(function (err) {
-        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(err));
-    });
-
-    if (store != null) {
-        store.all(function (json) {
-            $scope.notify_history = json.length;
-        });
-    }
-
+    
     $scope.settings = function (i) {
         $scope.popover.hide();
         switch (i) {
@@ -240,6 +197,63 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                 break;
         }
     };
+    
+    $scope.$on('$locationChangeSuccess', function ()
+    {
+        $scope.notify_feedback = notify_feedback;
+        $scope.notify_event = notify_event;
+        $scope.notify_highlight = notify_highlight;
+        $scope.notify_history = notify_history;
+    });
+
+    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        notify_feedback = 0;
+        dataAdminFeedback = json.result;
+        for (var i = 0; i < dataAdminFeedback.length; i++) {
+            if (dataAdminFeedback[i].status == 2) {
+                notify_feedback++;
+            }
+        }
+        $scope.notify_feedback = notify_feedback;
+    }).fail(function (er) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    })
+
+    $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        voteEvent.listEvent = json.result;
+        notify_event = 0;
+        for (var i = 0; i < voteEvent.listEvent.length; i++) {
+            if (voteEvent.listEvent[i].state == 0) {
+                notify_event++;
+            }
+        }
+        $scope.notify_event = notify_event;
+    }).fail(function (er) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    });
+
+    $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: 0, end: maxPage})
+            .done(function (data) {
+                if (data.result) {
+                    if (!listHighlightEvent)
+                    {
+                        listHighlightEvent = {};
+                        listHighlightEvent.items = [];
+                    }
+                    listHighlightEvent.items = data.result;
+                    notify_highlight = data.result.length;
+                    $scope.notify_highlight = notify_highlight;
+                }
+            }).fail(function (err) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(err));
+    });
+
+    if (store != null) {
+        store.all(function (json) {
+            notify_history = json.length;
+            $scope.notify_history = notify_history;
+        });
+    }
 });
 
 var isLoadMoreOpinion = false;
