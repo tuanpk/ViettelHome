@@ -103,8 +103,9 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
             console.log($location.path());
             userName = document.getElementById("username").value;
 
-            if(userName.indexOf("@viettel.com.vn")<0) userName=userName.concat("@viettel.com.vn");
-            
+            if (userName.indexOf("@viettel.com.vn") < 0)
+                userName = userName.concat("@viettel.com.vn");
+
             var password = document.getElementById("password").value;
             $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {
                 $ionicLoading.hide();
@@ -158,7 +159,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
     }).fail(function (er) {
         console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
     })
-    
+
     $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         voteEvent.listEvent = json.result;
         var notify_event = 0;
@@ -170,6 +171,16 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
         $scope.notify_event = notify_event;
     }).fail(function (er) {
         console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    });
+
+    $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: begin, end: end})
+        .done(function (data) {
+            if (data.result.length > 0) {
+                listHighlightEvent.items = data.result;
+            }
+            $scope.notify_highlight = data.result.length;
+        }).fail(function (err) {
+            console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
     });
 
     if (store != null) {

@@ -1,10 +1,10 @@
-var listHighlightEvent;
+var listHighlightEvent = [];
 var currentHighlightEvent;
 var listImages;
 var indexOfUrl;
 module.controller('HLController', function ($scope, $state)
 {
-    listHighlightEvent = null;
+//    listHighlightEvent = null;
     currentHighlightEvent = null;
     listImages = null;
     $scope.title = 'Sự kiện nổi bật';
@@ -36,7 +36,7 @@ module.controller('HLController', function ($scope, $state)
         var curLengthEvents = 0;
         if (listHighlightEvent)
             curLengthEvents = listHighlightEvent.length;
-        getHighlightEvents($scope, curIndexLoaded, curIndexLoaded + 5);
+        getHighlightEvents($scope, curIndexLoaded, curIndexLoaded + maxPage);
         curIndexLoaded += 5;
         if (curLengthEvents < listHighlightEvent.length)
             $scope.statusLoadmore = true;
