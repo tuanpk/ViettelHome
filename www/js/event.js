@@ -156,6 +156,8 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
                                         voteEvent.selectedItem.unlike--;
                                     }
                                     voteEvent.selectedItem.state = valOfRadio;
+                                    
+                                    notify_event = refresh_notify(voteEvent.listEvent, 0);
                                     $state.go('event_detail_true');
                                 });
                             }).fail(function () {

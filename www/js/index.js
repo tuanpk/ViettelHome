@@ -150,7 +150,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
     });
 
     $scope.pop_title = "Cài đặt";
-    
+
     $scope.settings = function (i) {
         $scope.popover.hide();
         switch (i) {
@@ -197,7 +197,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                 break;
         }
     };
-    
+
     $scope.$on('$locationChangeSuccess', function ()
     {
         $scope.notify_feedback = notify_feedback;
@@ -564,3 +564,14 @@ module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover) {
     };
 });
 //history*************
+
+
+function refresh_notify(json, state) {
+    var notify = 0;
+    for (var i = 0; i < json.length; i++) {
+        if (json[i].state == state) {
+            notify++;
+        }
+    }
+    return notify;
+}
