@@ -2,6 +2,7 @@ var userId = '';
 var session = '';
 var userName = '';
 var fullName = '';
+var department = '';
 var maxPage = 10;
 
 // var PARSE = "https://api.parse.com/1/functions/";
@@ -103,12 +104,14 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
 
             console.log($location.path());
             userName = document.getElementById("username").value;
+            
             var password = document.getElementById("password").value;
             $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {
                 $ionicLoading.hide();
                 userId = json.result[0].userId;
                 session = json.result[0].session;
                 fullName = json.result[0].fullname;
+                department = json.result[0].department;
                 $state.go('main');
             }).fail(function (err) {
                 $ionicLoading.hide();
