@@ -110,7 +110,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 ).done(function (json) {
 
                     $scope.feedbackId = json.result[0].feedbackId;
-                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
+//                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
 
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
@@ -125,11 +125,13 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         store.batch($scope.mediaUrl, function (json) {
 //                            alert('insert ' + JSON.stringify(json));
                             for (var i = 0; i < json.length; i++) {
-                                window.resolveLocalFileSystemURI(json[i].url, readFile, onError);
+                                window.resolveLocalFileSystemURI(json[i].nativeURL, readFile, onError);
+                                if (DEBUG)
+                                    alert('resolveLocalFileSystemURI ' + json[i].nativeURL);
                             }
                         });
-                    }
-                    goBackViewWithName('main');
+                    } else
+                        goBackViewWithName('main');
                 }).fail(function (err) {
                     $scope.feedbackId = -1;
                     alert("postFeedback Error " + JSON.stringify(err));
@@ -139,12 +141,23 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     function readFile(fileEntry) {
 //        alert('fileEntry ' + JSON.stringify(fileEntry));
+        var index = -1;
+        var attach_type = 0;
+        for (var i = 0; i < $scope.mediaUrl.length; i++) {
+            if ($scope.mediaUrl[i].feedbackId == $scope.feedbackId && $scope.mediaUrl[i].nativeURL == fileEntry.nativeURL) {
+                if ($scope.mediaUrl[i].status === 2) {
+                    index = i;
+                    attach_type = $scope.mediaUrl[i].attach_type;
+                    break;
+                }
+            }
+        }
         fileEntry.file(function (file) {
             var reader = new FileReader();
 //            alert('fileEntry.file ' + JSON.stringify(file));
-            reader.onprogress = function (evt) {
-                alert('onprogress ' + JSON.stringify(evt));
-            };
+//            reader.onprogress = function (evt) {
+//                alert('onprogress ' + JSON.stringify(evt));
+//            };
             reader.onloadend = function (evt) {
 //                alert('onloadend ' + sizeof(evt.target.result));
 //                alert('fileEntry.file 2 ' + JSON.stringify(file));
@@ -153,18 +166,35 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         {
                             userId: userId,
                             session: session,
-                            attach_type: '1',
+                            attach_type: attach_type,
                             feedbackId: $scope.feedbackId,
-                            file_index: '1',
+                            file_index: index,
                             filename: file.name,
                             stringData: evt.target.result
                         }
                 ).done(function (json) {
-                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
-                    store.get($scope.feedbackId + '_0', function (json) {
-                        json.status = 1;
-                        store.save(json);
+//                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
+//                    alert('fileEntry ' + JSON.stringify(fileEntry));
+
+                    store.all(function (json) {
+                        for (var i = 0; i < json.length; i++) {
+                            if (json[i].feedbackId == $scope.feedbackId && json[i].nativeURL == fileEntry.nativeURL) {
+                                if (json[i].status === 2) {
+                                    json[i].status = 1;
+                                    store.save(json[i]);
+                                    if (DEBUG)
+                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].nativeURL + ' = ' + ' fileEntry ' + fileEntry.nativeURL);
+                                    break;
+                                }
+                            }
+                        }
+                        goBackViewWithName('main');
                     });
+
+//                    store.get($scope.feedbackId + '_0', function (json) {
+//                        json.status = 1;
+//                        store.save(json);
+//                    });
 
                     var query = new Parse.Query(Parse.Installation);
                     Parse.Push.send({
@@ -174,18 +204,28 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         }
                     }, {
                         success: function () {
-//                            alert('Parse.Push.send Success');
+                            console.log('Parse.Push.send Success');
                         },
                         error: function (error) {
                             alert('Parse.Push.send Error' + JSON.stringify(error));
                         }
                     });
                 }).fail(function (err) {
-                    alert("uploadFileFeedback Error " + JSON.stringify(err));
-                    store.get($scope.feedbackId + '_0', function (json) {
-                        json.status = 0;
-                        store.save(json);
+                    store.all(function (json) {
+                        for (var i = 0; i < json.length; i++) {
+                            if (json[i].nativeURL == fileEntry.nativeURL) {
+                                if (json[i].status == 2) {
+                                    json[i].status = 0;
+                                    store.save(json[i]);
+                                    if (DEBUG)
+                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].nativeURL + ' = ' + ' fileEntry ' + fileEntry.nativeURL);
+                                    break;
+                                }
+                            }
+                        }
+                        goBackViewWithName('main');
                     });
+                    alert("uploadFileFeedback Error " + JSON.stringify(err));
                 });
             }
             reader.readAsDataURL(file);
@@ -193,13 +233,16 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     }
 
     function onError(error) {
-        alert('onError ' + JSON.stringify(error));
+        alert(JSON.stringify(error));
     }
 
-    function gotFile(fileEntry) 
+    function gotFile(fileEntry)
     {
-        alert(fileEntry.nativeURL);
         $scope.imgPopover = fileEntry.nativeURL;
+        var date = new Date();
+        var json = {feedbackId: "", index: $scope.mediaUrl.length, nativeURL: fileEntry.nativeURL, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
+        $scope.mediaUrl.push(json);
+//        alert(fileEntry.nativeURL);
     }
 
     $scope.choosePicture = function ()
@@ -208,10 +251,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         }).then(function (file_uri) {
-            var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
-            $scope.mediaUrl.push(json);
-            $scope.imgPopover = file_uri;
             var image = document.getElementById('feedback_image');
             image.src = file_uri;
             window.resolveLocalFileSystemURI(file_uri, gotFile, onError);
@@ -225,19 +264,16 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             targetHeight: 320,
             saveToPhotoAlbum: false
         }).then(function (file_uri) {
-            var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
-            $scope.mediaUrl.push(json);
-            $scope.imgPopover = file_uri;
-//            var image = document.getElementById('feedback_image');
-//            image.src = file_uri;
+            var image = document.getElementById('feedback_image');
+            image.src = file_uri;
+            window.resolveLocalFileSystemURI(file_uri, gotFile, onError);
         }, onError);
     };
 
     $scope.takeVideo = function () {
         $Capture.captureVideo({limit: 1, duration: 1}).then(function (files_uri) {
             var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: files_uri[0], title: "", content: "", type: 2, date: date, status: 2, progess: 0};
+            var json = {feedbackId: "", index: $scope.mediaUrl.length, url: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
         }, onError);
     };

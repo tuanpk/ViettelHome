@@ -38,8 +38,7 @@
                 <span>Nội dung:</span> (<span>{{200 - txtContent.length}}</span>)
                 <textarea rows="3" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
                 <div class="FBMedia">
-                    {{imgPopover}}
-                    <img class="FBimg" alt="" src="{{imgPopover}}" id="feedback_image" ng-click="zoomImg($event)">
+                    <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
                     <button class="feedback_icon" ng-click="choosePicture()">
                         <i class="icon ion-images"></i>
                     </button> 
