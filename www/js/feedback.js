@@ -75,9 +75,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     }).then(function (popover) {
         $scope.popover = popover;
     });
-    $scope.zoomImg = function ($event, src) {
-        if (src) {
-            $scope.imgPopover = src;
+
+    $scope.zoomImg = function ($event) {
+        if ($scope.imgPopover) {
             $scope.popover.show($event);
         }
     };
@@ -191,10 +191,14 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         });
     }
 
-    $scope.imgFeedback = null;
     function onError(error) {
         alert('onError ' + JSON.stringify(error));
     }
+
+    function gotFile(fileEntry) {
+        $scope.imgPopover = fileEntry.nativeURL;
+    }
+
     $scope.choosePicture = function ()
     {
         $Camera.getPicture({
@@ -204,9 +208,10 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
-            $scope.imgFeedback = file_uri;
+            $scope.imgPopover = file_uri;
 //            var image = document.getElementById('feedback_image');
 //            image.src = file_uri;
+            window.resolveLocalFileSystemURI(file_uri, gotFile, onError);
         }, onError);
     };
 
@@ -220,7 +225,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
-            $scope.imgFeedback = file_uri;
+            $scope.imgPopover = file_uri;
 //            var image = document.getElementById('feedback_image');
 //            image.src = file_uri;
         }, onError);
