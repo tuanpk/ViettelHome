@@ -58,10 +58,10 @@ function validText(idText, name)
     var inputText = document.getElementById(idText);
     if (inputText == null || inputText.value == "") {
         $ionicPopup.show({
-                    title: 'Thông Báo',
-                    template: name + " chưa được nhập!",
-                    buttons: [{text: 'Ok'}]
-                });
+            title: 'Thông Báo',
+            template: name + " chưa được nhập!",
+            buttons: [{text: 'Ok'}]
+        });
         return false;
     }
     else
@@ -81,7 +81,7 @@ module.controller('BlankController', function ($scope, $location, $state) {
     }
 });
 
-module.controller('LoginController', function ($scope, $location, $state, $ionicLoading,$ionicPopup)
+module.controller('LoginController', function ($scope, $location, $state, $ionicLoading, $ionicPopup)
 {
     $scope.login = function () {
         if (!validText("username", "Email")) {
@@ -97,15 +97,13 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
             addScript('http://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true&callback=mapsApiReady', function () {
                 console.log('addScript onload');
             });
-
 //            if(ionic.Platform.isWindowsPhone()) {
 //                loadjscssfile('http://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css','css');
 //            }
-
             console.log($location.path());
             userName = document.getElementById("username").value;
+
             if(userName.indexOf("@viettel.com.vn")<0) userName=userName.concat("@viettel.com.vn");
-            
             
             var password = document.getElementById("password").value;
             $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {
@@ -128,7 +126,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
     };
 });
 
-module.controller('MainController', function ($scope, $state,$ionicPopup, $ionicModal, $ionicPopover)
+module.controller('MainController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicPopover)
 {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         animation: 'slide-in-up',
@@ -147,6 +145,26 @@ module.controller('MainController', function ($scope, $state,$ionicPopup, $ionic
     });
 
     $scope.pop_title = "Cài đặt";
+
+    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        var notify_feedback = 0;
+        dataAdminFeedback = json.result;
+        for (var i = 0; i < dataAdminFeedback.length; i++) {
+            if (dataAdminFeedback[i].status === 2) {
+                notify_feedback++;
+            }
+        }
+        ;
+        $scope.notify_feedback = notify_feedback;
+    }).fail(function (er) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    })
+
+    if (store != null) {
+        store.all(function (json) {
+            $scope.notify_history = json.length;
+        });
+    }
 
     $scope.settings = function (i) {
         $scope.popover.hide();

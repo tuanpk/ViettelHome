@@ -1,4 +1,4 @@
-var dataAdminFeedback;
+var dataAdminFeedback = {};
 var department;
 
 function getDepartment($scope, $ionicPopup) 
@@ -29,7 +29,6 @@ var isLoadMore = false;
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) 
 {
     $scope.statusFilter=1;
-    dataAdminFeedback = {};
     getDepartment($scope, $ionicPopup);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
 
@@ -49,7 +48,6 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     });
 
     $scope.refresh = function () {
-        dataAdminFeedback = {};
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
             $scope.$apply(function () {
                 dataAdminFeedback = json.result;
