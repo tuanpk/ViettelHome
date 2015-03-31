@@ -147,18 +147,18 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
 
     $scope.pop_title = "Cài đặt";
 
-//    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
-//        var notify_feedback = 0;
-//        dataAdminFeedback = json.result;
-//        for (var i = 0; i < dataAdminFeedback.length; i++) {
-//            if (dataAdminFeedback[i].status == 2) {
-//                notify_feedback++;
-//            }
-//        }
-//        $scope.notify_feedback = notify_feedback;
-//    }).fail(function (er) {
-//        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
-//    })
+    $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        var notify_feedback = 0;
+        dataAdminFeedback = json.result;
+        for (var i = 0; i < dataAdminFeedback.length; i++) {
+            if (dataAdminFeedback[i].status == 2) {
+                notify_feedback++;
+            }
+        }
+        $scope.notify_feedback = notify_feedback;
+    }).fail(function (er) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    })
 
     $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         voteEvent.listEvent = json.result;
@@ -173,12 +173,12 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
         console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
     });
 
-    $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: begin, end: end})
+    $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: 0, end: maxPage})
         .done(function (data) {
-            if (data.result.length > 0) {
+            if(data.result) {
                 listHighlightEvent.items = data.result;
+                $scope.notify_highlight = data.result.length;
             }
-            $scope.notify_highlight = data.result.length;
         }).fail(function (err) {
             console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
     });
