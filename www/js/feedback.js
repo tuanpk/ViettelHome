@@ -115,6 +115,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].key = $scope.feedbackId + "_" + i;
+                            $scope.mediaUrl[i].userName = userName;
                             $scope.mediaUrl[i].index = i;
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
                             $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
