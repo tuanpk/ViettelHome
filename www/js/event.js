@@ -47,7 +47,7 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
         $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: pageVoteEvent, end: pageVoteEvent + maxPage}).done(function (json) {
             $scope.$apply(function ()
             {
-                if (json.result.length > 0) {
+                if (json.length >0 && json.result.length) {
                     voteEvent.listEvent = voteEvent.listEvent.concat(json.result);
                     $scope.listEvent = voteEvent.listEvent;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
