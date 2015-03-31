@@ -138,9 +138,9 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
         dataAdminFeedback.selectedItemAdmin = selectedItem;
         dataAdminFeedback.selectedIndex = index;
         $state.go('admin_feedback_reply', {title: selectedItem.title});
-        if (dataAdminFeedback[index].status == 2) {
+        if (dataAdminFeedback[index].status == 1) {
             $state.go('admin_feedback_forward', {title: selectedItem.title});
-        } else if (dataAdminFeedback[index].status == 1) {
+        } else if (dataAdminFeedback[index].status == 2) {
             $state.go('admin_feedback_reply', {title: selectedItem.title});
         }
     };
@@ -194,6 +194,7 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
     };
 
     $scope.forwardReply = function () {
+        alert("forwardReply");
         $state.go('feedback_department', {});
     };
     $scope.sentReply = function () {
