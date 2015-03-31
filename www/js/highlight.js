@@ -1,4 +1,4 @@
-var listHighlightEvent = [];
+var listHighlightEvent;
 var currentHighlightEvent;
 var listImages;
 var indexOfUrl;
@@ -29,15 +29,23 @@ module.controller('HLController', function ($scope, $state)
                 video: 'ion-videocamera'
             };
     $scope.statusLoadmore = true;
-    var curIndexLoaded = 0;
+    var curIndexLoaded = maxPage;
+    var isInit=false;
     $scope.loadMore = function ()
     {
-        alert('loadmore');
+//        alert('loadmore');
         var curLengthEvents = 0;
-        if (listHighlightEvent)
-            curLengthEvents = listHighlightEvent.length;
-        getHighlightEvents($scope, curIndexLoaded, curIndexLoaded + maxPage);
-        curIndexLoaded += 5;
+        if (!isInit)
+        {
+            $scope.items = listHighlightEvent.items;
+            isInit=true
+        }
+        else 
+        {
+            if(listHighlightEvent) curLengthEvents = listHighlightEvent.length;
+            getHighlightEvents($scope, curIndexLoaded, curIndexLoaded + maxPage);
+        }
+        curIndexLoaded += maxPage;
         if (curLengthEvents < listHighlightEvent.length)
             $scope.statusLoadmore = true;
         else
@@ -185,7 +193,7 @@ function getHighlightEvents($scope, begin, end)
                 }
             }).fail(function (err)
     {
-        alert('Xin hãy kiểm tra lại kết nối');
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(err));
     });
 }
 function getHighlightObjectById(id)

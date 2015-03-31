@@ -4,19 +4,35 @@
             <i class="ion-chevron-left"></i> SỰ KIỆN NỔI BẬT
         </ion-nav-back-button>    
     </ion-nav-bar>
-    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">
+    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" class="admin_feedback_body">
         <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
         </ion-refresher>
-        <div class="list">
-            <div class="item item-icon-left item-icon-right" ng-click="pushPage(item.highlightId)" ng-repeat="item in items">
-                <i ng-if="item.highlight_type == 1" class="icon {{icons.image}} HLLeftIcon"></i>
-                <i ng-if="item.highlight_type == 2" class="icon {{icons.video}} HLLeftIcon"></i>
-                <i ng-if="item.highlight_type == 0" class="icon {{icons.text}} HLLeftIcon"></i>
-                <p><span class="HLItemTitle">{{item.title}}</span></p>
-                <p><span class="HLEventItem-department">{{ item.department}}</span></p>
-                <i class="icon ion-chevron-right HLRightIcon"></i>
-            </div>
-        </div>
+        <ion-list>
+            <ion-item class="admin_item" ng-repeat="item in items" >
+                <div class="row admin_feedback_item" ng-click="pushPage(item.highlightId)">
+                    <i ng-show="item.highlight_type == 0" class="col col-10 icon {{icons.text}} HLLeftIcon"></i>
+                    <i ng-show="item.highlight_type == 1" class="col col-10 icon {{icons.image}} HLLeftIcon"></i>
+                    <i ng-show="item.highlight_type == 2" class="col col-10 icon {{icons.video}} HLLeftIcon"></i>
+                    <div class="admin_feedback_content">
+                        <span class="row admin_feedback_title">{{item.title}}</span>
+                        <span class="row admin_feedback_department">{{ item.department}}</span>
+                    </div>
+                        <i class="col col-10 icon ion-chevron-right HLRightIcon"></i><br/><br/>
+                </div>
+            </ion-item>
+        </ion-list>
+
+
+        <!--        <div class="list">
+                    <div class="item item-icon-left item-icon-right" ng-click="pushPage(item.highlightId)" ng-repeat="item in items">
+                        <i ng-if="item.highlight_type == 1" class="icon {{icons.image}} HLLeftIcon"></i>
+                        <i ng-if="item.highlight_type == 2" class="icon {{icons.video}} HLLeftIcon"></i>
+                        <i ng-if="item.highlight_type == 0" class="icon {{icons.text}} HLLeftIcon"></i>
+                        <p><span class="HLItemTitle">{{item.title}}</span></p>
+                        <p><span class="HLEventItem-department">{{ item.department}}</span></p>
+                        <i class="icon ion-chevron-right HLRightIcon"></i>
+                    </div>
+                </div>-->
         <ion-infinite-scroll distance="5%" ng-if="statusLoadmore" on-infinite="loadMore()">
         </ion-infinite-scroll>
     </ion-content>

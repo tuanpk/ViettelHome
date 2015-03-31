@@ -174,13 +174,18 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
     });
 
     $.post(PARSE + "onLoadHighlightEvent", {userId: userId, session: session, begin: 0, end: maxPage})
-        .done(function (data) {
-            if(data.result) {
-                listHighlightEvent.items = data.result;
-                $scope.notify_highlight = data.result.length;
-            }
-        }).fail(function (err) {
-            console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+            .done(function (data) {
+                if (data.result) {
+                    if (!listHighlightEvent)
+                    {
+                        listHighlightEvent = {};
+                        listHighlightEvent.items = [];
+                    }
+                    listHighlightEvent.items = data.result;
+                    $scope.notify_highlight = data.result.length;
+                }
+            }).fail(function (err) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(err));
     });
 
     if (store != null) {
