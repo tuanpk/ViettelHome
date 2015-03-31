@@ -15,7 +15,7 @@
         <p ng-hide="historys.length" class="opinion_hide">Không có lịch sử nào! <i class="ion-sad-outline"></i></p>
         <ion-list>
             <ion-item class="row" ng-repeat="history in historys">
-                <i class="icon {{fileIcon[history.type]}} col col-10 history_icon_left"></i>
+                <i class="icon {{fileIcon[history.attach_type]}} col col-10 history_icon_left"></i>
                 <header class="col col-66">
                     <span class="row history_title_item">{{history.title}}</span>
                     <span class="row history_time">{{history.date}}</span>
