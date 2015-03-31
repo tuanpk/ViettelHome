@@ -136,6 +136,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     $scope.viewAdminFeedBack = function (index) {
         var selectedItem = dataAdminFeedback[index];
         dataAdminFeedback.selectedItemAdmin = selectedItem;
+        dataAdminFeedback.selectedIndex = index;
         $state.go('admin_feedback_reply', {title: selectedItem.title});
         if (dataAdminFeedback[index].status == 2) {
             $state.go('admin_feedback_forward', {title: selectedItem.title});
@@ -146,7 +147,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     $scope.viewFeedBack = function (index) {
         var selectedItem = dataAdminFeedback[index]; // chú ý 2 dữ liệu khác nhau!
         dataAdminFeedback.selectedItem = selectedItem;
-        $state.go('admin_feedback_myReply', {});
+        $state.go('admin_feedback_comment', {});
     };
 }
 );
@@ -214,6 +215,8 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
                 template: 'Bạn gửi ý kiến thành công!',
                 buttons: [{text: 'Ok'}]
             });
+            dataAdminFeedback[dataAdminFeedback.selectedIndex].status = 1;
+            refresh_feedback(dataAdminFeedback, CHUATRALOI);
             goBackViewWithName('admin_feedback');
         }).fail(function (err) {
             $ionicPopup.show({
@@ -301,7 +304,7 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
                                         time: time.toLocaleDateString()};
                                     dataAdminFeedback.selectedItem.comment.push(comment_new);
                                     dataAdminFeedback.selectedItem.status = 2;
-                                    $state.go('admin_feedback_myReply', {}, {reload: true});
+                                    $state.go('admin_feedback_comment', {}, {reload: true});
                                 });
                             }).fail(function (err) {
                                 $ionicPopup.show({

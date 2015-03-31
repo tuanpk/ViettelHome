@@ -132,9 +132,9 @@ module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $i
                 templateUrl: 'templates/admin_feedback_reply.html',
                 controller: 'AdminFeedBackReplyCtr'
             })
-            .state('admin_feedback_myReply', {
-                url: '/admin_feedback_myReply',
-                templateUrl: 'templates/admin_feedback_myReply.html',
+            .state('admin_feedback_comment', {
+                url: '/admin_feedback_comment',
+                templateUrl: 'templates/admin_feedback_comment.html',
                 controller: 'AdminFeedBackMyReplyCtr'
             });
 

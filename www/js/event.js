@@ -157,7 +157,7 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
                                     }
                                     voteEvent.selectedItem.state = valOfRadio;
                                     
-                                    notify_event = refresh_notify(voteEvent.listEvent, 0);
+                                    notify_event = refresh_notify(voteEvent.listEvent, CHUA_VOTE);
                                     $state.go('event_detail_true');
                                 });
                             }).fail(function () {

@@ -21,6 +21,13 @@ var notify_event = 0;
 var notify_highlight = 0;
 var notify_history = 0;
 
+var DATRALOI = 1;
+var CHUATRALOI = 2;
+
+var CHUA_VOTE = 0;
+var TOT = 1;
+var XAU = 2;
+
 //var module = angular.module('starter.controllers', []);
 var dataOpinion = [];
 
@@ -570,6 +577,16 @@ function refresh_notify(json, state) {
     var notify = 0;
     for (var i = 0; i < json.length; i++) {
         if (json[i].state == state) {
+            notify++;
+        }
+    }
+    return notify;
+}
+
+function refresh_feedback(json, state) {
+    var notify = 0;
+    for (var i = 0; i < json.length; i++) {
+        if (json[i].status == state) {
             notify++;
         }
     }
