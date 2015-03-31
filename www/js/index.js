@@ -154,11 +154,23 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                 notify_feedback++;
             }
         }
-        ;
         $scope.notify_feedback = notify_feedback;
     }).fail(function (er) {
         console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
     })
+    
+    $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
+        voteEvent.listEvent = json.result;
+        var notify_event = 0;
+        for (var i = 0; i < voteEvent.listEvent.length; i++) {
+            if (voteEvent.listEvent[i].state === 0) {
+                notify_event++;
+            }
+        }
+        $scope.notify_event = notify_event;
+    }).fail(function (er) {
+        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(er));
+    });
 
     if (store != null) {
         store.all(function (json) {

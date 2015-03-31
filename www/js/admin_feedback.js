@@ -1,4 +1,4 @@
-var dataAdminFeedback = {};
+var dataAdminFeedback = [];
 var department;
 
 function getDepartment($scope, $ionicPopup) 
