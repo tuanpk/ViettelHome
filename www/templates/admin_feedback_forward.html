@@ -23,7 +23,7 @@
                     <span name="label_item" class="admin_feedback_content2">NỘI DUNG</span>
                     <span name="label_item" class="row item-text-wrap admin_feedback_content3">{{detailAdminFeedback.content}}</span>
                     <div class="row">
-                        <img src="{{img.url}}" ng-repeat="img in imgs" width="50px" height="50px" class="admin_img" ng-click="zoomImg($event, img.url)" /> 
+                        <img src="{{imgForwardReply.url}}" ng-repeat="imgForwardReply in imgForwardReplys" width="50px" height="50px" class="admin_img" ng-click="zoomImg($event, imgForwardReply.url)" /> 
                     </div>
                 </header>
                 <div ng-repeat="comment in comments">

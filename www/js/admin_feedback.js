@@ -1,4 +1,4 @@
-var dataAdminFeedback = [];
+var dataAdminFeedback;
 var department;
 
 function getDepartment($scope, $ionicPopup) {
@@ -26,6 +26,7 @@ function getDepartment($scope, $ionicPopup) {
 var pageAdminFeedback = 0;
 var isLoadMore = false;
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) {
+    dataAdminFeedback = {};
     getDepartment($scope, $ionicPopup);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
 
@@ -45,6 +46,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
     })
 
     $scope.refresh = function () {
+        dataAdminFeedback = {};
         $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
             $scope.$apply(function () {
                 dataAdminFeedback = json.result;
@@ -139,8 +141,8 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
         }
     };
     $scope.viewFeedBack = function (index) {
-        var myFeedback = dataAdminFeedback[index]; // chú ý 2 dữ liệu khác nhau!
-        dataAdminFeedback.selectedItem = myFeedback;
+        var selectedItem = dataAdminFeedback[index]; // chú ý 2 dữ liệu khác nhau!
+        dataAdminFeedback.selectedItem = selectedItem;
         $state.go('admin_feedback_myReply', {});
     };
 }
@@ -153,7 +155,7 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
     }).then(function (popover) {
         $scope.popover = popover;
     });
-    $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
+//    $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
     $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
     $scope.zoomImg = function ($event, src) {
         $scope.imgPopover = src;
@@ -223,19 +225,22 @@ module.controller('AdminFeedBackDepartmentCtr', function ($scope, $location, $st
 
 });
 module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPopover) {
+    $scope.username = userName;
+    $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
+    $scope.imgForwardReplys = dataAdminFeedback.selectedItemAdmin.link;
+    $scope.comments = dataAdminFeedback.selectedItemAdmin.comment;
+    
     $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
         scope: $scope
     }).then(function (popover) {
         $scope.popover = popover;
     });
-    $scope.username = userName;
-    $scope.detailAdminFeedback = dataAdminFeedback.selectedItemAdmin;
-    $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
+    
     $scope.zoomImg = function ($event, src) {
         $scope.imgPopover = src;
         $scope.popover.show($event);
     };
-    $scope.comments = dataAdminFeedback.selectedItemAdmin.comment;
+    
     $scope.reply = function () {
         $state.go('admin_feedback_reply', {});
     };
@@ -243,7 +248,8 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
 module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup,$ionicPopover) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
-    $scope.imgs = dataAdminFeedback.selectedItemAdmin.link;
+    $scope.imgAdminReplys = dataAdminFeedback.selectedItem.link;
+    
     $ionicPopover.fromTemplateUrl('templates/admin_img_popover.html', {
         scope: $scope
     }).then(function (popover) {
