@@ -76,8 +76,10 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         $scope.popover = popover;
     });
     $scope.zoomImg = function ($event, src) {
-        $scope.imgPopover = src;
-        $scope.popover.show($event);
+        if (src) {
+            $scope.imgPopover = src;
+            $scope.popover.show($event);
+        }
     };
 
     $scope.updateEditor = function (elementId, minHeight)
@@ -189,6 +191,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         });
     }
 
+    $scope.imgFeedback = null;
     function onError(error) {
         alert('onError ' + JSON.stringify(error));
     }
@@ -201,8 +204,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
-            var image = document.getElementById('feedback_image');
-            image.src = file_uri;
+            $scope.imgFeedback = file_uri;
+//            var image = document.getElementById('feedback_image');
+//            image.src = file_uri;
         }, onError);
     };
 
@@ -216,8 +220,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length.toString(), url: file_uri, title: "", content: "", type: 1, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
-            var image = document.getElementById('feedback_image');
-            image.src = file_uri;
+            $scope.imgFeedback = file_uri;
+//            var image = document.getElementById('feedback_image');
+//            image.src = file_uri;
         }, onError);
     };
 
@@ -551,7 +556,8 @@ function resizeTextArea(elementId, minHeight)
         element.style.height = minHeight + "px";
     else
         element.style.height = element.scrollHeight + "px";
-};
+}
+;
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
