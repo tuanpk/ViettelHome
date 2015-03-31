@@ -150,7 +150,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
         var notify_feedback = 0;
         dataAdminFeedback = json.result;
         for (var i = 0; i < dataAdminFeedback.length; i++) {
-            if (dataAdminFeedback[i].status === 2) {
+            if (dataAdminFeedback[i].status == 2) {
                 notify_feedback++;
             }
         }
@@ -163,7 +163,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
         voteEvent.listEvent = json.result;
         var notify_event = 0;
         for (var i = 0; i < voteEvent.listEvent.length; i++) {
-            if (voteEvent.listEvent[i].state === 0) {
+            if (voteEvent.listEvent[i].state == 0) {
                 notify_event++;
             }
         }
