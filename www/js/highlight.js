@@ -1,8 +1,12 @@
 var listHighlightEvent;
 var currentHighlightEvent;
 var listImages;
+var indexOfUrl;
 module.controller('HLController', function ($scope, $state)
 {
+    listHighlightEvent = null;
+    currentHighlightEvent = null;
+    listImages = null;
     $scope.title = 'Sự kiện nổi bật';
     $scope.url = [
         {
@@ -26,9 +30,9 @@ module.controller('HLController', function ($scope, $state)
             };
     $scope.statusLoadmore = true;
     var curIndexLoaded = 0;
-    var init = false;
     $scope.loadMore = function ()
     {
+        alert('loadmore');
         var curLengthEvents = 0;
         if (listHighlightEvent)
             curLengthEvents = listHighlightEvent.length;
@@ -73,8 +77,6 @@ module.controller('HLTruyenThongController', function ($scope)
 {
     $scope.title = currentHighlightEvent.title;
 });
-var indexOfUrl;
-
 module.controller('HLListViewController', function ($scope, $state)
 {
     var loadedImage = false;
@@ -181,7 +183,6 @@ function getHighlightEvents($scope, begin, end)
     {
         alert('Xin hãy kiểm tra lại kết nối');
     });
-    $scope.items = listHighlightEvent.items;
 }
 function getHighlightObjectById(id)
 {
