@@ -140,11 +140,26 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
             var password = document.getElementById("password").value;
             $.post(PARSE + "login", {username: userName, password: password}).done(function (json) {
                 $ionicLoading.hide();
-                userId = json.result[0].userId;
-                session = json.result[0].session;
-                fullName = json.result[0].fullname;
-                department = json.result[0].department;
-                $state.go('main');
+                if (json.result) {
+                    userId = json.result[0].userId;
+                    session = json.result[0].session;
+                    fullName = json.result[0].fullname;
+                    department = json.result[0].department;
+                    $state.go('main');
+                }
+                else if (json.error) {
+                    $ionicPopup.show({
+                        title: 'Thông Báo',
+                        template: "Login Error " + json,
+                        buttons: [{text: 'Ok'}]
+                    });
+                } else {
+                    $ionicPopup.show({
+                        title: 'Thông Báo',
+                        template: "Login Error " + JSON.stringify(json.error),
+                        buttons: [{text: 'Ok'}]
+                    });
+                }
             }).fail(function (err) {
                 $ionicLoading.hide();
                 $ionicPopup.show({
