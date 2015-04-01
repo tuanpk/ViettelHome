@@ -35,6 +35,28 @@ var map;
 
 function mapsApiReady() {
 //    alert('Google maps api Ready');
+    navigator.geolocation.getCurrentPosition(function (pos)
+    {
+        latlong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
+        var mapOptions = {
+            center: latlong,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: latlong,
+            map: map,
+            title: 'My Position'
+        });
+        google.maps.event.addListener(marker, 'click', function ()
+        {
+            infowindow.open(map, marker);
+        });
+    }, function (err) {
+        alert(err);
+    });
 }
 
 function addScript(url, callback) {

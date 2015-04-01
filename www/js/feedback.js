@@ -390,7 +390,7 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
 module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
 {
     $scope.isLoadedMap = false;
-    loadMap($scope);
+    loadMap();
     getListLocation($scope);
     $scope.local = {
         loc: ''
@@ -403,21 +403,21 @@ module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
         goBackViewWithName('feedback');
     };
 });
-function loadMap($scope)
+function loadMap()
 {
     navigator.geolocation.getCurrentPosition(function (pos)
     {
-        var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+        latlong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
         var mapOptions = {
-            center: myLatlng,
+            center: latlong,
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map"),
+        map = new google.maps.Map(document.getElementById("map"),
                 mapOptions);
         var marker = new google.maps.Marker({
-            position: myLatlng,
+            position: latlong,
             map: map,
             title: 'My Position'
         });
@@ -425,13 +425,12 @@ function loadMap($scope)
         {
             infowindow.open(map, marker);
         });
-        $scope.$apply(function ()
-        {
-            $scope.map = map;
-            $scope.isLoadedMap = true;
-        });
-    }, function (err)
-    {
+//        $scope.$apply(function ()
+//        {
+//            $scope.map = map;
+//            $scope.isLoadedMap = true;
+//        });
+    }, function (err) {
         alert(err);
     });
 }
