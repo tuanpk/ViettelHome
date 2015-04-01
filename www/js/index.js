@@ -174,6 +174,9 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                         template: "Login Error " + JSON.stringify(json.error),
                         buttons: [{text: 'Ok'}]
                     });
+                    if(json.error.status == 400) {
+                        $state.go('main_login');
+                    }
                 } else {
                     $ionicPopup.show({
                         title: 'Thông Báo',
