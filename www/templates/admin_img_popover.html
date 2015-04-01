@@ -1,7 +1,7 @@
 <ion-popover-view style="width:{{height+height/5}}px; height: {{height-height/6}}px;overflow: hidden;background-color: black;">
     <ion-slide-box active-slide="indexOfImage">
             <ion-slide ng-repeat="item in mediaUrl">
-                <img src="{{item.nativeURL}}" style="overflow: hidden;width: 100%;height: 100%;" ng-click="popover.hide()"/>
+                <img src="{{item.nativeURL}}" class="AdminFBPopImg" ng-click="popover.hide()"/>
             </ion-slide>
         </ion-slide-box> 
 </ion-popover-view>

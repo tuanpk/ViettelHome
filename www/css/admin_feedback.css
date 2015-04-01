@@ -155,3 +155,10 @@ button.bt_icon:hover{
 .admin_img{
     margin: 2px;
 }
+//Loinv7
+.AdminFBPopImg
+{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
