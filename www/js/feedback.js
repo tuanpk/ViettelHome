@@ -1,8 +1,8 @@
-var mapLocal = { local: '' };
-var fbDepartment = { value: '' };
+var mapLocal = {local: ''};
+var fbDepartment = {value: ''};
 var listDepartment = {};
 var listLocation = {};
-module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName)
+module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
     $scope.items = [
         {
@@ -111,10 +111,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             attach_count: $scope.mediaUrl.length
                         }
                 ).done(function (json) {
-
                     $scope.feedbackId = json.result[0].feedbackId;
-//                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
-
+                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].key = $scope.feedbackId + "_" + i;
@@ -123,18 +121,23 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
                             $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
-//                            window.resolveLocalFileSystemURI($scope.mediaUrl[i].url, readFile, onError);
                         }
                         store.batch($scope.mediaUrl, function (json) {
-//                            alert('insert ' + JSON.stringify(json));
+                            alert('insert ' + JSON.stringify(json));
                             for (var i = 0; i < json.length; i++) {
                                 window.resolveLocalFileSystemURI(json[i].fullPath, readFile, onError);
                                 if (DEBUG)
                                     alert('resolveLocalFileSystemURI ' + json[i].fullPath);
                             }
                         });
-                    } else
+                    } else {
+                        $ionicPopup.show({
+                            title: 'Thông Báo',
+                            template: "Gửi phản ánh thánh công",
+                            buttons: [{text: 'Ok'}]
+                        });
                         goBackViewWithName('main');
+                    }
                 }).fail(function (err) {
                     $scope.feedbackId = -1;
                     alert("postFeedback Error " + JSON.stringify(err));
@@ -143,7 +146,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     function readFile(fileEntry) {
-//        alert('fileEntry ' + JSON.stringify(fileEntry));
+        alert('fileEntry ' + JSON.stringify(fileEntry));
         var index = -1;
         var attach_type = 0;
         for (var i = 0; i < $scope.mediaUrl.length; i++) {
@@ -157,7 +160,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }
         fileEntry.file(function (file) {
             var reader = new FileReader();
-//            alert('fileEntry.file ' + JSON.stringify(file));
+            alert('fileEntry.file ' + JSON.stringify(file));
             reader.onloadend = function (evt) {
 //                alert('onloadend ' + sizeof(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
@@ -171,7 +174,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             stringData: evt.target.result
                         }
                 ).done(function (json) {
-//                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
+                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
                     store.all(function (json) {
                         for (var i = 0; i < json.length; i++) {
                             if (json[i].feedbackId == $scope.feedbackId && json[i].fullPath == fileEntry.fullPath) {
@@ -229,12 +232,12 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     function gotFile(fileEntry)
     {
-        if(DEBUG)
-            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
+//        if(DEBUG)
+//            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
 //        alert(JSON.stringify(fileEntry));
         $scope.imgPopover = fileEntry.fullPath;
         var date = new Date();
-        var json = {feedbackId: "", index: $scope.mediaUrl.length, nativeURL: fileEntry.fullPath, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
+        var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: fileEntry.fullPath, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
         $scope.mediaUrl.push(json);
 //        alert(fileEntry.fullPath);
     }
@@ -267,7 +270,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.takeVideo = function () {
         $Capture.captureVideo({limit: 1, duration: 1}).then(function (files_uri) {
             var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length, url: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
+            var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
         }, onError);
     };
@@ -541,7 +544,8 @@ function resizeTextArea(elementId, minHeight)
             element.style.height = element.scrollHeight + "px";
         }
     }
-};
+}
+;
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
