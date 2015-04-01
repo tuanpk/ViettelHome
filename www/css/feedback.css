@@ -47,8 +47,8 @@
     float: left;
     font-size: 35px;
     margin-left: 0%;
-    max-width: 30%;
-    max-height: 30%;
+    max-width: 18%;
+    max-height: 15%;
     height: 45px;
     width: 45px;
 }
@@ -94,7 +94,7 @@
 }
 .FBMedia 
 {
-    margin-right: 2%;
+    /*margin-right: 2%;*/
     margin-top: 3px;
 }
 .feedback_heading_small{
@@ -135,9 +135,12 @@
 }
 .feedback_icon{
     float: right;
-    font-size: 198%;
+    /*font-size: 198%;*/
     margin-left: 3%;
-    background-color: #C6E746
+    background-color: #C6E746;
+    max-width: 25%;
+    max-height: 15%;
+
 }
 .feedback_true{
     float: left;
