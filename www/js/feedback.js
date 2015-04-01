@@ -235,9 +235,9 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 //        if(DEBUG)
 //            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
 //        alert(JSON.stringify(fileEntry));
-        $scope.imgPopover = fileEntry.fullPath;
+        $scope.imgPopover = fileEntry.toURL();
         var date = new Date();
-        var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: fileEntry.fullPath, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
+        var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: $scope.imgPopover, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
         $scope.mediaUrl.push(json);
 //        alert(fileEntry.fullPath);
     }
