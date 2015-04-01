@@ -247,7 +247,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }).then(function (file_uri) {
             var image = document.getElementById('feedback_image');
             image.src = file_uri;
-            window.resolveLocalFileSystemURI(file_uri, gotFile, onError);
+            window.resolveLocalFileSystemURL(file_uri, gotFile, onError);
         }, onError);
     };
 

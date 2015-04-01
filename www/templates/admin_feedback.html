@@ -15,7 +15,7 @@
         </ion-refresher>
         <ion-list>
             <ion-item class="admin_item" ng-repeat="dataAdmin in dataAdminFeedback">
-                <div class="row admin_feedback_item" ng-click="viewAdminFeedBack($index)" ng-hide="{{!comment.username.localeCompare(username)}}">
+                <div class="row admin_feedback_item" ng-click="viewAdminFeedBack($index)" ng-hide="(statusFilter===3)">
                     <i class="col col-10 icon {{icon_admin[dataAdmin.link_type]}} admin_icon_left"></i>
                     <div class="admin_feedback_content">
                         <span class="row admin_feedback_title">{{dataAdmin.title}}</span>
@@ -30,13 +30,13 @@
                         <i class="ion-reply admin_icon_right2"></i>
                     </div>
                 </div>
-                <div  class="row admin_feedback_item1" ng-click="viewFeedBack($index)" ng-hide="{{comment.username.localeCompare(username)}}">
+                <div  class="row admin_feedback_item1" ng-click="viewFeedBack($index)" ng-hide="((dataAdmin.status === 2) ||  statusFilter===2)">
                     <div class="admin_feedback_content1"> 
                         <p class="row admin_feedback_title">{{dataAdmin.title}}</p>
                         <p class="row admin_feedback_department1">Gửi tới :{{dataAdmin.department}}</p>
                         <span name="label_item" class="row admin_feedback_time1">{{dataAdmin.time}}
-                            <span class="admin_status1" ng-hide="{{dataAdmin.status != 1}}">Đã trả lời</span>
-                            <span class="admin_status2" ng-hide="{{dataAdmin.status == 1}}">Chưa trả lời</span>
+                            <span class="admin_status1" > Đã trả lời</span>
+                            <!--<span class="admin_status2" ng-show="{{dataAdmin.status === 2}}">Chưa trả lời</span>-->
                         </span>
                     </div>
                     <i class="col ion-chevron-right admin_icon_right3"></i>

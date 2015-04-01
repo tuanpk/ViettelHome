@@ -29,14 +29,16 @@ var isLoadMore = false;
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) 
 {
     $scope.statusFilter=1;
-    getDepartment($scope, $ionicPopup);
+//    getDepartment($scope, $ionicPopup);
     $scope.icon_admin = ['ion-clipboard', 'ion-camera', 'ion-videocamera'];
 
     $.post(PARSE + "onLoadReplyFeedback", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         $scope.$apply(function () {
             dataAdminFeedback = json.result;
+//            dataAdminFeedback.splice(0,1);
+//            if(DEBUG) alert(JSON.stringify(dataAdminFeedback));
             $scope.dataAdminFeedback = dataAdminFeedback;
-            pageAdminFeedback = maxPage;
+            pageAdminFeedback = maxPage+1;
             isLoadMore = true;
         });
     }).fail(function (er) {
@@ -77,7 +79,7 @@ module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPop
                     dataAdminFeedback = dataAdminFeedback.concat(json.result);
                     $scope.dataAdminFeedback = dataAdminFeedback;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
-                    pageAdminFeedback += maxPage;
+                    pageAdminFeedback += maxPage+1;
                 } else {
                     isLoadMore = false;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
