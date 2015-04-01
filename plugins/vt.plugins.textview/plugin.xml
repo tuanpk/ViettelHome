@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="vt.plugins.textview"
+        version="0.1.0">
+
+  <name>TextView</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <js-module src="www/TextView.js" name="TextView">
+    <clobbers target="TextView" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Hello">
+        <param name="android-package" value="com.example.plugin.Hello"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/Hello.java" target-dir="src/com/example/plugin/"/>    
+  </platform>
+ <platform name="ios">
+    
+    <config-file target="config.xml" parent="/*">
+      <feature name="TextView">
+        <param name="ios-package" value="TextView" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/TextView.h"/>
+    <source-file src="src/ios/TextView.m"/>
+  </platform>
+
+  <platform name="wp7">
+    <source-file src="src/wp7/Hello.cs"/>
+  </platform>
+
+</plugin>

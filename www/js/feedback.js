@@ -2,6 +2,8 @@ var mapLocal = {local: ''};
 var fbDepartment = {value: ''};
 var listDepartment = {};
 var listLocation = {};
+//save status show/hidden of text area native --Loinv7 at 27/03
+var txvStatus = 0; //0 not init textview 1 show 
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
     $scope.items = [
@@ -20,7 +22,19 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }
     ];
     $scope.mediaUrl = [];
+    if (txvStatus === 0)
+    {
+        plugins.textView.init(function () {
+            $scope.$apply(function () {
+                txtStatus = 1;
+            });
 
+        }, function () {
+            $scope.$apply(function () {
+                txtStatus = 0;
+            });
+        }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 100 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
+    }
     $('#demo_datetime').mobiscroll().datetime({
         theme: 'mobiscroll-dark',
         mode: 'mode',
@@ -30,24 +44,41 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         maxDate: new Date(2020, 01, 01, 00, 00), // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
         stepMinute: 1  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
     });
-
-//    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
-//        scope: $scope,
-//        focusFirstInput: true,
-//        animation: 'slide-in-up'
-//    }).then(function (modal)
-//    {
-//        $scope.modal = modal;
-//    });
-
-//    $scope.$on('$destroy', function ()
-//    {
-//        $scope.modal.remove();
-//    });
     $scope.$on('$locationChangeSuccess', function ()
     {
         $scope.local = mapLocal.local;
         $scope.department = fbDepartment.value;
+        if (txtStatus === 1)
+        {
+//            alert('status 1');
+            plugins.textView.hidden(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            });
+            txtStatus = 2;
+        }
+        else
+        if (txtStatus === 2)
+        {
+//            alert('status 2');
+            plugins.textView.show(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 200 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
+            txtStatus = 1;
+
+        }
+        else
+        {
+//            alert('status 3');
+            plugins.textView.clearText(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            });
+        }
     });
     $scope.showScreen = function (i)
     {
