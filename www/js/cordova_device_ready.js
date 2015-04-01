@@ -40,9 +40,9 @@ var app = {
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.hide();
-        } 
-        app.pushNotify();
+        }
         app.database();
+        app.pushNotify();
     },
     pushNotify: function () {
         parsePlugin.initialize(Parse_Application_Id, Parse_Client_Key, function () {
@@ -113,6 +113,8 @@ var app = {
 //                alert('database ' + JSON.stringify(me));
 //            });
         });
+        if (DEBUG)
+            alert('initSqlite Lawnchair');
     }
 };
 
