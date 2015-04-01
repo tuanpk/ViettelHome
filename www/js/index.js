@@ -171,13 +171,13 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 else if (json.error) {
                     $ionicPopup.show({
                         title: 'Thông Báo',
-                        template: "Login Error " + json,
+                        template: "Login Error " + JSON.stringify(json.error),
                         buttons: [{text: 'Ok'}]
                     });
                 } else {
                     $ionicPopup.show({
                         title: 'Thông Báo',
-                        template: "Login Error " + JSON.stringify(json.error),
+                        template: "Login Error " + JSON.stringify(json),
                         buttons: [{text: 'Ok'}]
                     });
                 }
