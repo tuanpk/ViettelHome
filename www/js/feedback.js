@@ -122,12 +122,13 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
                         }
+                        alert('store.batch() ' + $scope.mediaUrl.length);
                         store.batch($scope.mediaUrl, function (json) {
                             alert('insert ' + JSON.stringify(json));
                             for (var i = 0; i < json.length; i++) {
-                                window.resolveLocalFileSystemURI(json[i].fullPath, readFile, onError);
+                                window.resolveLocalFileSystemURI(json[i].url, readFile, onError);
                                 if (DEBUG)
-                                    alert('resolveLocalFileSystemURI ' + json[i].fullPath);
+                                    alert('resolveLocalFileSystemURI ' + json[i].url);
                             }
                         });
                     } else {
@@ -140,7 +141,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     }
                 }).fail(function (err) {
                     $scope.feedbackId = -1;
-                    alert("postFeedback Error " + JSON.stringify(err));
+                    $ionicPopup.show({
+                        title: 'Thông Báo',
+                        template: "Gửi phản ánh thất bại " + JSON.stringify(err),
+                        buttons: [{text: 'Ok'}]
+                    });
                 });
             }
     };
@@ -149,8 +154,15 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         alert('fileEntry ' + JSON.stringify(fileEntry));
         var index = -1;
         var attach_type = 0;
+        var readFilePath;
+        if (ionic.Platform.isWindowsPhone()) {
+            readFilePath = fileEntry.toURL();
+        } else {
+            readFilePath = fileEntry.nativeURL;
+        }
+        
         for (var i = 0; i < $scope.mediaUrl.length; i++) {
-            if ($scope.mediaUrl[i].feedbackId == $scope.feedbackId && $scope.mediaUrl[i].fullPath == fileEntry.fullPath) {
+            if ($scope.mediaUrl[i].feedbackId == $scope.feedbackId && $scope.mediaUrl[i].url == readFilePath) {
                 if ($scope.mediaUrl[i].status === 2) {
                     index = i;
                     attach_type = $scope.mediaUrl[i].attach_type;
@@ -177,12 +189,12 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     alert('uploadFileFeedback Success ' + JSON.stringify(json));
                     store.all(function (json) {
                         for (var i = 0; i < json.length; i++) {
-                            if (json[i].feedbackId == $scope.feedbackId && json[i].fullPath == fileEntry.fullPath) {
+                            if (json[i].feedbackId == $scope.feedbackId && json[i].url == readFilePath) {
                                 if (json[i].status === 2) {
                                     json[i].status = 1;
                                     store.save(json[i]);
                                     if (DEBUG)
-                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].fullPath + ' = ' + ' fileEntry ' + fileEntry.fullPath);
+                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].url + ' = ' + ' fileEntry ' + readFilePath);
                                     break;
                                 }
                             }
@@ -207,12 +219,12 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                 }).fail(function (err) {
                     store.all(function (json) {
                         for (var i = 0; i < json.length; i++) {
-                            if (json[i].fullPath == fileEntry.fullPath) {
+                            if (json[i].url == readFilePath) {
                                 if (json[i].status == 2) {
                                     json[i].status = 0;
                                     store.save(json[i]);
                                     if (DEBUG)
-                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].fullPath + ' = ' + ' fileEntry ' + fileEntry.fullPath);
+                                        alert('index ' + index + ' ' + $scope.feedbackId + ' = ' + json[i].feedbackId + ' ' + json[i].url + ' = ' + ' fileEntry ' + readFilePath);
                                     break;
                                 }
                             }
@@ -232,17 +244,16 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     function gotFile(fileEntry)
     {
-//        if(DEBUG)
-//            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
-        alert(JSON.stringify(fileEntry));
+        if(DEBUG)
+            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
         if (ionic.Platform.isWindowsPhone()) {
             $scope.imgPopover = fileEntry.toURL();
-        } else
+        } else {
             $scope.imgPopover = fileEntry.nativeURL;
+        }
         var date = new Date();
-        var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: $scope.imgPopover, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
+        var json = {feedbackId: "", index: $scope.mediaUrl.length, url: $scope.imgPopover, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
         $scope.mediaUrl.push(json);
-//        alert(fileEntry.fullPath);
     }
 
     $scope.choosePicture = function ()
@@ -273,7 +284,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.takeVideo = function () {
         $Capture.captureVideo({limit: 1, duration: 1}).then(function (files_uri) {
             var date = new Date();
-            var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
+            var json = {feedbackId: "", index: $scope.mediaUrl.length, url: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
             $scope.mediaUrl.push(json);
         }, onError);
     };
