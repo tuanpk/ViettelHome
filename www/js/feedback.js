@@ -234,8 +234,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
 //        if(DEBUG)
 //            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
-//        alert(JSON.stringify(fileEntry));
-        $scope.imgPopover = fileEntry.toURL();
+        alert(JSON.stringify(fileEntry));
+        if (ionic.Platform.isWindowsPhone()) {
+            $scope.imgPopover = fileEntry.toURL();
+        } else
+            $scope.imgPopover = fileEntry.nativeURL;
         var date = new Date();
         var json = {feedbackId: "", index: $scope.mediaUrl.length, fullPath: $scope.imgPopover, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
         $scope.mediaUrl.push(json);
