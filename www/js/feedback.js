@@ -73,13 +73,13 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
         $scope.popover.remove();
     });
-    $scope.zoomImg = function ($event) 
+    $scope.zoomImg = function ($event)
     {
-        
-        if ($scope.imgPopover) 
+
+        if ($scope.imgPopover)
         {
-            $scope.height=window.innerHeight/3.5;
-            $scope.indexOfImage=1;
+            $scope.height = window.innerHeight / 3.5;
+            $scope.indexOfImage = 1;
             $scope.popover.show($event);
 //            alert(JSON.stringify($scope.mediaUrl));
         }
@@ -566,10 +566,12 @@ function resizeTextArea(elementId, minHeight)
     var element = document.getElementById(elementId);
     if (element.scrollHeight < minHeight)
         element.style.height = minHeight + "px";
-    else
-        element.style.height = element.scrollHeight + "px";
-}
-;
+    else {
+        if (element.scrollHeight < 170) {
+            element.style.height = element.scrollHeight + "px";
+        }
+    }
+};
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
