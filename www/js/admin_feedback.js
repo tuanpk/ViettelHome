@@ -191,8 +191,9 @@ module.controller('AdminFeedBackReplyCtr', function ($scope, $state, $ionicPopov
         $scope.adFBTXTReply.value = $scope.fbReply.value;
     };
 
-    $scope.resizeText = function (elementId) {
-        resizeTextArea(elementId);
+    $scope.updateEditor = function (elementId, minHeight)
+    {
+        resizeTextArea(elementId, minHeight);
     };
 
     $scope.forwardReply = function () {
@@ -254,7 +255,7 @@ module.controller('AdminFeedBackForwardCtr', function ($scope, $state, $ionicPop
         $state.go('admin_feedback_reply', {});
     };
 });
-module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPopup,$ionicPopover) {
+module.controller('AdminFeedBackComment', function ($scope, $state, $ionicPopup,$ionicPopover) {
     $scope.item = dataAdminFeedback.selectedItem;
     $scope.comments = dataAdminFeedback.selectedItem.comment;
     $scope.imgAdminReplys = dataAdminFeedback.selectedItem.link;
@@ -269,10 +270,11 @@ module.controller('AdminFeedBackMyReplyCtr', function ($scope, $state, $ionicPop
         $scope.popover.show($event);
     };
 
-    $scope.resizeText = function (elementId) {
-        resizeTextArea(elementId);
+    $scope.updateEditor = function (elementId, minHeight)
+    {
+        resizeTextArea(elementId, minHeight);
     };
-
+    
     $scope.finish_AdminReply = function () {
         var txtOpinionReply = document.getElementById('txtOpinionReply').value;
         var time = new Date();

@@ -28,8 +28,8 @@
                 </header>
             </ion-item>
             <ion-item class="admin_feedback_item">
-                <span name="label_item" class="row admin_feedback_content2">Nội dung trả lời:</span>
-                <textarea ng-model="adFBTXTReply.value" id="adFBTXTReply" ng-keypress="resizeText('adFBTXTReply')" ng-trim="false" maxlength="150" class="textarea textarea--transparent admin_feedback_reply" rows="3"></textarea>
+                <span name="label_item" class="row admin_feedback_content2">Nội dung trả lời:</span><span>{{adFBTXTReply.length}}/150</span>
+                <textarea ng-model="adFBTXTReply.value" id="adFBTXTReply" ng-change="updateEditor('adFBTXTReply',50)" ng-trim="false" maxlength="150" class="textarea textarea--transparent admin_feedback_reply" rows="3"></textarea>
                 <span name="label_item" class="row admin_feedback_content2">Mẫu câu có sẵn:</span>
                 <div class="list" style="width: 100%;">
                     <ion-radio ng-repeat="reply in replys"

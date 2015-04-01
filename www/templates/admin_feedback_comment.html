@@ -30,8 +30,8 @@
                     </ion-item>
                 </ion-list>
             </ion-item>
-            <span name="label_item" class="row opinion_reply-content">Ý KIẾN KHÁC</span>
-            <textarea id="txtOpinionReply" ng-keypress="resizeText('txtOpinionReply')" ng-trim="false" maxlength="150" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>
+            <span name="label_item" class="row opinion_reply-content">Ý KIẾN KHÁC</span><span>{{txtOpinionReply.length}}/150</span>
+            <textarea id="txtOpinionReply" ng-model="txtOpinionReply" ng-change="updateEditor('txtOpinionReply',50)" ng-trim="false" maxlength="150" class="textarea textarea--transparent opinion_reply-comment" rows="3"></textarea>
         </ion-list>
     </ion-content>
 </ion-view>

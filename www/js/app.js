@@ -135,7 +135,7 @@ module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $i
             .state('admin_feedback_comment', {
                 url: '/admin_feedback_comment',
                 templateUrl: 'templates/admin_feedback_comment.html',
-                controller: 'AdminFeedBackMyReplyCtr'
+                controller: 'AdminFeedBackComment'
             });
 
     // if none of the above states are matched, use this as the fallback
