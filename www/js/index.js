@@ -33,17 +33,14 @@ var dataOpinion = [];
 var latlong;
 var map;
 
-function mapsApiReady() {
-//    alert('Google maps api Ready');
-    navigator.geolocation.getCurrentPosition(function (pos)
-    {
-        latlong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-
-        var mapOptions = {
-            center: latlong,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+function loadmap() {
+    var mapOptions = {
+        center: latlong,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var element = document.getElementById("map");
+    if (element) {
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
         var marker = new google.maps.Marker({
             position: latlong,
@@ -54,9 +51,37 @@ function mapsApiReady() {
         {
             infowindow.open(map, marker);
         });
-    }, function (err) {
-        alert(err);
-    });
+    }
+}
+
+function mapsApiReady() {
+    if (latlong) {
+        loadmap();
+    } else {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            latlong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            var mapOptions = {
+                center: latlong,
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var element = document.getElementById("map");
+            if (element) {
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                var marker = new google.maps.Marker({
+                    position: latlong,
+                    map: map,
+                    title: 'My Position'
+                });
+                google.maps.event.addListener(marker, 'click', function ()
+                {
+                    infowindow.open(map, marker);
+                });
+            }
+        }, function (err) {
+            alert(err);
+        });
+    }
 }
 
 function addScript(url, callback) {
@@ -99,18 +124,18 @@ function validText(idText, name)
         return true;
 }
 
-module.controller('AppController', function ($scope, $location, $state) {
-});
-
-module.controller('BlankController', function ($scope, $location, $state) {
-    if (session != '') {
-        console.log("Already logged in. open Main page");
-        $state.go('main');
-    } else {
-        console.log("Not Login. open Login page");
-        $state.go('main_login');
-    }
-});
+//module.controller('AppController', function ($scope, $location, $state) {
+//});
+//
+//module.controller('BlankController', function ($scope, $location, $state) {
+//    if (session != '') {
+//        console.log("Already logged in. open Main page");
+//        $state.go('main');
+//    } else {
+//        console.log("Not Login. open Login page");
+//        $state.go('main_login');
+//    }
+//});
 
 module.controller('LoginController', function ($scope, $location, $state, $ionicLoading, $ionicPopup)
 {
@@ -123,10 +148,6 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
                 template: '<i class="icon ion-load-a button-positive" style="font-size: 100%">Đang xác thực đến máy chủ</i>',
                 noBackdrop: false,
                 duration: TIMEOUT_HTTP
-            });
-
-            addScript('http://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true&callback=mapsApiReady', function () {
-                console.log('addScript onload');
             });
 //            if(ionic.Platform.isWindowsPhone()) {
 //                loadjscssfile('http://code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css','css');
@@ -295,6 +316,10 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
             $scope.notify_history = notify_history;
         });
     }
+
+    addScript('http://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true&callback=mapsApiReady', function () {
+        console.log('addScript onload');
+    });
 });
 
 var isLoadMoreOpinion = false;
