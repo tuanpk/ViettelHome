@@ -32,12 +32,12 @@
                         <option value="KinhDoanh">Kinh doanh</option>
                     </select>
                 </h5>
-                <span>Tiêu đề:</span> (<span>{{50 - txtTitle.length}}</span>)
+                <span>Tiêu đề:</span><span>{{txtTitle.length}}/50</span>
                 <!--textarea rows="1" class="FBTextarea" id="txtTitle" ng-keypress="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea-->
                 <textarea rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-keypress="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea>
                 <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
-                <span>Nội dung:</span> (<span>{{200 - txtContent.length}}</span>)
-                <textarea rows="5" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
+                <span>Nội dung:</span> <span>{{txtContent.length}}/250</span>
+                <textarea rows="5" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
                 
                 <div class="FBMedia">
                     <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
