@@ -390,7 +390,7 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
 module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
 {
     $scope.isLoadedMap = false;
-    loadMap();
+    mapsApiReady();
     getListLocation($scope);
     $scope.local = {
         loc: ''
@@ -403,37 +403,7 @@ module.controller('FBMapCtrl', function ($scope, goBackViewWithName)
         goBackViewWithName('feedback');
     };
 });
-function loadMap()
-{
-    navigator.geolocation.getCurrentPosition(function (pos)
-    {
-        latlong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
-        var mapOptions = {
-            center: latlong,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById("map"),
-                mapOptions);
-        var marker = new google.maps.Marker({
-            position: latlong,
-            map: map,
-            title: 'My Position'
-        });
-        google.maps.event.addListener(marker, 'click', function ()
-        {
-            infowindow.open(map, marker);
-        });
-//        $scope.$apply(function ()
-//        {
-//            $scope.map = map;
-//            $scope.isLoadedMap = true;
-//        });
-    }, function (err) {
-        alert(err);
-    });
-}
 module.factory('$Camera', ['$q', function ($q) {
 
         return {
