@@ -117,9 +117,9 @@ module.controller('eventDetailTrueController', function ($scope, goBackViewWithN
 
 //***********eventDetailFalseController*****************
 module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $ionicModal, $state) {
-    $scope.updateEditor = function (elementId)
+    $scope.updateEditor = function (elementId, minHeight)
     {
-        resizeTextArea(elementId);
+        resizeTextArea(elementId, minHeight);
     };
     $scope.eventDetailFalse = voteEvent.selectedItem;
 
