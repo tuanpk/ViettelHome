@@ -28,13 +28,10 @@ var CHUA_VOTE = 0;
 var TOT = 1;
 var XAU = 2;
 
-//var module = angular.module('starter.controllers', []);
 var dataOpinion = [];
 
-//function alert(message) {
-//    if(DEBUG)
-//        window.alert(message);
-//}
+var latlong;
+var map;
 
 function mapsApiReady() {
 //    alert('Google maps api Ready');
