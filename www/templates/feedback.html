@@ -33,10 +33,12 @@
                     </select>
                 </h5>
                 <span>Tiêu đề:</span> (<span>{{50 - txtTitle.length}}</span>)
-                <textarea rows="1" class="FBTextarea" id="txtTitle" ng-keypress="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea>
+                <!--textarea rows="1" class="FBTextarea" id="txtTitle" ng-keypress="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea-->
+                <textarea rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-keypress="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50" ></textarea>
                 <span class="FB_des_item">Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!</span>
                 <span>Nội dung:</span> (<span>{{200 - txtContent.length}}</span>)
-                <textarea rows="3" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
+                <textarea rows="5" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="200" ></textarea>
+                
                 <div class="FBMedia">
                     <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
                     <button class="feedback_icon" ng-click="choosePicture()">
