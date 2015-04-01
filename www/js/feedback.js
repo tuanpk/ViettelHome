@@ -112,7 +112,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         }
                 ).done(function (json) {
                     $scope.feedbackId = json.result[0].feedbackId;
-                    alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
+                    if (DEBUG)
+                        alert('postFeedback Success feedbackId: ' + $scope.feedbackId + ' ' + JSON.stringify(json));
                     if ($scope.mediaUrl.length > 0) {
                         for (var i = 0; i < $scope.mediaUrl.length; i++) {
                             $scope.mediaUrl[i].key = $scope.feedbackId + "_" + i;
@@ -122,9 +123,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
                         }
-                        alert('store.batch() ' + $scope.mediaUrl.length);
+                        if (DEBUG)
+                            alert('store.batch() ' + $scope.mediaUrl.length);
                         store.batch($scope.mediaUrl, function (json) {
-                            alert('insert ' + JSON.stringify(json));
+                            if (DEBUG)
+                                alert('insert ' + JSON.stringify(json));
                             for (var i = 0; i < json.length; i++) {
                                 window.resolveLocalFileSystemURI(json[i].url, readFile, onError);
                                 if (DEBUG)
@@ -151,7 +154,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     function readFile(fileEntry) {
-        alert('fileEntry ' + JSON.stringify(fileEntry));
+        if (DEBUG)
+            alert('fileEntry ' + JSON.stringify(fileEntry));
         var index = -1;
         var attach_type = 0;
         var readFilePath;
@@ -160,7 +164,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         } else {
             readFilePath = fileEntry.nativeURL;
         }
-        
+
         for (var i = 0; i < $scope.mediaUrl.length; i++) {
             if ($scope.mediaUrl[i].feedbackId == $scope.feedbackId && $scope.mediaUrl[i].url == readFilePath) {
                 if ($scope.mediaUrl[i].status === 2) {
@@ -172,7 +176,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         }
         fileEntry.file(function (file) {
             var reader = new FileReader();
-            alert('fileEntry.file ' + JSON.stringify(file));
+            if (DEBUG)
+                alert('fileEntry.file ' + JSON.stringify(file));
             reader.onloadend = function (evt) {
 //                alert('onloadend ' + sizeof(evt.target.result));
                 $.post(PARSE + "uploadFileFeedback",
@@ -186,7 +191,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             stringData: evt.target.result
                         }
                 ).done(function (json) {
-                    alert('uploadFileFeedback Success ' + JSON.stringify(json));
+                    if (DEBUG)
+                        alert('uploadFileFeedback Success ' + JSON.stringify(json));
                     store.all(function (json) {
                         for (var i = 0; i < json.length; i++) {
                             if (json[i].feedbackId == $scope.feedbackId && json[i].url == readFilePath) {
@@ -231,7 +237,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         }
                         goBackViewWithName('main');
                     });
-                    alert("uploadFileFeedback Error " + JSON.stringify(err));
+                    $ionicPopup.show({
+                        title: 'Thông Báo',
+                        template: "Upload File đính kèm thất bại " + JSON.stringify(err),
+                        buttons: [{text: 'Ok'}]
+                    });
                 });
             }
             reader.readAsDataURL(file);
@@ -244,7 +254,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     function gotFile(fileEntry)
     {
-        if(DEBUG)
+        if (DEBUG)
             alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
         if (ionic.Platform.isWindowsPhone()) {
             $scope.imgPopover = fileEntry.toURL();
