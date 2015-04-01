@@ -99,13 +99,13 @@ input[type=email], input[type=password] {
     height: 50%;
 
 
-        /*    background-color: #ffffff;
-            color: #E7DDFF;
-            text-align: center;
-            display: block;
-            width: 100%;
-            margin: 0 auto;
-            outline: none;*/
+    /*    background-color: #ffffff;
+        color: #E7DDFF;
+        text-align: center;
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        outline: none;*/
 }
 .main-sologan-contents {
     text-align: center;
@@ -121,7 +121,8 @@ input[type=email], input[type=password] {
     color: #FFFFFF;
     border-radius: 0.5em;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
+    padding-left: 9%;
     text-transform: uppercase;
     display: block;
     width: 90%;
@@ -131,7 +132,7 @@ input[type=email], input[type=password] {
     padding-bottom: 4%;
     font-size: 155%;
     margin-bottom: 5px;
-    
+
 
 }
 
@@ -140,7 +141,8 @@ input[type=email], input[type=password] {
     color: #FFFFFF;
     border-radius: 0.5em;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
+    padding-left: 9%;
     text-transform: uppercase;
     display: block;
     width: 90%;
@@ -157,7 +159,8 @@ input[type=email], input[type=password] {
     color: #FFFFFF;
     border-radius: 0.5em;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
+    padding-left: 9%;
     text-transform: uppercase;
     display: block;
     width: 90%;
@@ -333,7 +336,7 @@ input[type=email], input[type=password] {
 }
 .main-icon{
     font-size: 100%;
-    
+
 }
 .main-box {
 }
