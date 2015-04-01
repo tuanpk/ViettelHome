@@ -37,19 +37,19 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         stepMinute: 1  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
     });
 
-    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
-        scope: $scope,
-        focusFirstInput: true,
-        animation: 'slide-in-up'
-    }).then(function (modal)
-    {
-        $scope.modal = modal;
-    });
+//    $ionicModal.fromTemplateUrl('templates/FBModalTextbox.html', {
+//        scope: $scope,
+//        focusFirstInput: true,
+//        animation: 'slide-in-up'
+//    }).then(function (modal)
+//    {
+//        $scope.modal = modal;
+//    });
 
-    $scope.$on('$destroy', function ()
-    {
-        $scope.modal.remove();
-    });
+//    $scope.$on('$destroy', function ()
+//    {
+//        $scope.modal.remove();
+//    });
     $scope.$on('$locationChangeSuccess', function ()
     {
         $scope.local = mapLocal.local;
@@ -75,10 +75,19 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     }).then(function (popover) {
         $scope.popover = popover;
     });
-
-    $scope.zoomImg = function ($event) {
-        if ($scope.imgPopover) {
+    $scope.$on('$destroy', function ()
+    {
+        $scope.popover.remove();
+    });
+    $scope.zoomImg = function ($event) 
+    {
+        
+        if ($scope.imgPopover) 
+        {
+            $scope.height=window.innerHeight/3.5;
+            $scope.indexOfImage=1;
             $scope.popover.show($event);
+//            alert(JSON.stringify($scope.mediaUrl));
         }
     };
 
@@ -238,6 +247,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     function gotFile(fileEntry)
     {
+//        alert(JSON.stringify(fileEntry));
         $scope.imgPopover = fileEntry.nativeURL;
         var date = new Date();
         var json = {feedbackId: "", index: $scope.mediaUrl.length, nativeURL: fileEntry.nativeURL, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
