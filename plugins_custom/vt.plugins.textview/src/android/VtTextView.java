@@ -3,7 +3,6 @@ package com.viettel.mobile.plugin;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.jasypt.util.password.BasicPasswordEncryptor;
 
 public class VtTextView extends CordovaPlugin {
 
