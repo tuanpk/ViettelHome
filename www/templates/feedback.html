@@ -33,10 +33,10 @@
                     </select>
                 </h5>
                 <span>Tiêu đề:</span><span>{{txtTitle.length}}/50</span>
-                <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle',30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
+                <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
                 <span id="fbNoiDung">Nội dung:</span> <span>{{txtContent.length}}/250</span>
-                <textarea rows="4" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent',50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
-                
+                <textarea rows="4" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent', 50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
+
                 <div class="FBMedia">
                     <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
                     <button class="feedback_icon" ng-click="choosePicture()">
@@ -52,20 +52,17 @@
                 <div class="clear" style="clear: both;"></div>
             </div>
             <section style="height: auto">
-                <div>
-                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
-                        <span class="FBFloatLeft" >Địa điểm: {{local}}</span>
-                        <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
-                    </a>
-                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="">
-                        <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
-                    </a>
-                    <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
-                        <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
-                        <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
-                    </a>
-                    <!--<span class="FB_des_item">Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác</span>-->
-                </div>
+                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
+                    <span class="FBFloatLeft" >Địa điểm: {{local}}</span>
+                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                </a>
+                <a class="item FBOptionItemBorder FBItemPadding">
+                    <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
+                </a>
+                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
+                    <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
+                    <i class="ion-chevron-right FBIconFloatRight FBIconSize25"></i>
+                </a>
             </section>
             <br/>
         </div>
