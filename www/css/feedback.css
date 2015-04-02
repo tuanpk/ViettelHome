@@ -247,14 +247,10 @@
     padding: 1px;
     background-color: graytext;
 }
-.FBLocaText_box input
-{
+.FBLocaText_box input{
     width: 92%;
     height: 100%;
     float: right;
-    /*margin-top: 1px;*/
-    /*line-height: 1.5;*/
-    /*background-color: blue;*/
 }
 .FBOptionItemBorder
 {
@@ -319,7 +315,7 @@
 {
     float: right;
     margin-right: 8px;
-    margin-top: 1.2%;
+    margin-top: 3%;
 }
 .FBFloatLeft
 {
@@ -331,6 +327,7 @@
 {
     padding: 0px;
     margin: 3%;
+    height: 10%;
 }
 .FBItemPadding icon
 {
