@@ -1,7 +1,74 @@
 
-function TextView() {
-}
-TextView.prototype.init= function (successCallback, errorCallback, frame)
+//function TextView() {
+//}
+//TextView.prototype.init = function (successCallback, errorCallback, frame)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'init',
+//            [frame]
+//            );
+//};
+//TextView.prototype.setFrame = function (successCallback, errorCallback, frame)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'setFrame',
+//            [frame]
+//            );
+//};
+//TextView.prototype.hidden = function (successCallback, errorCallback)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'hidden', []
+//            );
+//};
+//TextView.prototype.show = function (successCallback, errorCallback, frame)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'show', [frame]
+//            );
+//};
+//TextView.prototype.destroy = function (successCallback, errorCallback)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'destroy', []
+//            );
+//};
+//TextView.prototype.getValueTextView = function (successCallback, errorCallback)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'getValueTextView', []
+//            );
+//};
+//TextView.prototype.clearText = function (successCallback, errorCallback)
+//{
+//    cordova.exec(
+//            successCallback,
+//            errorCallback,
+//            'TextView',
+//            'clearText', []
+//            );
+//};
+
+var TextView={
+    init:function (successCallback, errorCallback, frame)
     {
         cordova.exec(
                 successCallback,
@@ -10,8 +77,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                 'init',
                 [frame]
                 );
-    };
-               TextView.prototype.setFrame= function (successCallback, errorCallback,frame)
+    },
+    setFrame: function (successCallback, errorCallback,frame)
                {
                cordova.exec(
                             successCallback,
@@ -20,8 +87,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'setFrame',
                             [frame]
                             );
-               };
-               TextView.prototype.hidden= function (successCallback, errorCallback)
+               },
+               hidden: function (successCallback, errorCallback)
                {
                cordova.exec(
                             successCallback,
@@ -29,8 +96,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'TextView',
                             'hidden',[]
                             );
-               };
-               TextView.prototype.show= function (successCallback, errorCallback,frame)
+               },
+               show: function (successCallback, errorCallback,frame)
                {
                cordova.exec(
                             successCallback,
@@ -38,8 +105,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'TextView',
                             'show',[frame]
                             );
-               };
-               TextView.prototype.destroy= function (successCallback, errorCallback)
+               },
+               destroy: function (successCallback, errorCallback)
                {
                cordova.exec(
                             successCallback,
@@ -47,8 +114,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'TextView',
                             'destroy',[]
                             );
-               };
-               TextView.prototype.getValueTextView= function (successCallback, errorCallback)
+               },
+               getValueTextView: function (successCallback, errorCallback)
                {
                cordova.exec(
                             successCallback,
@@ -56,8 +123,8 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'TextView',
                             'getValueTextView',[]
                             );
-               };
-               TextView.prototype.clearText= function (successCallback, errorCallback)
+               },
+               clearText: function (successCallback, errorCallback)
                {
                cordova.exec(
                             successCallback,
@@ -65,14 +132,15 @@ TextView.prototype.init= function (successCallback, errorCallback, frame)
                             'TextView',
                             'clearText',[]
                             );
-               };
-               
+               }
+}
+
 TextView.install = function () {
-	if (!plugins) {
-		plugins = {};
-	}
-	plugins.textView = new TextView();
-	return plugins.textView ;
+    if (!window.plugins) {
+        window.plugins = {};
+    }
+    window.plugins.textView = TextView;
+    return window.plugins.textView;
 };
 
 cordova.addConstructor(TextView.install);

@@ -24,7 +24,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.mediaUrl = [];
     if (txvStatus === 0)
     {
-        plugins.textView.init(function () {
+        window.plugins.textView.init(function () {
             $scope.$apply(function () {
                 txtStatus = 1;
             });
@@ -51,7 +51,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         if (txtStatus === 1)
         {
 //            alert('status 1');
-            plugins.textView.hidden(function () {
+            window.plugins.textView.hidden(function () {
 //                alert('ok textview');
             }, function () {
 //                alert('error textview');
@@ -62,7 +62,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         if (txtStatus === 2)
         {
 //            alert('status 2');
-            plugins.textView.show(function () {
+            window.plugins.textView.show(function () {
 //                alert('ok textview');
             }, function () {
 //                alert('error textview');
@@ -73,7 +73,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         else
         {
 //            alert('status 3');
-            plugins.textView.clearText(function () {
+            window.plugins.textView.clearText(function () {
 //                alert('ok textview');
             }, function () {
 //                alert('error textview');
