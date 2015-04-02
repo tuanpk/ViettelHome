@@ -128,7 +128,6 @@
     background-color: #C6E746;
     max-width: 15%;
     max-height: 20%;
-
 }
 .feedback_true{
     float: left;
@@ -198,6 +197,7 @@
     size: 160px; 
     margin-left:2%;
     width: 50%;
+    height: 4%;
     text-align: center;
 }
 
@@ -285,6 +285,7 @@
     padding-left: 3px;
     padding-right: 3px;
     margin-top: 1px;
+    margin-bottom: 2%;
 }
 
 .FB_des_item

@@ -10,60 +10,54 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">     
-        <div style="height: 55%;">
-            <div class="FBBody">
-                <h5>Lựa chọn tình trạng phản ánh:</h5>
-                <div class="row feedback_row">
-                    <label class="item item-radio col col-50 feedback_radio">
-                        <input type="radio" name="group" value="1">
-                        <div class="item-content" style="padding: 5px">TÍCH CỰC</div>
-                        <i class="radio-icon ion-checkmark" style="padding: 0"></i>
-                    </label>
-                    <label class="item item-radio col col-50 feedback_radio">
-                        <input type="radio" name="group" value="0">
-                        <div class="item-content" style="padding: 5px">TIÊU CỰC</div>
-                        <i class="radio-icon ion-checkmark" style="padding: 0"></i>
-                    </label>
-                </div>
-                <h5>Lĩnh vực: 
-                    <select class="feedback_field" id="feedback_field">
-                        <option value="1">Hành chính</option>
-                        <option value="2">Kỹ thuật</option>
-                        <option value="3">Kinh doanh</option>
-                    </select>
-                </h5>
-                <span>Tiêu đề:</span><span>{{txtTitle.length}}/50</span>
-                <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
-                <span id="fbNoiDung">Nội dung:</span> <span>{{txtContent.length}}/250</span>
-                <textarea rows="4" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent', 50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
-
-                <div class="FBMedia">
-                    <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
-                    <button class="feedback_icon" ng-click="choosePicture()">
-                        <i class="icon ion-images"></i>
-                    </button> 
-                    <button class="feedback_icon" ng-click="takePicture()">
-                        <i class="icon ion-ios-camera-outline"></i>
-                    </button> 
-                    <button class="feedback_icon" ng-click="takeVideo()">
-                        <i class="icon ion-ios-videocam-outline"></i>
-                    </button>
-                </div>
-                <div class="clear" style="clear: both;"></div>
+        <div class="FBBody">
+            <h5>Lựa chọn tình trạng phản ánh:</h5>
+            <div class="row feedback_row">
+                <label class="item item-radio col col-50 feedback_radio">
+                    <input type="radio" name="group" value="1">
+                    <div class="item-content" style="padding: 5%">TÍCH CỰC</div>
+                    <i class="radio-icon ion-checkmark" style="padding: 0"></i>
+                </label>
+                <label class="item item-radio col col-50 feedback_radio">
+                    <input type="radio" name="group" value="0">
+                    <div class="item-content" style="padding: 3%">TIÊU CỰC</div>
+                    <i class="radio-icon ion-checkmark" style="padding: 0"></i>
+                </label>
             </div>
-            <section style="height: auto">
-                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
-                    <span class="FBFloatLeft" >Địa điểm: {{local}}</span>
-                    <i class="ion-chevron-right FBIconFloatRight FBIconSize20"></i>
-                </a>
-                <a class="item FBOptionItemBorder FBItemPadding">
-                    <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
-                </a>
-                <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
-                    <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
-                    <i class="ion-chevron-right FBIconFloatRight FBIconSize20"></i>
-                </a>
-            </section>
+            <h5>Lĩnh vực: 
+                <select class="feedback_field" id="feedback_field">
+                    <option value="1">Hành chính</option>
+                    <option value="2">Kỹ thuật</option>
+                    <option value="3">Kinh doanh</option>
+                </select>
+            </h5>
+            <span>Tiêu đề: {{txtTitle.length}}/50</span>
+            <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
+            <span id="fbNoiDung">Nội dung: {{txtContent.length}}/250</span>
+            <textarea rows="4" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent', 50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
+
+            <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
+            <button class="feedback_icon" ng-click="choosePicture()">
+                <i class="icon ion-images"></i>
+            </button> 
+            <button class="feedback_icon" ng-click="takePicture()">
+                <i class="icon ion-ios-camera-outline"></i>
+            </button> 
+            <button class="feedback_icon" ng-click="takeVideo()">
+                <i class="icon ion-ios-videocam-outline"></i>
+            </button>
+            <div class="clear" style="clear: both;"></div>
         </div>
+        <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(0)">
+            <span class="FBFloatLeft" >Địa điểm: {{local}}</span>
+            <i class="ion-chevron-right FBIconFloatRight FBIconSize20"></i>
+        </a>
+        <a class="item FBOptionItemBorder FBItemPadding">
+            <span class="FBFloatLeft">Thời gian:<input class="feedback_time" type="text" id="demo_datetime" value=""></span>
+        </a>
+        <a class="item FBOptionItemBorder FBItemPadding" ng-click="showScreen(2)">
+            <span class="FBFloatLeft">Cấp gửi: {{department}}</span>
+            <i class="ion-chevron-right FBIconFloatRight FBIconSize20"></i>
+        </a>
     </ion-content>
 </ion-view>
