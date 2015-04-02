@@ -19,51 +19,51 @@ var VtTextView={
                             [frame]
                             );
                },
-               hide: function (successCallback, errorCallback)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'hide',[]
-                            );
-               },
-               show: function (successCallback, errorCallback,frame)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'show',[frame]
-                            );
-               },
-               destroy: function (successCallback, errorCallback)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'destroy',[]
-                            );
-               },
-               getText: function (successCallback, errorCallback)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'getText',[]
-                            );
-               },
-               setText: function (successCallback, errorCallback)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'setText',[]
-                            );
-               }
+    hide: function (successCallback, errorCallback)
+    {
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'hide',[]
+                 );
+    },
+    show: function (successCallback, errorCallback,frame)
+    {
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'show',[frame]
+                 );
+    },
+    destroy: function (successCallback, errorCallback)
+    {
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'destroy',[]
+                 );
+    },
+    getText: function (successCallback, errorCallback)
+    {
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'getText',[]
+                 );
+    },
+    setText: function (successCallback, errorCallback)
+    {
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'setText',[]
+                 );
+    }
 }
 
 VtTextView.install = function () {
