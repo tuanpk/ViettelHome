@@ -1,12 +1,22 @@
 var VtTextView={
-    init:function (successCallback, errorCallback, frame)
+    initWithFrame:function (successCallback, errorCallback, frame)
     {
         cordova.exec(
                 successCallback,
                 errorCallback,
                 'VtTextView',
-                'init',
+                'initWithFrame',
                 [frame]
+                );
+    },
+    initWithID:function (successCallback, errorCallback, options)
+    {
+        cordova.exec(
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'initWithID',
+                [options] //Op tion include id, with ,height
                 );
     },
     setFrame: function (successCallback, errorCallback,frame)

@@ -7,6 +7,7 @@
     CGRect frameTextView;
 }
 - (void) init:(CDVInvokedUrlCommand*)command;
+-(void) initWithID : (CDVInvokedUrlCommand*) command;
 -(void) setFrame:(CDVInvokedUrlCommand*)command;
 -(void) hide:(CDVInvokedUrlCommand*)command;
 -(void) show:(CDVInvokedUrlCommand*)command;
