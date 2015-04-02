@@ -24,10 +24,18 @@
                     <i class="row icon {{statusIcon[history.status]}}"></i>
                     <span class="row">{{statusText[history.status]}}</span>
                 </div>
+                <ion-option-button class="button-assertive"
+                                   ng-click="" ng-hide="{{history.status!=1}}">
+                    Delete
+                </ion-option-button>
+                <ion-option-button class="button-calm"
+                                   ng-click="" ng-hide="{{history.status!=0}}">
+                    Resend
+                </ion-option-button>
             </ion-item>
         </ion-list>
-<!--        <ion-infinite-scroll ng-if="moreHistoryCanBeLoaded()" 
-                             on-infinite="loadMoreHistory()">
-        </ion-infinite-scroll>-->
+        <!--        <ion-infinite-scroll ng-if="moreHistoryCanBeLoaded()" 
+                                     on-infinite="loadMoreHistory()">
+                </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>
