@@ -16,12 +16,12 @@
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="Hello">
-        <param name="android-package" value="com.example.plugin.Hello"/>
+      <feature name="VtTextView">
+        <param name="android-package" value="com.viettel.mobile.plugin.VtTextView"/>
       </feature>
     </config-file>
 
-    <source-file src="src/android/Hello.java" target-dir="src/com/example/plugin/"/>    
+    <source-file src="src/android/VtTextView.java" target-dir="src/com/viettel/mobile/plugin/"/>    
   </platform>
  <platform name="ios">
     
