@@ -3,19 +3,15 @@
 {
     width: 98%;
     height: 30px;
-    /*line-height: 2;*/
     margin-left: 2px;
 }
 .FBText_boxSearchDepartment input
 {
     width: 82%;
     height: 30px;
-    /*line-height: 1.6;*/
-    /*background-color: green;*/
 }
 .FB_gps
 {
-    /*    padding: 1px;*/
     margin-top: -24px;
 }
 .FB_des_item_department{
@@ -27,7 +23,6 @@
     border: 1px solid black;
     border-radius: 4px;
     text-align: left;
-    /* background-color: graytext; */
     background-color: white;
     width: 100%;
     margin-top: -2px;
@@ -39,19 +34,14 @@
     height: 30%;
     line-height: 1.6;
     margin-left: 0px;
-    /*background-color: green;*/
 }
 .FBimg
 {
-    /*    width: 40%;*/
     float: left;
-/*    font-size: 35px;*/
     font-size: 198%;
     margin-left: 0%;
     max-width: 15%;
     max-height: 20%;
-/*    height: 45px;
-    width: 45px;*/
 }
 .FBItemPadding input {
     font-size: 100%;
@@ -95,13 +85,11 @@
 }
 .FBMedia 
 {
-    /*margin-right: 2%;*/
     margin-top: 3px;
 }
 .feedback_heading_small{
     font-size: 85%;
     float: left;
-
     width: 50%;
     color:#595959;
 }
@@ -137,7 +125,6 @@
 .feedback_icon{
     float: right;
     font-size: 198%;
-    /*margin-left: 3%;*/
     background-color: #C6E746;
     max-width: 15%;
     max-height: 20%;
@@ -156,7 +143,6 @@
 }
 
 .feedback_value {
-    /*    margin-left: 2%;*/
     font-size:96%;
     color: black;
     background-color: white;
@@ -233,7 +219,6 @@
     margin-left: -1%;
     font-size: 108%;
 }
-/*loinv7 at 21/03/2015*/
 .FBContent
 {
     background-color: oldlace;
@@ -253,7 +238,6 @@
 .FBText_box input
 {
     width: 100%;
-    /*height: 100%;*/
 }
 .FBLocaText_box
 {
@@ -275,13 +259,10 @@
 .FBOptionItemBorder
 {
     border: 1px solid black;
-    /*border-bottom: 1px solid black;*/
-    /*border-top: 1px solid black;*/
     padding: 10px;
 }
 .FBOptionItemBorder span
 {
-    /*float: left;*/
     margin-top: 7px;
     margin-bottom: 7px;
 }
@@ -298,7 +279,6 @@
     margin-bottom: 3px;
 }
 .FBTextarea{
-    /*    margin-left: 2%;*/
     width: 100%;
     border-radius: 3px;
     border: 1px solid black;
@@ -307,11 +287,6 @@
     margin-top: 1px;
 }
 
-.FBOption
-{
-    margin-top: 3%;
-    /*    background-color: green;*/
-}
 .FB_des_item
 {
     margin-left: 5px;
@@ -325,17 +300,14 @@
 }
 .FBIconSize25
 {
-    /*float: left;*/
     font-size: 25px;
 }
 .FBIconSize20
 {
-    /*float: left;*/
     font-size: 20px;
 }
 .FBIconSize15
 {
-    /*float: left;*/
     font-size: 15px;
 }
 .FBIconYellow
@@ -357,16 +329,12 @@
 .FBItemPadding
 {
     padding: 0px;
+    margin: 3%;
 }
 .FBItemPadding icon
 {
     padding: 1px;
 }
-/*.FBItemPadding input*/
-/*{*/
-/*margin-left: 10%;*/
-/*}*/
-/*Loinv7 at 23/03/2015*/
 .FBModalFrame
 {
     padding: 10px;
@@ -383,7 +351,6 @@
     border: 1px solid black;
     border-radius: 4px;
     text-align: left;
-    /*background-color: graytext;*/
     background-color: white;
     width: 82%;
 }
@@ -391,7 +358,6 @@
 {
     float: right;
     margin-right: 3%;
-
 }
 
 .feedback_des
@@ -405,7 +371,6 @@
 .FBDepartmentItemFrame
 {
     width: 100%;
-    /*background-color: #17734f;*/
 }
 .FBDepartmentItemFrame label
 {
@@ -422,14 +387,12 @@
 {
     margin-left: 8px;
 }
-/*Loinv7 at 25/03/15*/
 .FBText_boxSearchDepartment
 {
     float: left;
     border: 1px solid black;
     border-radius: 4px;
     text-align: left;
-    /*background-color: graytext;*/
     background-color: white;
     width: 82%;
 }

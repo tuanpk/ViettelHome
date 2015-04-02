@@ -2,39 +2,27 @@ var mapLocal = {local: ''};
 var fbDepartment = {value: ''};
 var listDepartment = {};
 var listLocation = {};
+var attach_type = 0;
 //save status show/hidden of text area native --Loinv7 at 27/03
-var txvStatus = 0; //0 not init textview 1 show 
+//var txvStatus = 0; //0 not init textview 1 show 
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
-    $scope.items = [
-        {
-            title: 'ĐỊA ĐIỂM',
-            desc: 'Địa điểm không chọn được mặc định tại nơi công tác hoặc tự động định vị theo vị trí  hiện tại (Vui lòng bật xác định vị trí trong mục cài đặt)',
-            content: 'Anh chỉ mong sao Em có thể nói lên hết những tâm tư bao lâu nay của hai đứa.Nhưng sau hôm nay Em nói xóa mau đi bao nhiêu kí ức Em vội ra đi riêng mình Em. Em có biết rất khó mới tìm thấy nhau, như lúc này Anh xin Em hãy quay trở lại.'
-        },
-        {
-            title: 'THỜI GIAN',
-            desc: 'Thời gian không chọn thì được tự động để mặc định với thời gian hiện tại',
-            content: 'Anh chỉ mong sao Em có thể nói lên hết những tâm tư bao lâu nay của hai đứa.Nhưng sau hôm nay Em nói xóa mau đi bao nhiêu kí ức Em vội ra đi riêng mình Em. Em có biết rất khó mới tìm thấy nhau, như lúc này Anh xin Em hãy quay trở lại.'
-        }, {
-            title: 'LỰA CHỌN CẤP GỬI',
-            desc: 'Cấp gửi không chọn thì được mặc định gửi tới cấp thuộc phòng/ban trung tâm công tác',
-        }
-    ];
+    var timeNow = new Date();
     $scope.mediaUrl = [];
-    if (txvStatus === 0)
-    {
-        window.plugins.textView.init(function () {
-            $scope.$apply(function () {
-                txtStatus = 1;
-            });
-
-        }, function () {
-            $scope.$apply(function () {
-                txtStatus = 0;
-            });
-        }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 100 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
-    }
+    document.getElementById("demo_datetime").value = timeNow;
+//    if (txvStatus === 0)
+//    {
+//        window.plugins.textView.init(function () {
+//            $scope.$apply(function () {
+//                txtStatus = 1;
+//            });
+//
+//        }, function () {
+//            $scope.$apply(function () {
+//                txtStatus = 0;
+//            });
+//        }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 100 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
+//    }
     $('#demo_datetime').mobiscroll().datetime({
         theme: 'mobiscroll-dark',
         mode: 'mode',
@@ -44,41 +32,53 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         maxDate: new Date(2020, 01, 01, 00, 00), // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
         stepMinute: 1  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
     });
+    
     $scope.$on('$locationChangeSuccess', function ()
     {
-        $scope.local = mapLocal.local;
-        $scope.department = fbDepartment.value;
-        if (txtStatus === 1)
-        {
-//            alert('status 1');
-            window.plugins.textView.hidden(function () {
-//                alert('ok textview');
-            }, function () {
-//                alert('error textview');
-            });
-            txtStatus = 2;
+        $scope.timeNow = timeNow;
+        if (mapLocal.local) {
+            $scope.local = mapLocal.local;
+        } else {
+            $scope.local = department;
         }
-        else
-        if (txtStatus === 2)
-        {
-//            alert('status 2');
-            window.plugins.textView.show(function () {
-//                alert('ok textview');
-            }, function () {
-//                alert('error textview');
-            }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 200 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
-            txtStatus = 1;
 
+        if (fbDepartment.value) {
+            $scope.department = fbDepartment.value;
+        } else {
+            $scope.department = department;
+            fbDepartment.value = department;
         }
-        else
-        {
-//            alert('status 3');
-            window.plugins.textView.clearText(function () {
-//                alert('ok textview');
-            }, function () {
-//                alert('error textview');
-            });
-        }
+//        if (txtStatus === 1)
+//        {
+////            alert('status 1');
+//            window.plugins.textView.hidden(function () {
+////                alert('ok textview');
+//            }, function () {
+////                alert('error textview');
+//            });
+//            txtStatus = 2;
+//        }
+//        else
+//        if (txtStatus === 2)
+//        {
+////            alert('status 2');
+//            window.plugins.textView.show(function () {
+////                alert('ok textview');
+//            }, function () {
+////                alert('error textview');
+//            }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 200 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
+//            txtStatus = 1;
+//
+//        }
+//        else
+//        {
+////            alert('status 3');
+//            window.plugins.textView.clearText(function () {
+////                alert('ok textview');
+//            }, function () {
+////                alert('error textview');
+//            });
+//        }
     });
     $scope.showScreen = function (i)
     {
@@ -131,14 +131,14 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                         {
                             userId: userId,
                             session: session,
-                            state: '1',
-                            domain: '1',
+                            state: $('input[name=group]:checked').val(),
+                            domain: document.getElementById("feedback_field").value,
                             title: document.getElementById('txtTitle').value,
                             content: document.getElementById('txtContent').value,
-                            attach_type: '0',
-                            location: 'Noi trai tim co nang',
-                            time: new Date().getTime(),
-                            department: '1',
+                            attach_type: attach_type,
+                            location: mapLocal.local,
+                            time: document.getElementById("demo_datetime").value,
+                            department: fbDepartment.value,
                             attach_count: $scope.mediaUrl.length
                         }
                 ).done(function (json) {
@@ -299,6 +299,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 
     $scope.choosePicture = function ()
     {
+        attach_type = 1;
         $Camera.getPicture({
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
@@ -310,6 +311,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     $scope.takePicture = function () {
+        attach_type = 1;
         $Camera.getPicture({
             quality: 100,
             targetWidth: 320,
@@ -323,6 +325,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     };
 
     $scope.takeVideo = function () {
+        attach_type = 2;
         $Capture.captureVideo({limit: 1, duration: 1}).then(function (files_uri) {
             var date = new Date();
             var json = {feedbackId: "", index: $scope.mediaUrl.length, url: files_uri[0], title: "", content: "", attach_type: 2, date: date, status: 2, progess: 0};
