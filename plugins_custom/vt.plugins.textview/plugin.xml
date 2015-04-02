@@ -9,8 +9,8 @@
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <js-module src="www/TextView.js" name="TextView">
-    <clobbers target="TextView" />
+  <js-module src="www/VtTextView.js" name="VtTextView">
+    <clobbers target="VtTextView" />
   </js-module>
 
   <platform name="android">
@@ -26,13 +26,13 @@
  <platform name="ios">
     
     <config-file target="config.xml" parent="/*">
-      <feature name="TextView">
-        <param name="ios-package" value="TextView" />
+      <feature name="VtTextView">
+        <param name="ios-package" value="VtTextView" />
       </feature>
     </config-file>
 
-    <header-file src="src/ios/TextView.h"/>
-    <source-file src="src/ios/TextView.m"/>
+    <header-file src="src/ios/VtTextView.h"/>
+    <source-file src="src/ios/VtTextView.m"/>
   </platform>
 
   <platform name="wp7">

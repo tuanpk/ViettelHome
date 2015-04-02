@@ -1,6 +1,6 @@
 #import "TextView.h"
 
-@implementation TextView
+@implementation VtTextView
 @synthesize commandDelegate;
 
 - (void) init:(CDVInvokedUrlCommand*)command
@@ -49,7 +49,7 @@
     
     [commandDelegate sendPluginResult:result callbackId:[command callbackId]];
 }
--(void) getValueTextView:(CDVInvokedUrlCommand*)command
+-(void) getText:(CDVInvokedUrlCommand*)command
 {
     NSString* callbackId = [command callbackId];
     NSString* content = textView.text;
@@ -59,7 +59,7 @@
     
     [commandDelegate sendPluginResult:result callbackId:callbackId];
 }
--(void) hidden:(CDVInvokedUrlCommand*)command
+-(void) hide:(CDVInvokedUrlCommand*)command
 {
     textView.hidden=YES;
     
@@ -85,7 +85,7 @@
                                messageAsString:@"OK"];
     [commandDelegate sendPluginResult:result callbackId:[command callbackId]];
 }
--(void) clearText:(CDVInvokedUrlCommand*)command
+-(void) setText:(CDVInvokedUrlCommand*)command
 {
     textView.text=@"";
     CDVPluginResult* result = [CDVPluginResult
