@@ -10,18 +10,18 @@ var VtTextView={
                 );
     },
     setFrame: function (successCallback, errorCallback,frame)
-               {
-               cordova.exec(
-                            successCallback,
-                            errorCallback,
-                            'VtTextView',
-                            'setFrame',
-                            [frame]
-                            );
-               },
+    {
+        cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 'VtTextView',
+                 'setFrame',
+                 [frame]
+                 );
+    },
     hide: function (successCallback, errorCallback)
     {
-    cordova.exec(
+        cordova.exec(
                  successCallback,
                  errorCallback,
                  'VtTextView',
@@ -30,7 +30,7 @@ var VtTextView={
     },
     show: function (successCallback, errorCallback,frame)
     {
-    cordova.exec(
+        cordova.exec(
                  successCallback,
                  errorCallback,
                  'VtTextView',
@@ -39,7 +39,7 @@ var VtTextView={
     },
     destroy: function (successCallback, errorCallback)
     {
-    cordova.exec(
+        cordova.exec(
                  successCallback,
                  errorCallback,
                  'VtTextView',
@@ -48,7 +48,7 @@ var VtTextView={
     },
     getText: function (successCallback, errorCallback)
     {
-    cordova.exec(
+        cordova.exec(
                  successCallback,
                  errorCallback,
                  'VtTextView',
@@ -57,7 +57,7 @@ var VtTextView={
     },
     setText: function (successCallback, errorCallback)
     {
-    cordova.exec(
+        cordova.exec(
                  successCallback,
                  errorCallback,
                  'VtTextView',
