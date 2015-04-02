@@ -7,9 +7,9 @@ var attach_type = 0;
 //var txvStatus = 0; //0 not init textview 1 show 
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
-    var timeNow = new Date();
+    $scope.timeNow = new Date();
     $scope.mediaUrl = [];
-    document.getElementById("demo_datetime").value = timeNow;
+   // document.getElementById("demo_datetime").value = timeNow;
 //    if (txvStatus === 0)
 //    {
 //        window.plugins.textView.init(function () {
@@ -35,7 +35,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     
     $scope.$on('$locationChangeSuccess', function ()
     {
-        $scope.timeNow = timeNow;
+//        $scope.timeNow = timeNow;
         if (mapLocal.local) {
             $scope.local = mapLocal.local;
         } else {
