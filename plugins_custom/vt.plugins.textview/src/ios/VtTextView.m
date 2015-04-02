@@ -61,15 +61,18 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey : UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    //    CGRect frame=textView.frame;
-    //    frame.origin.y=[UIScreen mainScreen].bounds.size.height-kbSize.height-frame.size.height;
+    [self.webView.scrollView setContentOffset:CGPointMake(0, textView.frame.size.height)];
+    [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height+textView.frame.size.height)];
+    float pos = [[self.webView stringByEvaluatingJavaScriptFromString :@"document.getElementById('fbNoiDung').getBoundingClientRect().bottom+5"] floatValue];
+    frame.origin.y = pos;
+    textView.frame=frame;
 
-    [UIView animateWithDuration : 0.2 animations : ^{
-        CGRect frame = textView.frame;
-        frame.origin.y = [UIScreen mainScreen].bounds.size.height - kbSize.height - frame.size.height;
-        [textView setFrame : frame];
-    }
-    ];
+//    [UIView animateWithDuration : 0.2 animations : ^{
+//        CGRect frame = textView.frame;
+//        frame.origin.y = [UIScreen mainScreen].bounds.size.height - kbSize.height - frame.size.height;
+//        [textView setFrame : frame];
+//    }
+//    ];
 }
 
 -(void) keyboardWillBeHidden : (NSNotification*) aNotification {
