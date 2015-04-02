@@ -192,12 +192,12 @@
     font-size: 80%;
     border: 1px solid black;
 }
-.feedback_field 
-{
+.feedback_field {
     color: #4281d0;
     border-radius: 8%; 
     size: 160px; 
     margin-left:2%;
+    width: 50%;
     text-align: center;
 }
 
