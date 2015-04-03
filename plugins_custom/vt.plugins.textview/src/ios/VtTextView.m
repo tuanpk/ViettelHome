@@ -19,108 +19,105 @@
     textView.delegate = self;
     [self.webView addSubview : textView];
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget : self action : @selector(panGesture :)];
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     panGesture.delegate = self;
+    tapGesture.delegate=self;
     [self.viewController.view addGestureRecognizer : panGesture];
-
+    [self.viewController.view addGestureRecognizer:tapGesture];
     CDVPluginResult* result = [CDVPluginResult
             resultWithStatus : CDVCommandStatus_OK
             messageAsString : @"OK"];
 
     [commandDelegate sendPluginResult : result callbackId : [command callbackId]];
 }
-
 -(void) initWithID : (CDVInvokedUrlCommand*) command {
     NSDictionary *dictFrame = [command argumentAtIndex : 0];
-    float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().bottom+5",[dictFrame objectForKey : @"id"]]] intValue];
-    float perwidth = [[dictFrame objectForKey : @"width"] floatValue];
-    float perheight = [[dictFrame objectForKey : @"height"] floatValue];
-    CGSize screenSize= [UIScreen mainScreen].bounds.size;
-    textView = [[UITextView alloc] initWithFrame : CGRectMake(0, pos, perwidth*screenSize.width/100, perheight*screenSize.height/100)];
-    textView.center = CGPointMake(self.webView.frame.size.width / 2, pos);
-    
+    idElement=[dictFrame objectForKey : @"id"];
+    float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
+    float width=[[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').clientWidth",idElement]] floatValue];
+    float height=[[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').clientHeight",idElement]] floatValue];
+    textView = [[UITextView alloc] initWithFrame : CGRectMake(0, pos, width, height)];
+    textView.center = CGPointMake(self.webView.frame.size.width / 2, pos+textView.frame.size.height/2);
     [textView.layer setBorderColor : [[[UIColor blackColor] colorWithAlphaComponent : 0.8] CGColor]];
     [textView.layer setBorderWidth : 1.0];
     textView.layer.cornerRadius = 5;
-    
     textView.backgroundColor = [UIColor whiteColor];
     textView.delegate = self;
-    [self.webView addSubview : textView];
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget : self action : @selector(panGesture :)];
+    [textView setTag:1];
+    [self.webView setTag:2];
+    [self.viewController.view setTag:3];
+    [self.webView.scrollView setTag:4];
+    [self.viewController.view addSubview: textView];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget : self action : @selector(panGesture:)];
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     panGesture.delegate = self;
-    [self.viewController.view addGestureRecognizer : panGesture];
-
+    tapGesture.delegate=self;
+    [self.webView addGestureRecognizer : panGesture];
+    [self.webView addGestureRecognizer:tapGesture];
+ 
+    [[NSNotificationCenter defaultCenter] addObserver : self
+                                             selector : @selector(keyboardWasShown :)
+                                                 name : UIKeyboardWillShowNotification object : nil];
+//    [self.webView loadHTMLString:@"<script type='text/javascript'>alert('ok');</script>" baseURL:nil];
+    
     CDVPluginResult* result = [CDVPluginResult
             resultWithStatus : CDVCommandStatus_OK
             messageAsString : @"OK"];
-
     [commandDelegate sendPluginResult : result callbackId : [command callbackId]];
 }
 
--(void) keyboardWasShown : (NSNotification*) aNotification {
-
+-(void) keyboardWasShown : (NSNotification*) aNotification
+{
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey : UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    [self.webView.scrollView setContentOffset:CGPointMake(0, textView.frame.size.height)];
-    [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height+textView.frame.size.height*2)];
-    float pos = [[self.webView stringByEvaluatingJavaScriptFromString :@"document.getElementById('fbNoiDung').getBoundingClientRect().bottom+5"] floatValue];
-     CGRect frame = textView.frame;
-    frame.origin.y = pos;
-    textView.frame= frame;
-
-//    [UIView animateWithDuration : 0.2 animations : ^{
-//        CGRect frame = textView.frame;
-//        frame.origin.y = [UIScreen mainScreen].bounds.size.height - kbSize.height - frame.size.height;
-//        [textView setFrame : frame];
-//    }
-//    ];
+    
+    float offsetHeight=kbSize.height-([UIScreen mainScreen].bounds.size.height-textView.frame.origin.y-textView.frame.size.height);
+    if (offsetHeight>0)
+    {
+        [self.webView.scrollView setContentOffset:CGPointMake(0, offsetHeight)];
+        [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height+kbSize.height-offsetHeight)];
+        float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
+        CGRect frame = textView.frame;
+        frame.origin.y = pos;
+        textView.frame= frame;
+    }
 }
 
--(void) keyboardWillBeHidden : (NSNotification*) aNotification {
-    //    NSDictionary* info = [aNotification userInfo];
-    //    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    //    
-    //    //    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    //    [UIView animateWithDuration:1.0 animations:^{
-    //        CGRect frame=textView.frame;
-    //        //        CGRect rect=[UIScreen mainScreen].bounds.size.width;
-    //        frame.origin.y=[UIScreen mainScreen].bounds.size.height-kbSize.height;
-    //        [textView setFrame:frame];
-    //    }];
-}
-
--(void) textViewDidBeginEditing : (UITextView *) textView {
-    [[NSNotificationCenter defaultCenter] addObserver : self
-    selector : @selector(keyboardWasShown :)
-    name : UIKeyboardDidShowNotification object : nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver : self
-    selector : @selector(keyboardWillBeHidden :)
-    name : UIKeyboardWillHideNotification object : nil];
-}
-
--(void) textViewDidEndEditing : (UITextView *) textView {
-    [textView resignFirstResponder];
+-(void) textViewDidBeginEditing : (UITextView *) textView
+{
+    
 }
 //To enable gesture recognizer
 
 -(BOOL) gestureRecognizer : (UIGestureRecognizer *) gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer : (UIGestureRecognizer *) otherGestureRecognizer {
     return YES;
 }
-
+-(void) tapGesture:(UITapGestureRecognizer*) tapGeture
+{
+    [UIView animateWithDuration : 0.5 animations : ^{
+        [self.webView.scrollView setContentOffset:CGPointMake(0, 0)];
+        [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height)];
+        float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
+        CGRect frame = textView.frame;
+        frame.origin.y = pos;
+        textView.frame= frame;
+        [textView resignFirstResponder];
+    }
+     ];
+}
 -(void) panGesture : (UIPanGestureRecognizer*) panGesture {
     CGRect frame = textView.frame;
 
     if (panGesture.state == UIGestureRecognizerStateBegan) {
     }
     if (panGesture.state == UIGestureRecognizerStateChanged) {
-        float pos = [[self.webView stringByEvaluatingJavaScriptFromString : @"document.getElementById('fbNoiDung').getBoundingClientRect().bottom+5"] intValue];
+        float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
         frame.origin.y = pos;
         [textView setFrame : frame];
-        //        textView.text=[NSString stringWithFormat:@"%f",self.webView.contentScaleFactor];
     }
-    if (panGesture.state == UIGestureRecognizerStateEnded) {
-        [self.webView stringByEvaluatingJavaScriptFromString : @"document.getElementById('FeedBackContent').getAttribute('direction')=z"];
+    if (panGesture.state == UIGestureRecognizerStateEnded)
+    {
+        
     }
 }
 
