@@ -3,36 +3,9 @@
 @implementation VtTextView
 @synthesize commandDelegate;
 
--(void) initWithFrame : (CDVInvokedUrlCommand*) command {
-    NSDictionary *dictFrame = [command argumentAtIndex : 0];
-    float x = [[dictFrame valueForKey : @"x"] floatValue];
-    float y = [[dictFrame objectForKey : @"y"] floatValue];
-    float width = [[dictFrame objectForKey : @"width"] floatValue];
-    float height = [[dictFrame objectForKey : @"height"] floatValue];
-    frameTextView = CGRectMake(x, y, width, height);
-    textView = [[UITextView alloc] initWithFrame : frameTextView];
-    [textView.layer setBorderColor : [[[UIColor blackColor] colorWithAlphaComponent : 0.8] CGColor]];
-    [textView.layer setBorderWidth : 1.0];
-    textView.layer.cornerRadius = 5;
-    textView.center = CGPointMake(self.webView.frame.size.width / 2, y);
-    textView.backgroundColor = [UIColor whiteColor];
-    textView.delegate = self;
-    [self.webView addSubview : textView];
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget : self action : @selector(panGesture :)];
-    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-    panGesture.delegate = self;
-    tapGesture.delegate=self;
-    [self.viewController.view addGestureRecognizer : panGesture];
-    [self.viewController.view addGestureRecognizer:tapGesture];
-    CDVPluginResult* result = [CDVPluginResult
-            resultWithStatus : CDVCommandStatus_OK
-            messageAsString : @"OK"];
-
-    [commandDelegate sendPluginResult : result callbackId : [command callbackId]];
-}
 -(void) initWithID : (CDVInvokedUrlCommand*) command {
     NSDictionary *dictFrame = [command argumentAtIndex : 0];
-    idElement=[dictFrame objectForKey : @"id"];
+    idElement=[dictFrame objectForKey:@"id"];
     float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
     float width=[[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').clientWidth",idElement]] floatValue];
     float height=[[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').clientHeight",idElement]] floatValue];

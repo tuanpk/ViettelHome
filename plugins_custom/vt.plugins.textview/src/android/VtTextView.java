@@ -1,4 +1,4 @@
-package com.viettel.mobile.plugin;
+package com.viettel.mobile.plugins;
 
 import org.apache.cordova.*;
 

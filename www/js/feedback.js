@@ -70,15 +70,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             txtStatus = 1;
 
         }
-        else
-        {
-//            alert('status 3');
-            window.plugins.VtTextView.clearText(function () {
-//                alert('ok textview');
-            }, function () {
-//                alert('error textview');
-            });
-        }
         
     });
     $scope.showScreen = function (i)

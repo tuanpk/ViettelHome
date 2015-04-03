@@ -7,7 +7,6 @@
     CGRect frameTextView;
     NSString *idElement;
 }
-- (void) initWithFrame:(CDVInvokedUrlCommand*)command;
 -(void) initWithID : (CDVInvokedUrlCommand*) command;
 -(void) setFrame:(CDVInvokedUrlCommand*)command;
 -(void) hide:(CDVInvokedUrlCommand*)command;

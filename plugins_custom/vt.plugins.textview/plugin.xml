@@ -17,7 +17,7 @@
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="VtTextView">
-        <param name="android-package" value="com.viettel.mobile.plugin.VtTextView"/>
+        <param name="android-package" value="com.viettel.mobile.plugins"/>
       </feature>
     </config-file>
 
