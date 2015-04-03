@@ -1,29 +1,4 @@
 var dataAdminFeedback = [];
-var department;
-
-function getDepartment($scope, $ionicPopup) 
-{
-    if (!department)
-    {
-        department = {};
-        $.post(PARSE + "onLoadDepartment", {userId: userId, session: session, begin: 0, end: 100}).done(function (json) {
-            $scope.$apply(function () {
-                department = json.result;
-                $scope.department = department;
-            });
-        }).fail(function (er) {
-            $ionicPopup.show({
-                title: 'Thông Báo',
-                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
-                buttons: [{text: 'Ok'}]
-            });
-        });
-    } else {
-        $scope.department = department;
-    }
-}
-;
-
 var pageAdminFeedback = 0;
 var isLoadMore = false;
 module.controller('AdminFeedBackCtr', function ($scope, $ionicPopover, $ionicPopup, $state) 
