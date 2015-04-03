@@ -38,6 +38,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 //        $scope.timeNow = timeNow;
         if (mapLocal.local) {
             $scope.local = mapLocal.local;
+            mapLocal.local = department;
         } else {
             $scope.local = department;
         }
@@ -127,6 +128,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         if (validText("txtTitle", "Tiêu đề"))
             if (validText("txtContent", "Nôi dung phản ánh"))
             {
+                var d = new Date(document.getElementById("demo_datetime").value);
                 $.post(PARSE + "postFeedback",
                         {
                             userId: userId,
@@ -137,8 +139,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             content: document.getElementById('txtContent').value,
                             attach_type: attach_type,
                             location: mapLocal.local,
-                            time: document.getElementById("demo_datetime").value,
-                            department: fbDepartment.value,
+                            time: d.getTime(),
+                            department:'1', //fbDepartment.value,
                             attach_count: $scope.mediaUrl.length
                         }
                 ).done(function (json) {
