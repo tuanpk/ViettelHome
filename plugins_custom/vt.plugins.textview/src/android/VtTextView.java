@@ -1,9 +1,21 @@
 package com.viettel.mobile.plugin;
 
-import java.util.Set;
 import org.apache.cordova.*;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class VtTextView extends CordovaPlugin {
 
