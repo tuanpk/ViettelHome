@@ -127,7 +127,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         if (validText("txtTitle", "Tiêu đề",$ionicPopup))
             if (validText("txtContent", "Nôi dung phản ánh",$ionicPopup))
             {
-                var d = new Date(document.getElementById("demo_datetime").value);
+                var time = new Date(document.getElementById("demo_datetime").value);
                 $.post(PARSE + "postFeedback",
                         {
                             userId: userId,
@@ -138,7 +138,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             content: document.getElementById('txtContent').value,
                             attach_type: attach_type,
                             location: mapLocal.local,
-                            time: d.getTime(),
+                            time: time.getTime(),
                             department:'1', //fbDepartment.value,
                             attach_count: $scope.mediaUrl.length
                         }
@@ -365,11 +365,11 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 //    }
 });
 
-module.controller('FeedbackLocationController', function ($scope, $state, $ionicPopover, goBackViewWithName)
+module.controller('FeedbackLocationController', function ($scope,$ionicPopup, $state, $ionicPopover, goBackViewWithName)
 {
     $scope.fbDataFilter = {};
     $scope.fbTxtOtherLocal = {};
-    getDepartments($scope);
+    getDepartments($scope,$ionicPopup);
     $ionicPopover.fromTemplateUrl('templates/FBPopoverLocation.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -410,13 +410,13 @@ module.controller('FeedbackLocationController', function ($scope, $state, $ionic
         $state.go("feedback_map");
     };
 });
-module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackViewWithName)
+module.controller('FBDepartmentCtr', function ($scope,$ionicPopup, $ionicPopover, goBackViewWithName)
 {
     $scope.fbDataFilter = {};
-    $scope.department = {
-        value: 'Phòng tổng hợp'
+    $scope.fbdepartment = {
+        value: department
     };
-    getDepartments($scope);
+    getDepartments($scope,$ionicPopup);
     $ionicPopover.fromTemplateUrl('templates/FBPopoverLocation.html', {
         scope: $scope
     }).then(function (popover) {
@@ -435,7 +435,7 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
     {
         if (document.getElementById('fbCheckDepartment').checked)
             fbDepartment = {
-                value: $scope.department.value
+                value: $scope.fbdepartment.value
             };
         else
             fbDepartment = {
@@ -562,22 +562,26 @@ function sizeof(_1) {
     return _3;
 }
 
-function getDepartments($scope)
-{
-    $.post(PARSE + "onLoadDepartment", {userId: userId, session: session, begin: 0, end: 50})
-            .done(function (data)
-            {
-                $scope.$apply(function ()
-                {
-                    listDepartment = data.result;
-                    $scope.items = listDepartment;
-                });
-            }).fail(function (err)
+function getDepartments($scope, $ionicPopup) {
+    if (!listDepartment)
     {
-        $scope.items = {};
-        alert('Xin hãy kiểm tra lại kết nối');
-    });
-}
+        listDepartment = {};
+        $.post(PARSE + "onLoadDepartment", {userId: userId, session: session, begin: 0, end: 100}).done(function (json) {
+            $scope.$apply(function () {
+                listDepartment = json.result;
+                $scope.department = listDepartment;
+            });
+        }).fail(function (er) {
+            $ionicPopup.show({
+                title: 'Thông Báo',
+                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                buttons: [{text: 'Ok'}]
+            });
+        });
+    } else {
+        $scope.department = listDepartment;
+    }
+};
 function getListLocation($scope)
 {
     $.post(PARSE + "onSuggestDepartment", {userId: userId, session: session, begin: 0, end: 50})
