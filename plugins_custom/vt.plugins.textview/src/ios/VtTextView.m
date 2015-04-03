@@ -1,4 +1,4 @@
-#import "TextView.h"
+#import "VtTextView.h"
 
 @implementation VtTextView
 @synthesize commandDelegate;
