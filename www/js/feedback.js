@@ -12,7 +12,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     document.getElementById("demo_datetime").value = timeNow;
     if (txvStatus === 0)
     {
-        window.plugins.VtTextView.init(function () {
+        window.plugins.VtTextView.initWithID(function () {
             $scope.$apply(function () {
                 txtStatus = 1;
             });
@@ -21,7 +21,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             $scope.$apply(function () {
                 txtStatus = 0;
             });
-        }, {id:'txtContent'});
+        }, {id:'txtFBContent'});
     }
     $('#demo_datetime').mobiscroll().datetime({
         theme: 'mobiscroll-dark',
@@ -51,7 +51,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
         if (txtStatus === 1)
         {
 //            alert('status 1');
-            window.plugins.VtTextView.hidden(function () {
+            window.plugins.VtTextView.hide(function () {
 //                alert('ok textview');
             }, function () {
 //                alert('error textview');

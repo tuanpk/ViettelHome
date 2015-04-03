@@ -1,14 +1,4 @@
 var VtTextView={
-    initWithFrame:function (successCallback, errorCallback, frame)
-    {
-        cordova.exec(
-                successCallback,
-                errorCallback,
-                'VtTextView',
-                'initWithFrame',
-                [frame]
-                );
-    },
     initWithID:function (successCallback, errorCallback, options)
     {
         cordova.exec(
