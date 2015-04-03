@@ -9,7 +9,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 {
     $scope.timeNow = new Date();
     $scope.mediaUrl = [];
-    document.getElementById("demo_datetime").value = timeNow;
+    document.getElementById("demo_datetime").value = $scope.timeNow;
     if (txvStatus === 0)
     {
         window.plugins.VtTextView.initWithID(function () {
