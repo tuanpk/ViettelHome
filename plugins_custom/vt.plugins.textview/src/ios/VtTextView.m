@@ -154,7 +154,7 @@
     [commandDelegate sendPluginResult : result callbackId : callbackId];
 }
 
--(void) hidden : (CDVInvokedUrlCommand*) command {
+-(void) hide : (CDVInvokedUrlCommand*) command {
     textView.hidden = YES;
 
     CDVPluginResult* result = [CDVPluginResult
