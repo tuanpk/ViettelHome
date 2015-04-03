@@ -109,7 +109,7 @@ function loadjscssfile(filename, filetype) {
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-function validText(idText, name)
+function validText(idText, name,$ionicPopup)
 {
     var inputText = document.getElementById(idText);
     if (inputText == null || inputText.value == "") {
