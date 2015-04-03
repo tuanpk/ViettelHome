@@ -9,7 +9,7 @@
             </button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">     
+    <ion-content id="FeedBackContent" locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">     
         <div class="FBBody">
             <h5>Lựa chọn tình trạng phản ánh:</h5>
             <div class="row feedback_row">
@@ -33,8 +33,8 @@
             </h5>
             <span>Tiêu đề: {{txtTitle.length}}/50</span>
             <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
-            <span id="fbNoiDung">Nội dung: {{txtContent.length}}/250</span>
-            <textarea rows="4" class="FBTextarea" id="txtContent" ng-change ="updateEditor('txtContent', 50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
+            <span>Nội dung: {{txtContent.length}}/250</span>
+            <textarea rows="4" class="FBTextarea" id="txtAreaContent" ng-change ="updateEditor('txtContent', 50)" ng-model="txtContent" ng-trim="false" maxlength="250" ></textarea>
 
             <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">
             <button class="feedback_icon" ng-click="choosePicture()">

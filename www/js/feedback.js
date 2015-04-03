@@ -4,25 +4,25 @@ var listDepartment = {};
 var listLocation = {};
 var attach_type = 0;
 //save status show/hidden of text area native --Loinv7 at 27/03
-//var txvStatus = 0; //0 not init textview 1 show 
+var txvStatus = 0; //0 not init textview 1 show 
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
     $scope.timeNow = new Date();
     $scope.mediaUrl = [];
-   // document.getElementById("demo_datetime").value = timeNow;
-//    if (txvStatus === 0)
-//    {
-//        window.plugins.textView.init(function () {
-//            $scope.$apply(function () {
-//                txtStatus = 1;
-//            });
-//
-//        }, function () {
-//            $scope.$apply(function () {
-//                txtStatus = 0;
-//            });
-//        }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 100 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
-//    }
+    document.getElementById("demo_datetime").value = timeNow;
+    if (txvStatus === 0)
+    {
+        window.plugins.VtTextView.init(function () {
+            $scope.$apply(function () {
+                txtStatus = 1;
+            });
+
+        }, function () {
+            $scope.$apply(function () {
+                txtStatus = 0;
+            });
+        }, {id:'txtContent'});
+    }
     $('#demo_datetime').mobiscroll().datetime({
         theme: 'mobiscroll-dark',
         mode: 'mode',
@@ -48,37 +48,38 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
             $scope.department = department;
             fbDepartment.value = department;
         }
-//        if (txtStatus === 1)
-//        {
-////            alert('status 1');
-//            window.plugins.textView.hidden(function () {
-////                alert('ok textview');
-//            }, function () {
-////                alert('error textview');
-//            });
-//            txtStatus = 2;
-//        }
-//        else
-//        if (txtStatus === 2)
-//        {
-////            alert('status 2');
-//            window.plugins.textView.show(function () {
-////                alert('ok textview');
-//            }, function () {
-////                alert('error textview');
-//            }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 200 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
-//            txtStatus = 1;
-//
-//        }
-//        else
-//        {
-////            alert('status 3');
-//            window.plugins.textView.clearText(function () {
-////                alert('ok textview');
-//            }, function () {
-////                alert('error textview');
-//            });
-//        }
+        if (txtStatus === 1)
+        {
+//            alert('status 1');
+            window.plugins.VtTextView.hidden(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            });
+            txtStatus = 2;
+        }
+        else
+        if (txtStatus === 2)
+        {
+//            alert('status 2');
+            window.plugins.VtTextView.show(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            }, {x: '5', y: document.getElementById('fbNoiDung').getBoundingClientRect().bottom + window.innerWidth * 25 / 200 + 5, width: window.innerWidth * 95 / 100, height: window.innerWidth * 25 / 100});
+            txtStatus = 1;
+
+        }
+        else
+        {
+//            alert('status 3');
+            window.plugins.VtTextView.clearText(function () {
+//                alert('ok textview');
+            }, function () {
+//                alert('error textview');
+            });
+        }
+        
     });
     $scope.showScreen = function (i)
     {
