@@ -35,7 +35,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     
     $scope.$on('$locationChangeSuccess', function ()
     {
-//        $scope.timeNow = timeNow;
         if (mapLocal.local) {
             $scope.local = mapLocal.local;
             mapLocal.local = department;
@@ -125,8 +124,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     $scope.feedbackId = -1;
     $scope.postFeedback = function ()
     {
-        if (validText("txtTitle", "Tiêu đề"))
-            if (validText("txtContent", "Nôi dung phản ánh"))
+        if (validText("txtTitle", "Tiêu đề",$ionicPopup))
+            if (validText("txtContent", "Nôi dung phản ánh",$ionicPopup))
             {
                 var d = new Date(document.getElementById("demo_datetime").value);
                 $.post(PARSE + "postFeedback",
