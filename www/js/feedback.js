@@ -426,20 +426,21 @@ module.controller('FBDepartmentCtr', function ($scope, $ionicPopover, goBackView
     $scope.$on('$destroy', function () {
         $scope.popover.remove();
     });
-    $scope.selectLocation = function (value)
+    $scope.selectLocation = function (value,departID)
     {
         $scope.fbDataFilter.query = value;
+        $scope.departmentID=departID;
         $scope.popover.hide();
     };
     $scope.sumitDepartment = function ()
     {
         if (document.getElementById('fbCheckDepartment').checked)
             fbDepartment = {
-                value: $scope.fbDataFilter.query
+                value: $scope.department.value
             };
         else
             fbDepartment = {
-                value: $scope.department.value
+                value: $scope.departmentID
             };
         goBackViewWithName('feedback');
     };
