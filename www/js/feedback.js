@@ -4,7 +4,6 @@ var listDepartment = {};
 var listLocation = {};
 var attach_type = 0;
 //save status show/hidden of text area native --Loinv7 at 27/03
-var txvStatus = 0; //0 not init textview 1 show 
 module.controller('FeedbackController', function ($scope, $state, $Capture, $Camera, $ionicPopover, $ionicModal, goBackViewWithName, $ionicPopup)
 {
     $scope.timeNow = new Date();

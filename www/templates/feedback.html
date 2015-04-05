@@ -1,6 +1,6 @@
 <ion-view>
     <ion-nav-bar class="bar-balanced">
-        <ion-nav-back-button class="button-clear">
+        <ion-nav-back-button class="button-clear" ng-click="goBack()">
             <i class="ion-chevron-left"></i> PHẢN ÁNH
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
@@ -32,7 +32,7 @@
                 </select>
             </h5>
             <span>Tiêu đề: {{txtTitle.length}}/50</span>
-            <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" id="txtFBTitle" rows="2" class="FBTextarea FBTextarea_title"  ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
+            <textarea id="txtFBTitle" rows="2" class="FBTextarea FBTextarea_title"  ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50" placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!"></textarea>
             <span>Nội dung: {{txtContent.length}}/250</span>
             <textarea rows="4" class="FBTextarea" id="txtFBContent" ng-model="txtFBContent" ng-trim="false" maxlength="250" ></textarea>
 
