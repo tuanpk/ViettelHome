@@ -32,8 +32,8 @@
                 </select>
             </h5>
             <span>Tiêu đề: {{txtTitle.length}}/50</span>
-            <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" rows="2" class="FBTextarea FBTextarea_title" id="txtTitle" ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
-            <span id="fbNoiDung">Nội dung: {{txtContent.length}}/250</span>
+            <textarea placeholder="Tiêu đề ngắn gọn, rõ ràng, dễ hiểu và yêu cầu có dấu!" id="txtFBTitle" rows="2" class="FBTextarea FBTextarea_title"  ng-change ="updateEditor('txtTitle', 30)" ng-model="txtTitle" ng-trim="false" maxlength="50"  ></textarea>
+            <span>Nội dung: {{txtContent.length}}/250</span>
             <textarea rows="4" class="FBTextarea" id="txtFBContent" ng-model="txtFBContent" ng-trim="false" maxlength="250" ></textarea>
 
             <img class="FBimg" alt="" id="feedback_image" ng-click="zoomImg($event)">

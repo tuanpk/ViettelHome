@@ -3,11 +3,16 @@
 
 @interface VtTextView : CDVPlugin
 {
-    UITextView *textView;
+    NSMutableDictionary *dictTextViews;
+    NSMutableArray *arrIDs;
+    NSMutableArray *arrCurId;
     CGRect frameTextView;
     NSString *idElement;
+    BOOL isScroll;
+    UIPanGestureRecognizer *panGesture;
+    UITapGestureRecognizer *tapGesture;
 }
--(void) initWithID : (CDVInvokedUrlCommand*) command;
+-(void) initWithListID:(CDVInvokedUrlCommand*) command;
 -(void) setFrame:(CDVInvokedUrlCommand*)command;
 -(void) hide:(CDVInvokedUrlCommand*)command;
 -(void) show:(CDVInvokedUrlCommand*)command;

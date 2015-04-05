@@ -1,68 +1,58 @@
-var VtTextView={
-    initWithID:function (successCallback, errorCallback, options)
+var VtTextView = {
+    initWithListID: function (successCallback, errorCallback, options)
     {
         cordova.exec(
                 successCallback,
                 errorCallback,
                 'VtTextView',
-                'initWithID',
+                'initWithListID',
                 [options] //Op tion include id, with ,height
                 );
     },
-    setFrame: function (successCallback, errorCallback,frame)
+    show: function (successCallback, errorCallback, options) //option: list id se hien ['idname','idname']
     {
         cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'setFrame',
-                 [frame]
-                 );
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'show', [options]
+                );
     },
-    hide: function (successCallback, errorCallback)
+    hide: function (successCallback, errorCallback, options) //option: list id se an ['idname','idname']
     {
         cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'hide',[]
-                 );
-    },
-    show: function (successCallback, errorCallback,frame)
-    {
-        cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'show',[frame]
-                 );
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'hide', [options]
+                );
     },
     destroy: function (successCallback, errorCallback)
     {
         cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'destroy',[]
-                 );
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'destroy', []
+                );
     },
     getText: function (successCallback, errorCallback)
     {
         cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'getText',[]
-                 );
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'getText', []
+                );
     },
-    setText: function (successCallback, errorCallback)
+    setText: function (successCallback, errorCallback, value)
     {
         cordova.exec(
-                 successCallback,
-                 errorCallback,
-                 'VtTextView',
-                 'setText',[]
-                 );
+                successCallback,
+                errorCallback,
+                'VtTextView',
+                'setText', [value]
+                );
     }
 }
 
