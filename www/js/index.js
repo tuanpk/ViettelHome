@@ -197,7 +197,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
     };
 });
 
-module.controller('MainController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicPopover)
+module.controller('MainController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicPopover,$translate,$filter)
 {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         animation: 'slide-in-up',
@@ -226,11 +226,19 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                 break;
             case 0:
                 $ionicPopup.show({
-                    title: 'Thông Báo',
+                    title: $filter('translate')('thongbao'),
                     template: "Nhận thông báo?",
                     buttons: [{text: 'Ok'}]
                 });
                 break;
+            case 1:
+                $ionicPopup.show({
+                    title: "Chọn ngôn ngữ thay đổi",
+                    template: "",
+                    buttons: [{text: 'Ok'}]
+                });
+                break;
+            
             default:
                 break;
         }

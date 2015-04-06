@@ -2,15 +2,23 @@
     <ion-content>
         <div class="login-form">
             <div class="login-title">VIETTEL HOME</div>
-            <input id="username" type="email" placeholder="Địa chỉ Email" value="tuantd7">
-            <input id="password" type="password" placeholder="Mật khẩu" value="123">
-<!--
-            <input id="username" type="email" placeholder="Địa chỉ Email" value="hoangpx@viettel.com.vn">
-            <input id="password" type="password" placeholder="Mật khẩu" value="123abc">-->
-
+            <input id="username" type="email" placeholder="{{'txtUsername'|translate}}" value="tuantd7">
+            <input id="password" type="password" placeholder="{{'txtPassword'|translate}}" value="123456">
             <br>
             <br>
-            <button class="login-button" ng-click="login()">Đăng Nhập</button>
+            <div class="row">
+                <label class="item item-radio col col-50 radio_event">
+                    <input type="radio" name="group" value="1" ng-checked="eventDetailFalse.state == 1">
+                    <div class="item-content">Tiếng Việt</div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio col col-50 radio_event">
+                    <input type="radio" name="group" value="0" ng-checked="eventDetailFalse.state == 2">
+                    <div class="item-content">Tiếng Anh</div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <button class="login-button" ng-click="login()">{{'btnLogin'|translate}}</button>
         </div>
     </ion-content>
 </ion-view>

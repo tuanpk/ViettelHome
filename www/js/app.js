@@ -6,10 +6,10 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var module = angular.module('starter', ['ionic']);
+var module = angular.module('starter', ['ionic', 'pascalprecht.translate']);
 
 
-module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider)
+module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider, $translateProvider)
 {
     $ionicConfigProvider.views.maxCache(30);
     $ionicConfigProvider.templates.maxPrefetch(30);
@@ -20,6 +20,15 @@ module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $i
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
+    /// Change language
+
+//        $translateProvider.fallbackLanguage("en");
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'lang/lang-',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage("en");
+
     $stateProvider
             // singin
             .state('main_login', {
@@ -144,3 +153,4 @@ module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $i
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
     // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
 });
+
