@@ -8,7 +8,6 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 {
     $scope.timeNow = new Date();
     $scope.mediaUrl = [];
-    $scope.department = department;
 //    if (window.plugins.VtTextView)
 //    {
 //        window.plugins.VtTextView.initWithListID(function () {
@@ -45,9 +44,14 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     {
         if (mapLocal.local) {
             $scope.local = mapLocal.local;
-            mapLocal.local = department;
+//            mapLocal.local = department;
         } else {
             $scope.local = department;
+        }
+        if(fbDepartment.value){
+            $scope.department = fbDepartment.value
+        }else{
+            $scope.department = department;
         }
     });
     $scope.showScreen = function (i)
