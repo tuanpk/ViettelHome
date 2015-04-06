@@ -25,7 +25,7 @@
                     <span class="row">{{statusText[history.status]}}</span>
                 </div>
                 <ion-option-button class="button-assertive"
-                                   ng-click="" ng-hide="{{history.status!=1}}">
+                                   ng-click="deleteHistory(history)" ng-hide="{{history.status!=1}}">
                     Delete
                 </ion-option-button>
                 <ion-option-button class="button-calm"
@@ -34,8 +34,5 @@
                 </ion-option-button>
             </ion-item>
         </ion-list>
-        <!--        <ion-infinite-scroll ng-if="moreHistoryCanBeLoaded()" 
-                                     on-infinite="loadMoreHistory()">
-                </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>

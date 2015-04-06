@@ -553,7 +553,7 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
 
 var isMoreHistory = true;
 //history*************
-module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover) {
+module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover,$state) {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         scope: $scope
     }).then(function (modal) {
@@ -627,17 +627,17 @@ module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover) {
                     isMoreHistory = false;
                 } else if ($scope.historys.length === 0) {
                     isMoreHistory = false;
-//                    alert('Bạn chưa gửi phản ánh nào');
                 }
             });
         }
     };
-//    $scope.$on('$stateChangeSuccess', function () {
-//        $scope.loadMoreHistory();
-//    });
+    $scope.deleteHistory = function (history) {
+        store.remove(history.feedbackId);
+        store.nuke();
+        $scope.historys.splice($scope.historys.indexOf(history), 1);
+    };
     $scope.moreHistoryCanBeLoaded = function () {
-        return isMoreHistory;// $scope.historys.length < 5;
-        // isMoreHistory = false when finish load Ajax
+        return isMoreHistory;
     };
 });
 //history*************
