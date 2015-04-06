@@ -239,14 +239,6 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                     buttons: [{text: 'Ok'}]
                 });
                 break;
-            case 1:
-                $ionicPopup.show({
-                    title: "Chọn ngôn ngữ thay đổi",
-                    template: "",
-                    buttons: [{text: 'Ok'}]
-                });
-                break;
-
             default:
                 break;
         }
