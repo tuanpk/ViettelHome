@@ -170,7 +170,7 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
         } else {
             $ionicPopup.show({
                 title: $filter('translate')('thongbao'),
-                template: $filter('translate')('chuabinhchon'),
+                template: $filter('translate')('chuathaydoi'),
                 buttons: [{text: 'Ok'}]
             });
         }
