@@ -4,18 +4,16 @@
             <div class="login-title">VIETTEL HOME</div>
             <input id="username" type="email" placeholder="{{'txtUsername'|translate}}" value="tuantd7">
             <input id="password" type="password" placeholder="{{'txtPassword'|translate}}" value="123456">
-            <br>
-            <br>
-            <div class="row">
-                <label class="item item-radio col col-50 radio_event">
-                    <input type="radio" name="group" value="1" ng-checked="eventDetailFalse.state == 1">
-                    <div class="item-content">Tiếng Việt</div>
-                    <i class="radio-icon ion-checkmark"></i>
+            <div class="row settinglang">
+                <label class="item item-radio col col-20 radio_event" style="background-color: #4281d0; border: 0;" ng-click="settingVI()">
+                    <input type="radio" name="group">
+                    <div class="item-content" style="text-align: left; padding: 0px ;background-color: #4281d0;"><img src="img/vi.png"/></div>
+                    <i class="radio-icon ion-checkmark" style="padding: 0;color: white"></i>
                 </label>
-                <label class="item item-radio col col-50 radio_event">
-                    <input type="radio" name="group" value="0" ng-checked="eventDetailFalse.state == 2">
-                    <div class="item-content">Tiếng Anh</div>
-                    <i class="radio-icon ion-checkmark"></i>
+                <label class="item item-radio col col-20 radio_event" style="background-color: #4281d0; border: 0;" ng-click="settingEN()">
+                    <input type="radio" name="group">
+                    <div class="item-content" style="text-align: left; padding: 0px;background-color: #4281d0;"><img src="img/us.png"/></div>
+                    <i class="radio-icon ion-checkmark" style="padding: 0;color: white"></i>
                 </label>
             </div>
             <button class="login-button" ng-click="login()">{{'btnLogin'|translate}}</button>
