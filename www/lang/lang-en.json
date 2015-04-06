@@ -10,5 +10,9 @@
     "nhanthongbao":"Receive notification",
     "dangxuat":"Sign out",
     "slogan": "The metabolism can quietly kill Viettel...",
-    "xacthuclogin":"Authenticating to the server"
+    "xacthuclogin":"Authenticating to the server",
+    
+    "binhchonsukien":"VOTED EVENT",
+    "taidanhsachbinhchon":"Load the list of votes"
+    
 }

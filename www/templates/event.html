@@ -1,11 +1,11 @@
 <ion-view>
     <ion-nav-bar class="bar-positive">
         <ion-nav-back-button class="button-clear">
-            <i class="ion-chevron-left"></i> BÌNH CHỌN SỰ KIỆN
+            <i class="ion-chevron-left"></i> {{'binhchonsukien' | translate}}
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content  on-infinite-scroll="loadMore()">
-        <ion-refresher pulling-text="Tải danh sách bình chọn" on-refresh="doRefreshListEvent()">
+        <ion-refresher pulling-text="{{'taidanhsachbinhchon' | translate}}" on-refresh="doRefreshListEvent()">
         </ion-refresher>
         <ion-list>
             <ion-item ng-repeat="event in listEvent" ng-click="showDetail_even($index)" class="vote_event_item">
@@ -19,4 +19,4 @@
         <ion-infinite-scroll ng-if="moreEventCanBeLoaded()" 
                              on-infinite="loadMoreEvent()"></ion-infinite-scroll>
     </ion-content>
-</ion-view>
+</ion-view>  

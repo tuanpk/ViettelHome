@@ -153,7 +153,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
         }
         else {
             $ionicLoading.show({
-                template: '<i class="icon ion-load-a button-positive" style="font-size: 100%">Đang xác thực đến máy chủ</i>',
+                template: '<i class="icon ion-load-a button-positive" style="font-size: 100%">{{"xacthuclogin"|translate}}</i>',
                 noBackdrop: false,
                 duration: TIMEOUT_HTTP
             });
