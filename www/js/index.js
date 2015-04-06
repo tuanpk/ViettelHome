@@ -109,7 +109,7 @@ function loadjscssfile(filename, filetype) {
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-function validText(idText, name,$ionicPopup)
+function validText(idText, name, $ionicPopup)
 {
     var inputText = document.getElementById(idText);
     if (inputText == null || inputText.value == "") {
@@ -137,8 +137,16 @@ function validText(idText, name,$ionicPopup)
 //    }
 //});
 
-module.controller('LoginController', function ($scope, $location, $state, $ionicLoading, $ionicPopup)
+module.controller('LoginController', function ($scope, $location, $state, $ionicLoading, $ionicPopup, $translate)
 {
+    $scope.settingVI = function () {
+        $translate.use('vi');
+    };
+
+    $scope.settingEN = function () {
+        $translate.use('en');
+    };
+
     $scope.login = function () {
         if (!validText("username", "Email")) {
         } else if (!validText("password", "Mật khẩu")) {
@@ -197,7 +205,7 @@ module.controller('LoginController', function ($scope, $location, $state, $ionic
     };
 });
 
-module.controller('MainController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicPopover,$translate,$filter)
+module.controller('MainController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicPopover, $translate, $filter)
 {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         animation: 'slide-in-up',
@@ -238,7 +246,7 @@ module.controller('MainController', function ($scope, $state, $ionicPopup, $ioni
                     buttons: [{text: 'Ok'}]
                 });
                 break;
-            
+
             default:
                 break;
         }
