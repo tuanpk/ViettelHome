@@ -8,26 +8,26 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
 {
     $scope.timeNow = new Date();
     $scope.mediaUrl = [];
-    document.getElementById("demo_datetime").value = $scope.timeNow;
-    if (window.plugins.VtTextView)
-    {
-        window.plugins.VtTextView.initWithListID(function () {
-            $scope.$apply(function () {
-            });
-
-        }, function () {
-            $scope.$apply(function () {
-            });
-        }, {
-            listID: ['txtFBTitle', 'txtFBContent'],
-            isScroll: 'false'
-        });
-    }
+    $scope.department = department;
+//    if (window.plugins.VtTextView)
+//    {
+//        window.plugins.VtTextView.initWithListID(function () {
+//            $scope.$apply(function () {
+//            });
+//
+//        }, function () {
+//            $scope.$apply(function () {
+//            });
+//        }, {
+//            listID: ['txtFBTitle', 'txtFBContent'],
+//            isScroll: 'false'
+//        });
+//    }
     $scope.goBack = function ()
     {
-        window.plugins.VtTextView.destroy(function () {
-        }, function () {
-        });
+//        window.plugins.VtTextView.destroy(function () {
+//        }, function () {
+//        });
         goBackViewWithName('main');
 
     }
@@ -104,10 +104,10 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             session: session,
                             state: $('input[name=group]:checked').val(),
                             domain: document.getElementById("feedback_field").value,
-                            title: document.getElementById('txtTitle').value,
-                            content: document.getElementById('txtContent').value,
+                            title: document.getElementById('txtFBTitle').value,
+                            content: document.getElementById('txtFBContent').value,
                             attach_type: attach_type,
-                            location: mapLocal.local,
+                            location: $scope.local,
                             time: time.getTime(),
                             department: '1', //fbDepartment.value,
                             attach_count: $scope.mediaUrl.length
@@ -121,8 +121,8 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             $scope.mediaUrl[i].key = $scope.feedbackId + "_" + i;
                             $scope.mediaUrl[i].userName = userName;
                             $scope.mediaUrl[i].index = i;
-                            $scope.mediaUrl[i].title = document.getElementById('txtTitle').value;
-                            $scope.mediaUrl[i].content = document.getElementById('txtContent').value;
+                            $scope.mediaUrl[i].title = document.getElementById('txtFBTitle').value;
+                            $scope.mediaUrl[i].content = document.getElementById('txtFBContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
                         }
                         if (DEBUG)
@@ -214,7 +214,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                     Parse.Push.send({
                         where: query, // Set our Installation query
                         data: {
-                            alert: "Đồng chí " + fullName + ' vừa gửi phản ánh : ' + document.getElementById('txtTitle').value
+                            alert: "Đồng chí " + fullName + ' vừa gửi phản ánh : ' + document.getElementById('txtFBTitle').value
                         }
                     }, {
                         success: function () {
@@ -340,25 +340,25 @@ module.controller('FeedbackLocationController', function ($scope, $ionicPopup, $
     $scope.fbDataFilter = {};
     $scope.fbTxtOtherLocal = {};
     getDepartments($scope, $ionicPopup);
-    if (window.plugins.VtTextView)
-    {
-        window.plugins.VtTextView.initWithListID(function () {
-            $scope.$apply(function () {
-            });
-
-        }, function () {
-            $scope.$apply(function () {
-            });
-        }, {
-            listID: ['txtFBLocation'],
-            isScroll: 'false'
-        });
-    }
+//    if (window.plugins.VtTextView)
+//    {
+//        window.plugins.VtTextView.initWithListID(function () {
+//            $scope.$apply(function () {
+//            });
+//
+//        }, function () {
+//            $scope.$apply(function () {
+//            });
+//        }, {
+//            listID: ['txtFBLocation'],
+//            isScroll: 'false'
+//        });
+//    }
     $scope.goBack = function ()
     {
-        window.plugins.VtTextView.show(function () {
-        }, function () {
-        }, ['txtFBTitle', 'txtFBContent']);
+//        window.plugins.VtTextView.show(function () {
+//        }, function () {
+//        }, ['txtFBTitle', 'txtFBContent']);
         goBackViewWithName('feedback');
 
     }
