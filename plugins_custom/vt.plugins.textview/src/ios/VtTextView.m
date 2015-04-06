@@ -66,11 +66,7 @@
                                messageAsString : @"OK"];
     [commandDelegate sendPluginResult : result callbackId : [command callbackId]];
 }
--(void) removeListIDs:(CDVInvokedUrlCommand*) command
-{
-    
-}
--(void) textViewDidBeginEditing : (UITextView *) textView
+-(void) textViewShouldBeginEditing : (UITextView *) textView
 {
     idElement=[arrIDs objectAtIndex:textView.tag];
 }
@@ -78,21 +74,28 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey : UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    for (int i=0; i<arrCurId.count; i++)
+    UITextView *textView=[dictTextViews objectForKey:idElement];
+    float offsetHeight=kbSize.height-([UIScreen mainScreen].bounds.size.height-textView.frame.origin.y-textView.frame.size.height);
+    if (offsetHeight>0)
     {
-        UITextView *textView=[dictTextViews objectForKey:[arrCurId objectAtIndex:i]];
-        float offsetHeight=kbSize.height-([UIScreen mainScreen].bounds.size.height-textView.frame.origin.y-textView.frame.size.height);
-        if (offsetHeight>0)
+        [self.webView.scrollView setContentOffset:CGPointMake(0, offsetHeight)];
+        [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height+kbSize.height-offsetHeight)];
+        CGRect frame = textView.frame;
+        float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",idElement]] floatValue];
+        frame.origin.y = pos;
+        textView.frame= frame;
+        for (int i=0; i<arrCurId.count; i++)
         {
-            [self.webView.scrollView setContentOffset:CGPointMake(0, offsetHeight)];
-            [self.webView.scrollView setContentSize:CGSizeMake(self.webView.frame.size.width, self.webView.frame.size.height+kbSize.height-offsetHeight)];
-            float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",[arrCurId objectAtIndex:i]]] floatValue];
-            CGRect frame = textView.frame;
-            frame.origin.y = pos;
-            textView.frame= frame;
+            if ([arrCurId objectAtIndex:i]!=idElement)
+            {
+                textView=[dictTextViews objectForKey:[arrCurId objectAtIndex:i]];
+                CGRect frame = textView.frame;
+                pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",[arrCurId objectAtIndex:i]]] floatValue];
+                frame.origin.y = pos;
+                textView.frame= frame;
+            }
         }
     }
-    
 }
 //To enable gesture recognizer
 
@@ -207,7 +210,17 @@
                                messageAsString : @"OK"];
     [commandDelegate sendPluginResult : result callbackId : [command callbackId]];
 }
-
+-(void) scrollContent: (CDVInvokedUrlCommand*) command
+{
+    for (int i=0; i<arrCurId.count; i++)
+    {
+        UITextView *textView=[dictTextViews objectForKey:[arrCurId objectAtIndex:i]];
+        float pos = [[self.webView stringByEvaluatingJavaScriptFromString :[NSString stringWithFormat:@"document.getElementById('%@').getBoundingClientRect().top",[arrCurId objectAtIndex:i]]] floatValue];
+        CGRect frame = textView.frame;
+        frame.origin.y = pos;
+        textView.frame= frame;
+    }
+}
 -(void) destroy : (CDVInvokedUrlCommand*) command
 {
     for (NSUInteger i=0; i<arrIDs.count; i++)
