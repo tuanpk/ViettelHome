@@ -2,12 +2,12 @@ var listHighlightEvent;
 var currentHighlightEvent;
 var listImages;
 var indexOfUrl;
-module.controller('HLController', function ($scope, $state)
+module.controller('HLController', function ($scope, $state,$filter)
 {
 //    listHighlightEvent = null;
     currentHighlightEvent = null;
     listImages = null;
-    $scope.title = 'Sự kiện nổi bật';
+    $scope.title = '{{"sukiennoibat" | translate}}';
     $scope.url = [
         {
             name: 'TruyenThong',
@@ -172,7 +172,7 @@ function getListImageItem($scope)
     }
 }
 
-function getHighlightEvents($scope, begin, end)
+function getHighlightEvents($scope,$filter, begin, end)
 {
     if (!listHighlightEvent)
     {
@@ -193,7 +193,7 @@ function getHighlightEvents($scope, begin, end)
                 }
             }).fail(function (err)
     {
-        console.log("Không thể kết nối đến máy chủ" + JSON.stringify(err));
+        console.log( $filter('translate')('khongketnoimaychu') + JSON.stringify(err));
     });
 }
 function getHighlightObjectById(id)
