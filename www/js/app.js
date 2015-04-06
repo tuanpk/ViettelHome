@@ -27,8 +27,7 @@ module.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $i
         prefix: 'lang/lang-',
         suffix: '.json'
     });
-    $translateProvider.preferredLanguage("en");
-
+    $translateProvider.preferredLanguage("vi");
     $stateProvider
             // singin
             .state('main_login', {
