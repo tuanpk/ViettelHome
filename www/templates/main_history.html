@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-bar class="bar-stable">
         <ion-nav-back-button class="button-clear">
-            <i class="ion-chevron-left"></i> DANH SÁCH ĐÃ GỬI
+            <i class="ion-chevron-left"></i> {{'danhsachdaguititle' | translate}}
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
             <button class="button" ng-click="popover.show($event)">
@@ -10,9 +10,9 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-        <ion-refresher pulling-text="Tải danh sách đã gửi" on-refresh="refreshHistory()">
+        <ion-refresher pulling-text={{'taidanhsachdagui' | translate}} on-refresh="refreshHistory()">
         </ion-refresher>
-        <p ng-hide="historys.length" class="opinion_hide">Không có lịch sử nào! <i class="ion-sad-outline"></i></p>
+        <p ng-hide="historys.length" class="opinion_hide">{{'khongcolichsu' | translate}} <i class="ion-sad-outline"></i></p>
         <ion-list>
             <ion-item class="row" ng-repeat="history in historys">
                 <i class="icon {{fileIcon[history.attach_type]}} col col-10 history_icon_left"></i>
@@ -26,11 +26,11 @@
                 </div>
                 <ion-option-button class="button-assertive"
                                    ng-click="deleteHistory(history)" ng-hide="{{history.status!=1}}">
-                    Delete
+                    {{'xoa' | translate}}
                 </ion-option-button>
                 <ion-option-button class="button-calm"
                                    ng-click="resendHistory(history)" ng-hide="{{history.status!=0}}">
-                    Resend
+                    {{'guilai' | translate}}
                 </ion-option-button>
             </ion-item>
         </ion-list>

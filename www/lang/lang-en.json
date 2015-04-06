@@ -31,7 +31,12 @@
     "chuathaydoi": "You not done voted comments or content changes",
     
     "sukiennoibattitle": "EVENT HIGHLIGHTS",
-    "sukiennoibat": "Event highlights"
-  
+    "sukiennoibat": "Event highlights",
+    
+    "danhsachdaguititle": "Already Send List! ALREADY SEND LIST",
+    "taidanhsachdagui": "Load the list of sent...",
+    "khongcolichsu": "No history!",
+    "xoa": "Delete",
+    "guilai": "Resend"
     
 }

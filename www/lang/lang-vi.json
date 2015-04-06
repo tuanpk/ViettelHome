@@ -31,6 +31,12 @@
     "chuathaydoi": "Bạn chưa bình chọn,đóng góp ý kiến hoặc không thay đổi nội dung",
     
     "sukiennoibattitle": "SỰ KIỆN NỔI BẬT",
-    "sukiennoibat": "Sự kiện nổi bật"
+    "sukiennoibat": "Sự kiện nổi bật",
+    
+    "danhsachdaguititle": "DANH SÁCH ĐÃ GỬI",
+    "taidanhsachdagui": "Tải danh sách đã gửi",
+    "khongcolichsu": "Không có lịch sử nào!",
+    "xoa": "Xóa",
+    "guilai": "Gửi lại"
     
 }
