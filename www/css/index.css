@@ -340,3 +340,8 @@ input[type=email], input[type=password] {
 }
 .main-box {
 }
+
+.settinglang{
+    margin-left: 30%;
+    background-color: #4281d0;
+}
