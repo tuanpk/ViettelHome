@@ -13,6 +13,21 @@
     "xacthuclogin":"Authenticating to the server",
     
     "binhchonsukien":"VOTED EVENT",
-    "taidanhsachbinhchon":"Load the list of votes"
+    "taidanhsachbinhchon":"Load the list of votes",
+    "xong":"Done",
+    "noidung":"CONTENTS:",
+    "binhchon":"Vote",
+    "dongy":"Agree",
+    "khongdongy":"Disagree",
+    "donggopthem":"Contributions to add comments",
+    "tyledongy":"Agree:",
+    "tylekhongdongy":"Disagree:",
+    "chuabinhchon": "No Vote",
+    "dabinhchon": "Already vote",
+    "bandabinhchon": "Already vote:",
+    "khongketnoimaychu": "Can not connect to server",
+    "luubinhchon": "Do you want to save your vote?",
+    "ketnoimang": "Please check your network connection and try again!",
+    "chuabinhchon": "You not done voted comments or content changes"
     
 }

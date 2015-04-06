@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-bar class="bar-positive">
         <ion-nav-back-button class="button-clear" ng-click="back()">
-            <i class="ion-chevron-left"></i> BÌNH CHỌN SỰ KIỆN
+            <i class="ion-chevron-left"></i> {{'binhchonsukien' | translate}}
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
@@ -9,21 +9,21 @@
             <ion-item class="vote_event_item">
                 <div class="item-text-wrap vote_event_item_title">{{eventDetail.title}}</div>
                 <span class="row vote_event_item_desc">{{eventDetail.department}}</span>
-                <span class="vote_event_item_content">NỘI DUNG:</span>
+                <span class="vote_event_item_content">{{'noidung' | translate}}</span>
                 <div class="item-text-wrap vote_event_content">{{eventDetail.content}}</div>
             </ion-item>
         </ion-list>
-        <div class="vote_event_status">Bạn đã bình chọn</div>
+        <div class="vote_event_status">{{'bandabinhchon' | translate}}</div>
 
         <div class="row">
             <label class="item item-radio col col-50 radio_event_true">
                 <input type="radio" name="group_true" disabled="true" ng-checked="eventDetail.state == 1">
-                <div class="item-content">Đồng ý</div>
+                <div class="item-content">{{'dongy' | translate}}</div>
                 <i class="radio-icon ion-checkmark"></i>
             </label>
             <label class="item item-radio col col-50 radio_event_true">
                 <input type="radio" name="group_true" disabled="true" ng-checked="eventDetail.state == 2">
-                <div class="item-content">Không đồng ý</div>
+                <div class="item-content">{{'khongdongy' | translate}}</div>
                 <i class="radio-icon ion-checkmark"></i>
             </label>
         </div>
@@ -35,10 +35,10 @@
         </div>
 
         <div class="bt_chart">
-            <button class="bt_chart_style1"></button> Đồng ý : {{notePie[0]}} %
+            <button class="bt_chart_style1"></button> {{'tyledongy' | translate}} {{notePie[0]}} %
         </div><p></p>
         <div class="bt_chart">
-            <button class="bt_chart_style2"></button> Không đồng ý : {{notePie[1]}} %
+            <button class="bt_chart_style2"></button> {{'tylekhongdongy' | translate}} {{notePie[1]}} %
         </div>
     </ion-content>
 </ion-view>

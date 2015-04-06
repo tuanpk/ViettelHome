@@ -5,8 +5,8 @@ var voteEvent = [];
 var isMoreEvent = false;
 var pageVoteEvent = 0;
 
-module.controller('chooseEventController', function ($scope, $state, $ionicPopup) {
-    $scope.des = ["Chưa bình chọn", "Đã bình chọn", "Đã bình chọn"];
+module.controller('chooseEventController', function ($scope, $state, $ionicPopup,$filter) {
+    $scope.des = [$filter('translate')('chuabinhchon'), $filter('translate')('dabinhchon'), $filter('translate')('dabinhchon')];
     $.post(PARSE + "onLoadVoteEvent", {userId: userId, session: session, begin: 0, end: maxPage}).done(function (json) {
         $scope.$apply(function ()
         {
@@ -17,8 +17,8 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
         });
     }).fail(function (er) {
         $ionicPopup.show({
-            title: 'Thông Báo',
-            template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+            title: $filter('translate')('thongbao'),
+            template: $filter('translate')('khongketnoimaychu') + JSON.stringify(er),
             buttons: [{text: 'Ok'}]
         });
     });
@@ -36,8 +36,8 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
             });
         }).fail(function (er) {
             $ionicPopup.show({
-                title: 'Thông Báo',
-                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                title: $filter('translate')('thongbao'),
+                template:  $filter('translate')('khongketnoimaychu')+ JSON.stringify(er),
                 buttons: [{text: 'Ok'}]
             });
         });
@@ -59,8 +59,8 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
             });
         }).fail(function (er) {
             $ionicPopup.show({
-                title: 'Thông Báo',
-                template: "Không thể kết nối đến máy chủ" + JSON.stringify(er),
+                title: $filter('translate')('thongbao'),
+                template: $filter('translate')('khongketnoimaychu') + JSON.stringify(er),
                 buttons: [{text: 'Ok'}]
             });
         });
@@ -82,7 +82,7 @@ module.controller('chooseEventController', function ($scope, $state, $ionicPopup
 //***********chooseEventController*****************
 
 //***********eventDetailTrueController*****************
-module.controller('eventDetailTrueController', function ($scope, goBackViewWithName) {
+module.controller('eventDetailTrueController', function ($scope, goBackViewWithName, $filter) {
     $scope.eventDetail = voteEvent.selectedItem;
     $scope.$on("$locationChangeSuccess", function ()
     {
@@ -94,12 +94,12 @@ module.controller('eventDetailTrueController', function ($scope, goBackViewWithN
             {
                 value: a,
                 color: "#0070c0",
-                label: "Đồng ý"
+                label: $filter('translate')('dongy'),
             },
             {
                 value: b,
                 color: "#c0504d",
-                label: "Không đồng ý"
+                label: $filter('translate')('khongdongy'),
             }
         ];
         $scope.notePie = [parseInt(a * 100 / (a + b)), parseInt(b * 100 / (a + b))];
@@ -129,13 +129,13 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
         var textOfTextarea = document.getElementById("txtVote").value;
         if (valOfRadio !== voteEvent.selectedItem.state || textOfTextarea) {
             var alertEvent = $ionicPopup.show({
-                title: 'Thông Báo',
-                template: 'Bạn có muốn lưu bình chọn của mình hay không?',
+                title: $filter('translate')('thongbao'),
+                template: $filter('translate')('luubinhchon'),
                 scope: $scope,
                 buttons: [
-                    {text: 'Không'},
+                    {text: $filter('translate')('dongy'),},
                     {
-                        text: '<b>OK</b>',
+                        text: $filter('translate')('khongdongy'),
                         type: 'button-positive',
                         onTap: function () {
                             alertEvent.close();
@@ -161,7 +161,7 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
                                     $state.go('event_detail_true');
                                 });
                             }).fail(function () {
-                                alert("Vui lòng kết nối mạng và thử lại!");
+                                alert($filter('translate')('ketnoimang'));
                             });
                         }
                     }
@@ -169,8 +169,8 @@ module.controller('eventDetailFalseController', function ($scope, $ionicPopup, $
             });
         } else {
             $ionicPopup.show({
-                title: 'Thông Báo',
-                template: 'Bạn chưa bình chọn,đóng góp ý kiến hoặc không thay đổi nội dung',
+                title: $filter('translate')('thongbao'),
+                template: $filter('translate')('chuabinhchon'),
                 buttons: [{text: 'Ok'}]
             });
         }
