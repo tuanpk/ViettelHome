@@ -553,7 +553,7 @@ module.controller('OpinionReplyController', function ($scope, $state, $ionicPopu
 
 var isMoreHistory = true;
 //history*************
-module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover,$state) {
+module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover, $state) {
     $ionicModal.fromTemplateUrl('templates/main_modal.html', {
         scope: $scope
     }).then(function (modal) {
@@ -632,10 +632,71 @@ module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover,$st
         }
     };
     $scope.deleteHistory = function (history) {
-        store.remove(history.feedbackId);
+        store.remove(history.key);
         store.nuke();
         $scope.historys.splice($scope.historys.indexOf(history), 1);
     };
+
+    $scope.resendHistory = function (history) {
+        if (DEBUG) alert(JSON.stringify(history));
+        window.resolveLocalFileSystemURI(history.url, readFile, onError);
+        function onError(error) {
+            if (DEBUG) alert("resendHistory : " + JSON.stringify(error));
+        }
+        function readFile(fileEntry) {
+            if (DEBUG) alert('fileEntry ' + JSON.stringify(fileEntry));
+
+            fileEntry.file(function (file) {
+                var reader = new FileReader();
+                if (DEBUG) alert('fileEntry.file ' + JSON.stringify(file));
+                reader.onloadend = function (evt) {
+                    $.post(PARSE + "uploadFileFeedback",
+                            {
+                                userId: userId,
+                                session: session,
+                                attach_type: history.attach_type,
+                                feedbackId: history.feedbackId,
+                                file_index: history.index,
+                                filename: history.filename,
+                                stringData: evt.target.result
+                            }
+                    ).done(function (json) {
+                        if (DEBUG)
+                            ///cập nhật history
+                            alert('retry uploadFileFeedback Success ' + JSON.stringify(json));
+                        store.get(history.key, function (r) {
+                            if (DEBUG) alert("store.get " + JSON.stringify(r));
+                            r.status = 1;
+                            store.save(r);
+                            $scope.history.status = 1;
+                        });
+                        var query = new Parse.Query(Parse.Installation);
+                        Parse.Push.send({
+                            where: query, 
+                            data: {
+                                alert: "Đồng chí " + fullName + ' vừa gửi phản ánh : ' + document.getElementById('txtFBTitle').value
+                            }
+                        }, {
+                            success: function () {
+                                console.log('Parse.Push.send Success');
+                            },
+                            error: function (error) {
+                                alert('Parse.Push.send Error' + JSON.stringify(error));
+                            }
+                        });
+                    }).fail(function (err) {
+                        $ionicPopup.show({
+                            title: 'Thông Báo',
+                            template: "Retry Upload File đính kèm thất bại " + JSON.stringify(err),
+                            buttons: [{text: 'Ok'}]
+                        });
+                    });
+                }
+                reader.readAsDataURL(file);
+            });
+        }
+    };
+
     $scope.moreHistoryCanBeLoaded = function () {
         return isMoreHistory;
     };

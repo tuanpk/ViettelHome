@@ -128,6 +128,7 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
                             $scope.mediaUrl[i].title = document.getElementById('txtFBTitle').value;
                             $scope.mediaUrl[i].content = document.getElementById('txtFBContent').value;
                             $scope.mediaUrl[i].feedbackId = $scope.feedbackId;
+//                            $scope.mediaUrl[i].filename = "hihi.chuoi";// $scope.mediaUrl[i].url;
                         }
                         if (DEBUG)
                             alert('store.batch() ' + $scope.mediaUrl.length);
@@ -261,14 +262,14 @@ module.controller('FeedbackController', function ($scope, $state, $Capture, $Cam
     function gotFile(fileEntry)
     {
         if (DEBUG)
-            alert('gotFile ' + fileEntry.toURL() + ' ' + fileEntry.fullPath);
+            alert('gotFile ' + fileEntry.toURL() + ' ' + JSON.stringify(fileEntry));
         if (ionic.Platform.isWindowsPhone()) {
             $scope.imgPopover = fileEntry.toURL();
         } else {
             $scope.imgPopover = fileEntry.nativeURL;
         }
         var date = new Date();
-        var json = {feedbackId: "", index: $scope.mediaUrl.length, url: $scope.imgPopover, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
+        var json = {feedbackId: "", index: $scope.mediaUrl.length, url: $scope.imgPopover, filename : fileEntry.name, title: "", content: "", attach_type: 1, date: date, status: 2, progess: 0};
         $scope.mediaUrl.push(json);
     }
 
