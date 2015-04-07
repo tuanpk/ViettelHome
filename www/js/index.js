@@ -632,8 +632,11 @@ module.controller('HistoryCtr', function ($scope, $ionicModal, $ionicPopover, $s
         }
     };
     $scope.deleteHistory = function (history) {
-        store.remove(history.key);
-        store.nuke();
+        store.get(history.key, function (r) {
+                            if (DEBUG) alert("store.get " + JSON.stringify(r));
+                            store.remove(r);
+                            $scope.history.status = 1;
+                        });
         $scope.historys.splice($scope.historys.indexOf(history), 1);
     };
 
