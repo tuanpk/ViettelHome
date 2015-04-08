@@ -4,8 +4,8 @@
     "btnLogin":"Login",
     "thongbao":"Warning",
     "phananh":"Feedback",
-    "binhchon":"Vote",
-    "sukien":"Event",
+    "binhchon":"Vote Event",
+    "sukien":"Highlights",
     "caidat":"Setting",
     "nhanthongbao":"Receive notification",
     "dangxuat":"Sign out",
@@ -16,7 +16,6 @@
     "taidanhsachbinhchon":"Load the list of votes",
     "xong":"Done",
     "noidung":"CONTENTS:",
-    "binhchon":"Vote",
     "dongy":"Agree",
     "khongdongy":"Disagree",
     "donggopthem":"Contributions to add comments",
@@ -37,6 +36,10 @@
     "taidanhsachdagui": "Load the list of sent...",
     "khongcolichsu": "No history!",
     "xoa": "Delete",
-    "guilai": "Resend"
+    "guilai": "Resend",
+    
+    "phananhtilte": "FEEDBACK",
+    "gui": "Send",
+    "luachontinhtrang": "Selection situation reflecting: "
     
 }

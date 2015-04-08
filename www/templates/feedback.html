@@ -1,22 +1,22 @@
 <ion-view>
     <ion-nav-bar class="bar-balanced">
         <ion-nav-back-button class="button-clear" ng-click="goBack()">
-            <i class="ion-chevron-left"></i> PHẢN ÁNH
+            <i class="ion-chevron-left"></i> {{'phananhtilte' | translate}}
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
             <button class="button" ng-click="postFeedback()">
-                <span class="fontFamily">Gửi</span>
+                <span class="fontFamily">{{'gui' | translate}}</span>
             </button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content id="FeedBackContent" locking="false" direction="y" scroll="true" overflow-scroll="false" style="background-color: #eef2f7">     
         <div class="FBBody">
-            <h5>Lựa chọn tình trạng phản ánh:</h5>
+            <h5>{{'luachontinhtrang' | translate}}</span></h5>
             <div class="row feedback_row">
                 <label class="item item-radio col col-50 feedback_radio">
                     <input type="radio" name="group" value="1" checked>
                     <div class="item-content" style="padding: 5%">TÍCH CỰC</div>
-                    <i class="radio-icon ion-checkmark" style="padding: 0"></i>
+                    <i class="radio-icon ion-checkmark" style="padding: 0"> </i>
                 </label>
                 <label class="item item-radio col col-50 feedback_radio">
                     <input type="radio" name="group" value="0">
